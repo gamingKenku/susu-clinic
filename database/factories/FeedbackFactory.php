@@ -17,7 +17,12 @@ class FeedbackFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'content' => fake()->text(),
+            'author' => fake()->name(),
+            'rating' => fake()->numberBetween(0, 5),
+            'mail' => fake()->safeEmail(),
+            'moderated' => false,
+            'blocked' => false,
         ];
     }
 }

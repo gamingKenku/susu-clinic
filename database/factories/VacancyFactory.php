@@ -17,7 +17,9 @@ class VacancyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'responsibilities' => fake()->randomHtml(),
+            'requirements' => fake()->randomHtml(),
+            'conditions' => fake()->randomHtml(),
         ];
     }
 }

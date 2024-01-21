@@ -17,7 +17,8 @@ class DiscountFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'header' => fake()->sentence(),
+            'markup' => fake()->randomHtml(),
         ];
     }
 }

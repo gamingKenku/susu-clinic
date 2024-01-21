@@ -17,7 +17,9 @@ class WorkingHoursFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'weekday' => fake()->numberBetween(0, 6),
+            'start_time' => fake()->time(),
+            'end_time' => fake()->time(),
         ];
     }
 }
