@@ -10,10 +10,15 @@ class Service extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'price',
+    ];
+
     public function discounts(): BelongsToMany
     {
         return $this->belongsToMany(Discount::class, 'discounts_services_junc');
     }
 
-    protected $table = 'roles';
+    protected $table = 'services';
 }

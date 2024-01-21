@@ -9,5 +9,10 @@ class Document extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'document_path',
+    ];
+
     protected $table = 'documents';
 }

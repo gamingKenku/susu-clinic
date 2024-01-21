@@ -10,6 +10,11 @@ class Clinic extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'adress',
+    ];
+
     public function categories(): HasMany 
     {
         return $this->hasMany(Category::class);

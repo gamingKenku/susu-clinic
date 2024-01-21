@@ -11,6 +11,11 @@ class Position extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+
     public function staff(): BelongsToMany
     {
         return $this->belongsToMany(Staff::class, 'staff_positions_junc', 'position_id', 'staff_id');

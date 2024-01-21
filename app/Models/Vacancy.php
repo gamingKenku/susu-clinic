@@ -10,6 +10,12 @@ class Vacancy extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'responsibilities',
+        'requirements',
+        'conditions',
+    ];
+    
     public function Position(): BelongsTo
     {
         return $this->belongsTo(Position::class);

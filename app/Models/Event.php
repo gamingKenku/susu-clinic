@@ -9,5 +9,11 @@ class Event extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'header',
+        'content',
+        'picture_path',
+    ];
+
     protected $table = 'events';
 }

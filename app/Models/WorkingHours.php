@@ -10,6 +10,12 @@ class WorkingHours extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'weekday',
+        'start_time',
+        'end_time',
+    ];
+
     public function staff(): BelongsTo 
     {
         return $this->belongsTo(Staff::class);
