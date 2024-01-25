@@ -27,7 +27,7 @@ class Staff extends Model
         return $this->belongsTo(Role::class);
     }
 
-    public function working_hours(): HasOne
+    public function workingHours(): HasOne
     {
         return $this->hasOne(WorkingHours::class);
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('patronym')->nullable();
             $table->mediumText('specialities');
-            $table->string('photo_path');
+            $table->string('photo_path')->nullable();
             $table->timestamp('experience');
             $table->timestamps();
             $table->foreignId('role_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
