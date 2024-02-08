@@ -14,6 +14,7 @@ class Service extends Model
     protected $fillable = [
         'name',
         'price',
+        'category_id'
     ];
 
     public function discounts(): BelongsToMany

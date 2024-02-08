@@ -12,7 +12,7 @@ class Clinic extends Model
 
     protected $fillable = [
         'name',
-        'adress',
+        'address',
     ];
 
     public function categories(): HasMany 

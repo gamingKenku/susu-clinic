@@ -12,7 +12,7 @@ class Discount extends Model
 
     protected $fillable = [
         'header',
-        'discount',
+        'markup',
         'start_date',
         'end_date'
     ];

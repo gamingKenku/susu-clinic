@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             FeedbackSeeder::class,
             RoleSeeder::class,
             PositionSeeder::class,
+            UserSeeder::class,
         ]);
         
         // \App\Models\User::factory(10)->create();
