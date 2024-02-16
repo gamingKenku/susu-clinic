@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->mediumText('responsibilities');
+            $table->mediumText('requirements');
+            $table->mediumText('conditions');
+            $table->boolean('has_vacancy');
             $table->timestamps();
         });
     }

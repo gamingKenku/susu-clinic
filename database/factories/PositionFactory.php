@@ -19,6 +19,10 @@ class PositionFactory extends Factory
         return [
             'name' => fake()->word(),
             'description' => fake()->text(),
+            'responsibilities' => fake()->randomHtml(),
+            'requirements' => fake()->randomHtml(),
+            'conditions' => fake()->randomHtml(),
+            'has_vacancy' => fake()->boolean(),
         ];
     }
 }

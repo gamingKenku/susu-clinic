@@ -11,9 +11,7 @@ class Vacancy extends Model
     use HasFactory;
 
     protected $fillable = [
-        'responsibilities',
-        'requirements',
-        'conditions',
+        'amount'
     ];
     
     public function Position(): BelongsTo

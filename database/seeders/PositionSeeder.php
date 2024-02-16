@@ -16,7 +16,6 @@ class PositionSeeder extends Seeder
     {
         Position::factory()
             ->count(10)
-            ->hasVacancies(1)
             ->create()
             ->each(function ($position) {
                 $staff = Staff::inRandomOrder()->take(rand(1, 3))->pluck('id');

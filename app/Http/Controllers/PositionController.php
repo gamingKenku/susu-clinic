@@ -44,6 +44,10 @@ class PositionController extends Controller
         $validated_data = $request->validate([
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:65535'],
+            'responsibilities' => ['required', 'max:16777215'],
+            'requirements' => ['required', 'max:16777215'],
+            'conditions' => ['required', 'max:16777215'],
+            'has_vacancy' => ['required', 'boolean'],
             'staff' => ['array'], 
             'staff.*' => ['exists:staff,id'],
         ]);
@@ -51,6 +55,10 @@ class PositionController extends Controller
         $position = Position::create([
             'name' => $validated_data['name'],
             'description' => $validated_data['description'],
+            'responsibilities' =>  $validated_data['responsibilities'],
+            'requirements' =>  $validated_data['requirements'],
+            'conditions' =>  $validated_data['conditions'],
+            'has_vacancy' => $validated_data['has_vacancy'],
         ]);
 
         $position->staff()->attach($validated_data['staff']);
@@ -66,7 +74,7 @@ class PositionController extends Controller
     public function show(string $id)
     {
         return view('resources.positions.show', [
-            'staff' => Position::query()->findOrFail($id)
+            'position' => Position::query()->findOrFail($id)
         ]);
     }
 
@@ -76,7 +84,7 @@ class PositionController extends Controller
     public function edit(string $id)
     {
         return view('resources.positions.edit', [
-            'staff' => Position::query()->findOrFail($id)
+            'position' => Position::query()->findOrFail($id)
         ]);
     }
 
@@ -88,6 +96,10 @@ class PositionController extends Controller
         $validated_data = $request->validate([
             'name' => ['required', 'max:255'],
             'description' => ['required', 'max:65535'],
+            'responsibilities' => ['required', 'max:16777215'],
+            'requirements' => ['required', 'max:16777215'],
+            'conditions' => ['required', 'max:16777215'],
+            'has_vacancy' => ['required', 'boolean'],
             'staff' => ['array'], 
             'staff.*' => ['exists:staff,id'],
         ]);
@@ -95,9 +107,13 @@ class PositionController extends Controller
         $position = Position::query()->findOrFail($id);
         $position->name = $validated_data['name'];
         $position->description = $validated_data['description'];
+        $position->responsibilities = $validated_data['responsibilities'];
+        $position->requirements = $validated_data['requirements'];
+        $position->conditions = $validated_data['conditions'];
+        $position->has_vacancy = $validated_data['has_vacancy'];
 
-        $position->staff()->attach($validated_data['staff']);
-
+        $position->staff()->sync($validated_data['staff']);
+        
         $position->save();
 
         return redirect('/admin/resources/positions');

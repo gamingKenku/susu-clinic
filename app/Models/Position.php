@@ -14,6 +14,10 @@ class Position extends Model
     protected $fillable = [
         'name',
         'description',
+        'responsibilities',
+        'requirements',
+        'conditions',
+        'has_vacancy',
     ];
 
     public function staff(): BelongsToMany
@@ -21,10 +25,10 @@ class Position extends Model
         return $this->belongsToMany(Staff::class, 'staff_positions_junc', 'position_id', 'staff_id');
     }
 
-    public function vacancies(): HasMany
-    {
-        return $this->hasMany(Vacancy::class);
-    }
+    // public function vacancies(): HasMany
+    // {
+    //     return $this->hasMany(Vacancy::class);
+    // }
 
     protected $table = 'positions';
 }
