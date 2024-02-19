@@ -48,7 +48,7 @@ class EventController extends Controller
             'content' => $validated_data['content'],
         ]);
 
-        $path = $request->file('picture_path')->storeAs('event_pictures', 'event' . $event->id);
+        $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getExtension());
         $event->picture_path = $path;
 
         $event->save();
@@ -93,7 +93,7 @@ class EventController extends Controller
         $event->content = $validated_data['content'];
 
         Storage::delete($event->picture_path);
-        $path = $request->file('picture_path')->storeAs('event_pictures', 'event' . $event->id);
+        $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getExtension());
         $event->picture_path = $path;
 
         $event->save();

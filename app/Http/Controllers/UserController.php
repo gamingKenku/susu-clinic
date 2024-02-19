@@ -40,7 +40,7 @@ class UserController extends Controller
             'last_name' => ['required', 'max:255'],
             'patronym' => ['max:255', 'string'],
             'username' => ['required', 'max:255', 'unique:users,username'],
-            'mail' => ['required', 'max:255', 'email', 'unique:users,mail'],
+            'email' => ['required', 'max:255', 'email', 'unique:users,email'],
             'password' => ['required', 'max:255', 'confirmed'],
         ]);
 
@@ -49,7 +49,7 @@ class UserController extends Controller
             'last_name' => $validated_data['last_name'],
             'patronym' => $validated_data['patronym'],
             'username' => $validated_data['username'],
-            'mail' => $validated_data['mail'],
+            'email' => $validated_data['email'],
             'password' => Hash::make($validated_data['password']),
         ]);
 
@@ -86,7 +86,7 @@ class UserController extends Controller
             'last_name' => ['required', 'max:255'],
             'patronym' => ['max:255', 'string'],
             'username' => ['required', 'max:255', 'unique:users,username'],
-            'mail' => ['required', 'max:255', 'email', 'unique:users,mail'],
+            'email' => ['required', 'max:255', 'email', 'unique:users,email'],
             'password' => ['required', 'max:255', 'confirmed'],
         ]);
 
@@ -96,7 +96,7 @@ class UserController extends Controller
         $user->last_name = $validated_data['last_name']; 
         $user->patronym = $validated_data['patronym']; 
         $user->username = $validated_data['username']; 
-        $user->mail = $validated_data['mail']; 
+        $user->email = $validated_data['email']; 
         $user->password = Hash::make($validated_data['password']);
 
         $user->save();

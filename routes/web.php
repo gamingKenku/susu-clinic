@@ -42,7 +42,7 @@ Route::resources([
     'admin/resources/staff' => StaffController::class,
     'admin/resources/working-hours' => ClinicController::class,
     'admin/resources/positions' => PositionController::class,
-    'admin/resources/vacancies' => VacancyController::class,
+    // 'admin/resources/vacancies' => VacancyController::class,
     'admin/resources/users' => UserController::class,
 ]);
 
