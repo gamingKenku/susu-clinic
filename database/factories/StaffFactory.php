@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Staff>
@@ -22,6 +23,7 @@ class StaffFactory extends Factory
             'patronym' => fake()->firstNameMale(),
             'specialities' => fake()->randomHtml(),
             'experience' => fake()->dateTime(),
+            'staff_type' => Arr::random(['doctor', 'nurse', 'administrator']),
         ];
     }
 }

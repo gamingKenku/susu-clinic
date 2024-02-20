@@ -48,10 +48,17 @@ Route::resources([
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/staff', [HomeController::class, 'staff'])->name('staffIndex');
+Route::get('/home/feedback', [HomeController::class, 'feedbackIndex'])->name('feedbackIndex');
+Route::get('/home/feedback/create', [HomeController::class, 'feedbackCreate'])->name('feedbackCreate');
+Route::post('/home/feedback', [HomeController::class, 'feedbackStore'])->name('feedbackStore');
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('/admin/resources', [AdminController::class, 'resources'])->name('resources');
-Route::get('/admin/moderation')->name('moderation');
+
+Route::get('/admin/moderation', [AdminController::class, 'moderationIndex'])->name('moderationIndex');
+Route::get('/admin/moderation/{feedback}', [AdminController::class, 'moderationEdit'])->name('moderationEdit');
+Route::put('/admin/moderation/{feedback}', [AdminController::class, 'moderationUpdate'])->name('moderationUpdate');
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [LoginController::class, 'login'])->name('login');

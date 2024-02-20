@@ -126,9 +126,9 @@ class UserTest extends TestCase
         ]));
     }
 
-    public function testEventDelete(): void
+    public function testUserDelete(): void
     {
-        // event delete check
+        // user delete check
         $response = $this->actingAs($this->user)->delete('/admin/resources/users/' . $this->test_user->id);
 
         $response->assertRedirect();

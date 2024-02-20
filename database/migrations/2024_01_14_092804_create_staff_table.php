@@ -19,8 +19,8 @@ return new class extends Migration
             $table->mediumText('specialities');
             $table->string('photo_path')->nullable();
             $table->timestamp('experience');
+            $table->enum('staff_type', ['doctor', 'nurse', 'administrator']);
             $table->timestamps();
-            $table->foreignId('role_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

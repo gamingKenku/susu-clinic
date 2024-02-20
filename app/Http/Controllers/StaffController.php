@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Position;
 use App\Models\Staff;
-use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,7 +19,7 @@ class StaffController extends Controller
     public function index()
     {
         return view('resources.staff.index', [
-            'staff' => Staff::query()->orderBy('role_id')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym'),
+            'staff' => Staff::query()->orderBy('staff_type')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym'),
         ]);
     }
 
@@ -30,7 +29,6 @@ class StaffController extends Controller
     public function create()
     {
         return view('resources.staff.create', [
-            'roles' => Role::all(),
             'positions' => Position::query()->orderBy('name'),
         ]);
     }
@@ -47,7 +45,7 @@ class StaffController extends Controller
             'specialities' => ['required', 'max:16777215'],
             'experience' => ['required', 'date', 'before:now'],
             'photo_path' => ['file', 'image'],
-            'role_id' => ['required', 'exists:roles,id'],
+            'staff_type' => ['required', 'in:doctor,nurse,administrator'],
             'positions' => ['array'],
             'positions.*' => ['exists:positions,id'],
         ]);
@@ -58,7 +56,7 @@ class StaffController extends Controller
             'patronym' => $validated_data['patronym'],
             'specialities' => $validated_data['specialities'],
             'experience' => $validated_data['experience'],
-            'role_id' => $validated_data['role_id'],
+            'staff_type' => $validated_data['staff_type']
         ]);
 
         $path = $request->file('photo_path')->storeAs('staff_photos', "staff{$staff->id}" . '.' . $request->file('photo_path')->getExtension());
@@ -88,7 +86,6 @@ class StaffController extends Controller
         return view('resources.staff.show', [
             'staff' => Staff::query()->findOrFail($id),
             'positions' => Position::query()->orderBy('name'),
-            'roles' => Role::all(),
         ]);
     }
 
@@ -104,7 +101,7 @@ class StaffController extends Controller
             'specialities' => ['required', 'max:16777215'],
             'experience' => ['required', 'date', 'before:now'],
             'photo_path' => ['file', 'image'],
-            'role_id' => ['required', 'exists:roles,id'],
+            'staff_type' => ['required', 'in:doctor,nurse,administrator'],
             'positions' => ['array'],
             'positions.*' => ['exists:positions,id'],
         ]);
@@ -116,7 +113,7 @@ class StaffController extends Controller
         $staff->patronym = $validated_data['patronym'];
         $staff->specialities = $validated_data['specialities'];
         $staff->experience = $validated_data['experience'];
-        $staff->role()->associate(Role::query()->findOrFail($validated_data['role_id']));
+        $staff->staff_type = $validated_data['staff_type'];
         $staff->positions()->sync($validated_data['positions']);
 
         Storage::delete($staff->photo_path);

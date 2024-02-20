@@ -19,13 +19,8 @@ class Staff extends Model
         'specialities',
         'photo_path',
         'experience',
-        'role_id'
+        'staff_type',
     ];
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
 
     public function workingHours(): HasOne
     {

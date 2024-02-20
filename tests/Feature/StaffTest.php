@@ -9,14 +9,14 @@ use App\Models\Staff;
 use App\Models\WorkingHours;
 use App\Models\Position;
 use App\Models\User;
-use App\Models\Role;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\StorageAttributes;
 
 class StaffTest extends TestCase
 {
-    protected $user, $staff, $positions, $working_hours, $role;
+    protected $user, $staff, $positions, $working_hours;
 
     protected function setUp(): void
     {
@@ -26,7 +26,6 @@ class StaffTest extends TestCase
         $this->staff = Staff::query()->latest()->first();
         $this->working_hours = WorkingHours::query()->latest()->take(3)->pluck('id')->toArray();
         $this->positions = Position::query()->latest()->take(3)->pluck('id')->toArray();
-        $this->role = Role::query()->latest()->first();
     }
 
     public function testStaffIndex(): void
@@ -44,7 +43,6 @@ class StaffTest extends TestCase
         $response = $this->actingAs($this->user)->get('/admin/resources/staff/create');
 
         $response->assertOk();
-        $response->assertViewHas('roles');
         $response->assertViewHas('positions');
     }
 
@@ -53,6 +51,8 @@ class StaffTest extends TestCase
         // staff create post check
         $file = UploadedFile::fake()->image("staff{$this->staff->id}.jpg");
 
+        $staff_type = Arr::random(['doctor', 'nurse', 'administrator']);
+
         $response = $this->actingAs($this->user)->post('/admin/resources/staff', [
             'first_name' => 'test first name',
             'last_name' => 'test last name',
@@ -60,7 +60,7 @@ class StaffTest extends TestCase
             'experience' => '2024-01-01 00:00:00',
             'specialities' => 'test specialities',
             'photo_path' => $file,
-            'role_id' => $this->role->id,
+            'staff_type' => $staff_type,
             'positions' => $this->positions,
         ]);
 
@@ -71,7 +71,7 @@ class StaffTest extends TestCase
         $this->assertEquals('test last name', $this->staff->last_name);
         $this->assertEquals('test patronym', $this->staff->patronym);
         $this->assertEquals('2024-01-01 00:00:00', $this->staff->experience);
-        $this->assertEquals($this->role->id, $this->staff->role_id);
+        $this->assertEquals($staff_type, $this->staff->staff_type);
         $this->assertEquals($this->positions, $this->staff->positions()->pluck('id')->toArray());
         $this->assertEquals($this->staff->photo_path, "staff_photos/staff{$this->staff->id}.tmp");
 
@@ -90,7 +90,7 @@ class StaffTest extends TestCase
         $this->assertEquals($this->staff->patronym, $response['staff']['patronym']);
         $this->assertEquals($this->staff->experience, $response['staff']['experience']);
         $this->assertEquals($this->staff->photo_path, $response['staff']['photo_path']);
-        $this->assertEquals($this->staff->role_id, $response['staff']['role_id']);
+        $this->assertEquals($this->staff->staff_type, $response['staff']['staff_type']);
         $positionsIds = array_map(function ($position) {
             return $position['id'];
         }, $response['staff']['positions']->toArray());
@@ -108,7 +108,7 @@ class StaffTest extends TestCase
         $this->assertEquals($this->staff->patronym, $response['staff']['patronym']);
         $this->assertEquals($this->staff->experience, $response['staff']['experience']);
         $this->assertEquals($this->staff->photo_path, $response['staff']['photo_path']);
-        $this->assertEquals($this->staff->role_id, $response['staff']['role_id']);
+        $this->assertEquals($this->staff->staff_type, $response['staff']['staff_type']);
         $positionsIds = array_map(function ($position) {
             return $position['id'];
         }, $response['staff']['positions']->toArray());
@@ -120,6 +120,8 @@ class StaffTest extends TestCase
         // staff edit post check
         $file = UploadedFile::fake()->image("staff{$this->staff->id}.jpg");
 
+        $staff_type = Arr::random(['doctor', 'nurse', 'administrator']);
+
         $response = $this->actingAs($this->user)->put('/admin/resources/staff/' . $this->staff->id, [
             'first_name' => 'test first name changed',
             'last_name' => 'test last name changed',
@@ -127,7 +129,7 @@ class StaffTest extends TestCase
             'specialities' => 'test specialities',
             'experience' => '2024-01-02 00:00:00',
             'photo_path' => $file,
-            'role_id' => $this->role->id,
+            'staff_type' => $staff_type,
             'positions' => $this->positions,
         ]);
         
@@ -138,7 +140,7 @@ class StaffTest extends TestCase
         $this->assertEquals('test last name changed', $this->staff->last_name);
         $this->assertEquals('test patronym changed', $this->staff->patronym);
         $this->assertEquals('2024-01-02 00:00:00', $this->staff->experience);
-        $this->assertEquals($this->role->id, $this->staff->role_id);
+        $this->assertEquals($staff_type, $this->staff->staff_type);
         $this->assertEquals($this->positions, $this->staff->positions()->pluck('id')->toArray());
         $this->assertEquals($this->staff->photo_path, "staff_photos/staff{$this->staff->id}.tmp");
     
