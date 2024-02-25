@@ -59,10 +59,13 @@ class AdminController extends Controller
 
         if ($validated_data['deleted'] == true) {
             $feedback->delete();
+            return redirect(route('moderationIndex'));
         }
 
         $feedback->moderated = $validated_data['moderated'];
         $feedback->blocked = $validated_data['blocked'];
+
+        $feedback->save();
 
         return redirect(route('moderationIndex'));
     }

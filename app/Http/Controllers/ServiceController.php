@@ -19,7 +19,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('resources.services.index', ['services' => Service::query()->orderBy('category_id')->paginate(25)]);
+        return view('resources.services.index', [
+            'services' => Service::query()->orderBy('category_id')->paginate(25)
+        ]);
     }
 
     /**
