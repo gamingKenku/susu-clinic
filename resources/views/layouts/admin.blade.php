@@ -37,7 +37,7 @@
                             <a class="nav-link" href="{{ route('resources') }}">Ресурсы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('moderation') }}">Модерация</a>
+                            <a class="nav-link" href="{{ route('moderationIndex') }}">Модерация</a>
                         </li>
                     </ul>
                     @endif

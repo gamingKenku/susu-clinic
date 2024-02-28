@@ -62,7 +62,7 @@ Route::put('/admin/moderation/{feedback}', [AdminController::class, 'moderationU
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [LoginController::class, 'login'])->name('login');
-Route::get('/admin/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/admin/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Auth::routes([
 //     'register' => false,
