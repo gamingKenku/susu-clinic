@@ -1,7 +1,16 @@
+@use('Illuminate\Http\Request')
+
+<span @class([
+    'btn-primary' => Request::boolean('unchecked'),
+    'btn-secondary' => !Request::boolean('unchecked'),
+    ])>
+</span>
+
 <div class="container">
     <div class="row">
         <div class="col-md">
-            <button type="button" class="btn "></button>
+            <button type="button" class="btn btn-primary btn-secondary">Все</button>
+            <button type="button" class="btn btn-primary btn-secondary">Непроверенные</button>
         </div>
     </div>
     <div class="row">
