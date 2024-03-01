@@ -1,21 +1,16 @@
-@use('Illuminate\Http\Request')
+@extends('layouts.admin')
 
-<span @class([
-    'btn-primary' => Request::boolean('unchecked'),
-    'btn-secondary' => !Request::boolean('unchecked'),
-    ])>
-</span>
-
+@section('content')
 <div class="container">
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md">
-            <button type="button" class="btn btn-primary btn-secondary">Все</button>
-            <button type="button" class="btn btn-primary btn-secondary">Непроверенные</button>
+            <button type="button" class="btn me-3 @if(!Request::boolean('unchecked')) btn-primary @else btn-secondary @endif">Все</button>
+            <button type="button" class="btn me-3 @if(Request::boolean('unchecked')) btn-primary @else btn-secondary @endif">Непроверенные</button>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <table class="table table-hover">
+            <table class="table table-hover table-sm">
                 <tr>
                     <th>Автор</th>
                     <th>Содержание</th>
@@ -36,3 +31,4 @@
         </div>
     </div>
 </div>
+@endsection

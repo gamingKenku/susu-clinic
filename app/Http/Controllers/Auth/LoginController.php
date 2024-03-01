@@ -70,9 +70,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) 
         {
-            if ($request->hasSession()) {
-                $request->session()->put('auth.password_confirmed_at', time());
-            }
+            $request->session()->regenerate();
 
             return $this->sendLoginResponse($request);
         }
