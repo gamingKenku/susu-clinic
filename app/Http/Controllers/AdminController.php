@@ -59,7 +59,7 @@ class AdminController extends Controller
 
         if ($validated_data['deleted'] == true) {
             $feedback->delete();
-            return redirect(route('moderationIndex'));
+            return redirect(route('moderationIndex', ['unchecked' => true]));
         }
 
         $feedback->moderated = $validated_data['moderated'];
@@ -67,6 +67,6 @@ class AdminController extends Controller
 
         $feedback->save();
 
-        return redirect(route('moderationIndex'));
+        return redirect(route('moderationIndex', ['unchecked' => true]));
     }
 }
