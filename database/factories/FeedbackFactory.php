@@ -19,7 +19,7 @@ class FeedbackFactory extends Factory
         return [
             'content' => fake()->text(),
             'author' => fake()->name(),
-            'rating' => fake()->numberBetween(0, 5),
+            'rating' => fake()->numberBetween(1, 5),
             'mail' => fake()->safeEmail(),
             'moderated' => false,
             'blocked' => false,
