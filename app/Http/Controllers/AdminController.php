@@ -28,7 +28,7 @@ class AdminController extends Controller
 
     public function moderationIndex(Request $request)
     {
-        if ($request->boolean('unchecked')) {
+        if (!$request->boolean('unchecked')) {
             $feedback = Feedback::paginate(30);
         }
         else {
