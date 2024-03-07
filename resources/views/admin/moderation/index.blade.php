@@ -51,6 +51,7 @@
                 <p class="text-muted">Отзывов пока нет.</p>
             @endif
 
+            {{ $feedback->withQueryString()->links() }}
         </div>
     </div>
 </div>

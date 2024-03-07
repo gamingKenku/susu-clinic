@@ -17,7 +17,7 @@ class AdminController extends Controller
     public function dashboard()
     {
         return view('admin.dashboard', [
-            'unmodded_feedback_count' => Feedback::query()->where('moderated', '=', false),
+            'unmodded_feedback_count' => Feedback::query()->where('moderated', '=', false)->count(),
         ]);
     }
 
@@ -29,10 +29,10 @@ class AdminController extends Controller
     public function moderationIndex(Request $request)
     {
         if (!$request->boolean('unchecked')) {
-            $feedback = Feedback::paginate(30);
+            $feedback = Feedback::paginate(15);
         }
         else {
-            $feedback = Feedback::query()->where('moderated', '=', false)->paginate(30);
+            $feedback = Feedback::query()->where('moderated', '=', false)->paginate(15);
         }
 
         return view('admin.moderation.index', [

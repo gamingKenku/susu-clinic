@@ -14,7 +14,7 @@ import { createApp } from 'vue';
  */
 
 const app = createApp({
-    
+
 });
 
 import ExampleComponent from './components/ExampleComponent.vue';
@@ -40,14 +40,18 @@ Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, 
 
 app.mount('#app');
 
-$(".refresh-button").on("click", function(event) {
-    let unchecked_flag = $(event.target).data('unchecked-flag');
-
-    let url = window.location.href;
-    if (url.indexOf('?') > -1){
-        url += '&unchecked=' + unchecked_flag;
-     } else {
-        url += '?unchecked=' + unchecked_flag;
-     }
-     window.location.href = url;
-})
+$(document).ready(function () {
+    $(".refresh-button").on("click", function(event) {
+        let unchecked_flag = $(event.target).data('unchecked-flag');
+    
+        let url = window.location.href;
+        url = url.split('?')[0];
+        
+        if (url.indexOf('?') > -1){
+            url += '&unchecked=' + unchecked_flag;
+         } else {
+            url += '?unchecked=' + unchecked_flag;
+         }
+         window.location.href = url;
+    });
+});
