@@ -13,7 +13,9 @@ import { createApp } from 'vue';
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
+const app = createApp({
+    
+});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
@@ -26,9 +28,9 @@ app.component('example-component', ExampleComponent);
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
-// });
+Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
+    app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
+});
 
 /**
  * Finally, we will attach the application instance to a HTML element with
@@ -37,3 +39,15 @@ app.component('example-component', ExampleComponent);
  */
 
 app.mount('#app');
+
+$(".refresh-button").on("click", function(event) {
+    let unchecked_flag = $(event.target).data('unchecked-flag');
+
+    let url = window.location.href;
+    if (url.indexOf('?') > -1){
+        url += '&unchecked=' + unchecked_flag;
+     } else {
+        url += '?unchecked=' + unchecked_flag;
+     }
+     window.location.href = url;
+})

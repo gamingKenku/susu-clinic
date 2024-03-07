@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row mb-3">
         <div class="col">
-            <button type="button" class="btn me-3 @if(!Request::boolean('unchecked')) btn-primary @else btn-secondary @endif">Все</button>
-            <button type="button" class="btn me-3 @if(Request::boolean('unchecked')) btn-primary @else btn-secondary @endif">Непроверенные</button>
+            <button type="button" data-unchecked-flag="false" class="refresh-button btn me-3 @if(!Request::boolean('unchecked')) btn-primary @else btn-secondary @endif">Все</button>
+            <button type="button" data-unchecked-flag="true" class="refresh-button btn me-3 @if(Request::boolean('unchecked')) btn-primary @else btn-secondary @endif">Непроверенные</button>
         </div>
     </div>
     <div class="row">
