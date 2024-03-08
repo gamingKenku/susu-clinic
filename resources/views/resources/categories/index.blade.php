@@ -1,3 +1,11 @@
-<div>
-    <!-- Because you are alive, everything is possible. - Thich Nhat Hanh -->
-</div>
+@extends('layouts.admin')
+
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+
+            </div>
+        </div>
+    </div>
+@endsection

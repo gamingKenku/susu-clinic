@@ -23,7 +23,22 @@ class AdminController extends Controller
 
     public function resources()
     {
-        return view('admin.resources');
+        $tables = [
+            'users',
+            'documents',
+            'events',
+            'clinics',
+            'categories',
+            'services',
+            'discounts',
+            'staff',
+            'positions',
+            'working_hours',
+        ];
+
+        return view('admin.resources', [
+            'tables' => $tables,
+        ]);
     }
 
     public function moderationIndex(Request $request)

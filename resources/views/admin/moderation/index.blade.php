@@ -16,6 +16,7 @@
                     <tr>
                         <th class="w-15">Автор</th>
                         <th class="w-auto">Содержание</th>
+                        <th class="w-auto">Дата отправки</th>
                         <th class="w-10">Оценка</th>
                         <th class="w-auto">Статус</th>
                         <th class="w-auto"></th>
@@ -24,6 +25,7 @@
                         <tr>
                             <td>{{$review->author}}</td>
                             <td>{{Str::limit($review->content, 100)}}</td>
+                            <td>{{$review->created_at}}</td>
                             <td>
                                 @for ($i = 1; $i <= $review->rating ; $i++)
                                     <span class="fa fa-star checked"></span>
