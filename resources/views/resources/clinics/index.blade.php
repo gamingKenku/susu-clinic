@@ -17,7 +17,7 @@
                 <h4 class="m-0">Клиники</h4>
                 <div>
                     <a href="{{ route('clinics.create') }}" class="btn btn-secondary" title="Создать">
-                        <span class="bi bi-plus-lg" aria-hidden="true"></span>
+                        <span class="fa-solid fa-plus" aria-hidden="true"></span>
                     </a>
                 </div>
             </div>

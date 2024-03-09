@@ -1,1 +1,7 @@
-[]
+[
+    {
+        "model-name": "Category",
+        "resource-file": "categories.json",
+        "table-name": "categories"
+    }
+]
