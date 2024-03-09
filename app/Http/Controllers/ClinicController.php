@@ -17,9 +17,9 @@ class ClinicController extends Controller
      */
     public function index()
     {
-        $clinics = Clinic::paginate(25);
+        $clinicsObjects = Clinic::paginate(25);
 
-        return view('resources.clinics.index', ['clinics' => $clinics]);
+        return view('resources.clinics.index', ['clinicsObjects' => $clinicsObjects]);
     }
 
     /**

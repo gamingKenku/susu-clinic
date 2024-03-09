@@ -14,5 +14,9 @@
         "sass": "^1.56.1",
         "vite": "^4.0.0",
         "vue": "^3.2.37"
+    },
+    "dependencies": {
+        "bootstrap-icons": "^1.11.3",
+        "fa-icons": "^0.2.0"
     }
 }
