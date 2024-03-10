@@ -195,6 +195,7 @@ return [
         'number'                   => 'номер',
         'password'                 => 'пароль',
         'password_confirmation'    => 'подтверждение пароля',
+        'user_password'   => 'пароль пользователя', 
         'phone'                    => 'номер телефона',
         'photo'                    => 'фотография',
         'postal_code'              => 'индекс',

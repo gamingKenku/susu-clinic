@@ -9,14 +9,29 @@
 
 @if (Route::current()->getName() === 'users.edit')
 <div class="mb-3 row">
-    <label for="old_password" class="col-form-label text-lg-end col-lg-2 col-xl-3">Старый пароль</label>
+    <label for="user_password" class="col-form-label text-lg-end col-lg-2 col-xl-3">Пароль пользователя</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="old_password" type="password" id="old_password" value="" minlength="1" maxlength="255" required="true" placeholder="Введите старый пароль...">
-        {!! $errors->first('old_password', '<div class="invalid-feedback">:message</div>') !!}
+        <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="user_password" type="password" id="user_password" value="" minlength="1" maxlength="255" required="true" placeholder="Введите старый пароль...">
+        {!! $errors->first('user_password', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
-@endif
 
+<div class="mb-3 row">
+    <label for="password" class="col-form-label text-lg-end col-lg-2 col-xl-3">Новый пароль</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" type="password" id="password" value="" minlength="1" maxlength="255" required="true" placeholder="Введите пароль...">
+        {!! $errors->first('password', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+
+<div class="mb-3 row">
+    <label for="password_confirmation" class="col-form-label text-lg-end col-lg-2 col-xl-3">Подтвердите новый пароль</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password_confirmation" type="password" id="password_confirmation" value="" minlength="1" maxlength="255" required="true" placeholder="Подтвердите пароль...">
+        {!! $errors->first('password_confirmation', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+@else
 <div class="mb-3 row">
     <label for="password" class="col-form-label text-lg-end col-lg-2 col-xl-3">Пароль</label>
     <div class="col-lg-10 col-xl-9">
@@ -32,6 +47,7 @@
         {!! $errors->first('password_confirmation', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
+@endif
 
 <div class="mb-3 row">
     <label for="email" class="col-form-label text-lg-end col-lg-2 col-xl-3">Адрес электронной почты</label>

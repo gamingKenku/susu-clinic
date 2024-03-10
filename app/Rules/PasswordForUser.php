@@ -23,7 +23,7 @@ class PasswordForUser implements ValidationRule
     {
         if (!Hash::check($value, $this->password))
         {
-
+            $fail('Поле :attribute должно совпадать с паролем изменяемого пользователя.');
         }
     }
 }
