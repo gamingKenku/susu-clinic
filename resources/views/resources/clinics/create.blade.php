@@ -5,9 +5,9 @@
     <div class="card text-bg-theme">
 
          <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">Create New Clinics</h4>
+            <h4 class="m-0">Создание клиники</h4>
             <div>
-                <a href="{{ route('clinics.clinics.index') }}" class="btn btn-primary" title="Show All Clinics">
+                <a href="{{ route('clinics.index') }}" class="btn btn-primary" title="Показать все ">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
             </div>
@@ -26,14 +26,14 @@
                 </div>
             @endif
 
-            <form method="POST" class="needs-validation" novalidate action="{{ route('clinics.clinics.store') }}" accept-charset="UTF-8" id="create_clinics_form" name="create_clinics_form" >
+            <form method="POST" class="needs-validation" novalidate action="{{ route('clinics.store') }}" accept-charset="UTF-8" id="create_clinics_form" name="create_clinics_form" >
             {{ csrf_field() }}
-            @include ('clinics.form', [
-                                        'clinics' => null,
+            @include ('resources.clinics.form', [
+                                        'clinic' => null,
                                       ])
 
                 <div class="col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">
-                    <input class="btn btn-primary" type="submit" value="Add">
+                    <input class="btn btn-primary" type="submit" value="Сохранить">
                 </div>
 
             </form>

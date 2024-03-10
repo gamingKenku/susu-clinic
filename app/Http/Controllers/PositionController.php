@@ -18,7 +18,7 @@ class PositionController extends Controller
     public function index()
     {
         return view('resources.positions.index', [
-            'positions' => Position::query()->orderBy('name'),
+            'positions' => Position::query()->orderBy('name')->paginate(25),
         ]);
     }
 
@@ -29,10 +29,10 @@ class PositionController extends Controller
     {
         return view('resources.positions.create', [
             'staff' => Staff::query()
-                ->orderBy('role_id')
                 ->orderBy('first_name')
                 ->orderBy('last_name')
-                ->orderBy('patronym'),
+                ->orderBy('patronym')
+                ->get(),
         ]);
     }
 

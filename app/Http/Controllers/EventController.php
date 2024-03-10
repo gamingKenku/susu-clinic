@@ -108,7 +108,10 @@ class EventController extends Controller
     {
         $event = Event::query()->findOrFail($id);
 
-        Storage::delete($event->picture_path);
+        if (isset($event->picture_path)) {
+            Storage::delete(optional($event->picture_path));
+        }
+        
         $event->delete();
 
         return redirect('/admin/resources/events');

@@ -19,7 +19,7 @@ class StaffController extends Controller
     public function index()
     {
         return view('resources.staff.index', [
-            'staff' => Staff::query()->orderBy('staff_type')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym'),
+            'staffObjects' => Staff::query()->orderBy('staff_type')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym')->paginate(25),
         ]);
     }
 
@@ -29,7 +29,7 @@ class StaffController extends Controller
     public function create()
     {
         return view('resources.staff.create', [
-            'positions' => Position::query()->orderBy('name'),
+            'positions' => Position::query()->orderBy('name')->get(),
         ]);
     }
 
@@ -83,9 +83,9 @@ class StaffController extends Controller
      */
     public function edit(string $id)
     {
-        return view('resources.staff.show', [
+        return view('resources.staff.edit', [
             'staff' => Staff::query()->findOrFail($id),
-            'positions' => Position::query()->orderBy('name'),
+            'positions' => Position::query()->orderBy('name')->get(),
         ]);
     }
 

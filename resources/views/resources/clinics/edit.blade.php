@@ -5,13 +5,13 @@
     <div class="card text-bg-theme">
   
          <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">{{ !empty($clinics->name) ? $clinics->name : 'Clinics' }}</h4>
+            <h4 class="m-0">{{ !empty($clinic->name) ? $clinic->name : 'Клиника' }}</h4>
             <div>
-                <a href="{{ route('clinics.clinics.index') }}" class="btn btn-primary" title="Show All Clinics">
+                <a href="{{ route('clinics.index') }}" class="btn btn-primary" title="Показать все">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
 
-                <a href="{{ route('clinics.clinics.create') }}" class="btn btn-secondary" title="Create New Clinics">
+                <a href="{{ route('clinics.create') }}" class="btn btn-secondary" title="Создать новую клинику">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>
                 </a>
             </div>
@@ -29,15 +29,15 @@
                 </div>
             @endif
 
-            <form method="POST" class="needs-validation" novalidate action="{{ route('clinics.clinics.update', $clinics->id) }}" id="edit_clinics_form" name="edit_clinics_form" accept-charset="UTF-8" >
+            <form method="POST" class="needs-validation" novalidate action="{{ route('clinics.update', $clinic->id) }}" id="edit_clinics_form" name="edit_clinics_form" accept-charset="UTF-8" >
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
-            @include ('clinics.form', [
-                                        'clinics' => $clinics,
+            @include ('resources.clinics.form', [
+                                        'clinic' => $clinic,
                                       ])
 
                 <div class="col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">
-                    <input class="btn btn-primary" type="submit" value="Update">
+                    <input class="btn btn-primary" type="submit" value="Сохранить">
                 </div>
             </form>
 

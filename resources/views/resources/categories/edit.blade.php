@@ -1,17 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
     <div class="card text-bg-theme">
   
          <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">{{ !empty($categories->name) ? $categories->name : 'Categories' }}</h4>
+            <h4 class="m-0">{{ !empty($categories->name) ? $categories->name : 'Категория' }}</h4>
             <div>
-                <a href="{{ route('categories.categories.index') }}" class="btn btn-primary" title="Show All Categories">
+                <a href="{{ route('categories.index') }}" class="btn btn-primary" title="Показать все">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
 
-                <a href="{{ route('categories.categories.create') }}" class="btn btn-secondary" title="Create New Categories">
+                <a href="{{ route('categories.create') }}" class="btn btn-secondary" title="Создать">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>
                 </a>
             </div>
@@ -29,15 +29,15 @@
                 </div>
             @endif
 
-            <form method="POST" class="needs-validation" novalidate action="{{ route('categories.categories.update', $categories->id) }}" id="edit_categories_form" name="edit_categories_form" accept-charset="UTF-8" >
+            <form method="POST" class="needs-validation" novalidate action="{{ route('categories.update', $categories->id) }}" id="edit_categories_form" name="edit_categories_form" accept-charset="UTF-8" >
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
-            @include ('categories.form', [
+            @include ('resources.categories.form', [
                                         'categories' => $categories,
                                       ])
 
                 <div class="col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">
-                    <input class="btn btn-primary" type="submit" value="Update">
+                    <input class="btn btn-primary" type="submit" value="Сохранить">
                 </div>
             </form>
 

@@ -3,5 +3,40 @@
         "model-name": "Category",
         "resource-file": "categories.json",
         "table-name": "categories"
+    },
+    {
+        "model-name": "Service",
+        "resource-file": "services.json",
+        "table-name": "services"
+    },
+    {
+        "model-name": "Discount",
+        "resource-file": "discounts.json",
+        "table-name": "discounts"
+    },
+    {
+        "model-name": "Staff",
+        "resource-file": "staff.json",
+        "table-name": "staff"
+    },
+    {
+        "model-name": "User",
+        "resource-file": "users.json",
+        "table-name": "users"
+    },
+    {
+        "model-name": "Position",
+        "resource-file": "positions.json",
+        "table-name": "positions"
+    },
+    {
+        "model-name": "Event",
+        "resource-file": "events.json",
+        "table-name": "events"
+    },
+    {
+        "model-name": "Document",
+        "resource-file": "documents.json",
+        "table-name": "documents"
     }
 ]

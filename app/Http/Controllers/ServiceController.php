@@ -30,8 +30,8 @@ class ServiceController extends Controller
     public function create()
     {
         return view('resources.services.create', [
-            'categories' => Category::query()->orderBy('name'),
-            'discounts' => Discount::query()->orderBy('start_date'),
+            'categories' => Category::query()->orderBy('name')->get(),
+            'discounts' => Discount::query()->orderBy('start_date')->get(),
         ]);
     }
 
@@ -76,8 +76,8 @@ class ServiceController extends Controller
     {
         return view('resources.services.edit', [
             'service' => Service::query()->findOrFail($id),
-            'categories' => Category::query()->orderBy('name'),
-            'discounts' => Discount::query()->orderBy('start_date'),
+            'categories' => Category::query()->orderBy('name')->get(),
+            'discounts' => Discount::query()->orderBy('start_date')->get(),
         ]);
     }
 

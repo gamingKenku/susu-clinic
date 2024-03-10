@@ -19,7 +19,7 @@ class DiscountsController extends Controller
     public function index()
     {
         return view('resources.discounts.index', [
-            'discounts' => Discount::query()->orderBy('start_date'),
+            'discounts' => Discount::query()->orderBy('start_date')->paginate(25),
         ]);
     }
 
@@ -29,7 +29,7 @@ class DiscountsController extends Controller
     public function create()
     {
         return view('resources.discounts.create', [
-            'services' => Service::query()->orderBy('name'),
+            'services' => Service::query()->orderBy('name')->get(),
         ]);
     }
 
@@ -77,7 +77,7 @@ class DiscountsController extends Controller
     public function edit(string $id)
     {
         return view('resources.discounts.edit', [
-            'services' => Service::query()->orderBy('name'),
+            'services' => Service::query()->orderBy('name')->get(),
             'discount' => Discount::query()->findOrFail($id),
         ]);
     }

@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $categories = Category::query()->orderBy('clinic_id')->paginate(25);
 
-        return view('resources.categories.index', ['categories' => $categories]);
+        return view('resources.categories.index', ['categoriesObjects' => $categories]);
     }
 
     /**
@@ -54,7 +54,7 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        return view('resources.categories.show', ['category' => Category::query()->findOrFail($id)]);
+        return view('resources.categories.show', ['categories' => Category::query()->findOrFail($id)]);
     }
 
     /**
@@ -62,7 +62,10 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('resources.categories.edit', ['category' => Category::query()->findOrFail($id)]);
+        return view('resources.categories.edit', [
+            'categories' => Category::query()->findOrFail($id),
+            'clinics' => Clinic::query()->orderBy('name')->get()
+        ]);
     }
 
     /**
