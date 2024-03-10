@@ -41,7 +41,7 @@ class StaffController extends Controller
         $validated_data = $request->validate([
             'first_name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'],
-            'patronym' => ['max:255', 'string'],
+            'patronym' => ['max:255'],
             'specialities' => ['required', 'max:16777215'],
             'experience' => ['required', 'date', 'before:now'],
             'photo_path' => ['file', 'image'],

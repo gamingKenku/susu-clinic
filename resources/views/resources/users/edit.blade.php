@@ -5,7 +5,7 @@
     <div class="card text-bg-theme">
   
          <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">{{ !empty($title) ? $title : 'Пользователь' }}</h4>
+            <h4 class="m-0">{{ !empty($user->username) ? $user->username : 'Пользователь' }}</h4>
             <div>
                 <a href="{{ route('users.index') }}" class="btn btn-primary" title="Показать все">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
