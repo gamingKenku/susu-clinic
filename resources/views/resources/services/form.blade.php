@@ -10,7 +10,7 @@
 <div class="mb-3 row">
     <label for="price" class="col-form-label text-lg-end col-lg-2 col-xl-3">Цена</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="price" type="number" id="price" value="{{ old('price', optional($service)->price) }}" min="-999999" max="999999" required="true" placeholder="Введите цену..." step="any">
+        <input class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="price" type="number" id="price" value="{{ old('price', optional($service)->price) }}" min="0" max="999999" required="true" placeholder="Введите цену..." step="0.01">
         {!! $errors->first('price', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
@@ -23,6 +23,22 @@
         	@foreach ($categories as $key => $category)
 			    <option value="{{ $key }}" {{ old('category_id', optional($service)->category_id) == $key ? 'selected' : '' }}>
 			    	{{ $category->name }}
+			    </option>
+			@endforeach
+        </select>
+        
+        {!! $errors->first('category_id', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+
+<div class="mb-3 row">
+    <label for="discounts" class="col-form-label text-lg-end col-lg-2 col-xl-3">Акции</label>
+    <div class="col-lg-10 col-xl-9">
+        <select multiple class="form-select{{ $errors->has('discounts') ? ' is-invalid' : '' }}" id="discounts" name="discounts" required="true">
+        	    {{-- <option value="" style="display: none;" {{ old('category_id', optional($service)->category_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите категорию...</option> --}}
+        	@foreach ($discounts as $key => $discount)
+			    <option value="{{ $key }}" {{ old('category_id', optional($service)->category_id) == $key ? 'selected' : '' }}>
+			    	{{ "$discount->header ($discount->created_at" }}
 			    </option>
 			@endforeach
         </select>
