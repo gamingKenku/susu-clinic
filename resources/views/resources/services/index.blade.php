@@ -23,7 +23,7 @@
         
         @if(count($services) == 0)
             <div class="card-body text-center">
-                <h4>No Services Available.</h4>
+                <h4>Услуг пока нет.</h4>
             </div>
         @else
         <div class="card-body p-0">

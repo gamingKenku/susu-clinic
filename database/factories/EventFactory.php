@@ -18,7 +18,7 @@ class EventFactory extends Factory
     {
         return [
             'header' => fake()->sentence(),
-            'content' => fake()->randomHtml(),
+            'content' => fake()->text(),
         ];
     }
 }

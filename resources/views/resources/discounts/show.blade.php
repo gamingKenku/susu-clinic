@@ -37,6 +37,14 @@
             <dd class="col-lg-10 col-xl-9">{{ $discount->header }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Содержание</dt>
             <dd class="col-lg-10 col-xl-9">{!! $discount->markup !!}</dd>
+            <dt class="text-lg-end col-lg-2 col-xl-3">Действует на услуги</dt>
+            <dd class="col-lg-10 col-xl-9">
+                <ol>
+                    @foreach ($discount->services as $service)
+                        <li>{{ $service->name }} ({{ $service->category->name }})</li>
+                    @endforeach
+                </ol>
+            </dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата начала акции</dt>
             <dd class="col-lg-10 col-xl-9">{{ $discount->start_date }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата окончания акции</dt>

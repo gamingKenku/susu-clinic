@@ -18,7 +18,7 @@ class DiscountFactory extends Factory
     {
         return [
             'header' => fake()->sentence(),
-            'markup' => fake()->randomHtml(),
+            'markup' => fake()->text(),
         ];
     }
 }

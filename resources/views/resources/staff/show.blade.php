@@ -47,6 +47,14 @@
             <dd class="col-lg-10 col-xl-9">{{ $staff->experience }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Тип сотрудника</dt>
             <dd class="col-lg-10 col-xl-9">{{ __(ucfirst($staff->staff_type)) }}</dd>
+            <dt class="text-lg-end col-lg-2 col-xl-3">Должности</dt>
+            <dd class="col-lg-10 col-xl-9">
+                <ol>
+                    @foreach ($staff->positions as $position)
+                        <li>{{ $position->name }}</li>
+                    @endforeach
+                </ol>
+            </dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата создания</dt>
             <dd class="col-lg-10 col-xl-9">{{ $staff->created_at }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата последнего обновления</dt>

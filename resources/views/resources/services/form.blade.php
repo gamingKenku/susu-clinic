@@ -47,19 +47,19 @@
             @if ($service != null)
                 @foreach ($discounts as $key => $discount)
                     <option value="{{ $discount->id }}" {{ in_array($discount->id, $service->discounts->pluck('id')->toArray()) ? 'selected' : '' }}>
-                        {{ "$discount->header ($discount->created_at" }}
+                        {{ "$discount->header ($discount->created_at)" }}
                     </option>
                 @endforeach
             @elseif (old('discounts') != null)
                 @foreach ($discounts as $key => $discount)
                     <option value="{{ $discount->id }}" {{ in_array($discount->id, old('discounts')) ? 'selected' : '' }}>
-                        {{ "$discount->header ($discount->created_at" }}
+                        {{ "$discount->header ($discount->created_at)" }}
                     </option>
                 @endforeach
             @else
                 @foreach ($discounts as $key => $discount)
                     <option value="{{ $discount->id }}">
-                        {{ "$discount->header ($discount->created_at" }}
+                        {{ "$discount->header ($discount->created_at)" }}
                     </option>
                 @endforeach   
             @endif

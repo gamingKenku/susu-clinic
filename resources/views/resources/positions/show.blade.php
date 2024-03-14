@@ -45,6 +45,14 @@
             <dd class="col-lg-10 col-xl-9">{!! $position->conditions !!}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Есть вакансия</dt>
             <dd class="col-lg-10 col-xl-9">{{ ($position->has_vacancy) ? 'Да' : 'Нет' }}</dd>
+            <dt class="text-lg-end col-lg-2 col-xl-3">Сотрудники</dt>
+            <dd class="col-lg-10 col-xl-9">
+                <ol>
+                    @foreach ($position->staff as $staff)
+                        <li>{{ $staff->first_name }} {{ $staff->last_name }} {{ $staff->patronym }}</li>
+                    @endforeach
+                </ol>
+            </dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата создания</dt>
             <dd class="col-lg-10 col-xl-9">{{ $position->created_at }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата последнего обновления</dt>

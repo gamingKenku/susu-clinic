@@ -12,7 +12,7 @@
         <div class="col">
 
             @if (!$feedback->isEmpty())
-                <table class="table table-hover table-sm">
+                <table class="table table-striped table-sm">
                     <tr>
                         <th class="w-15">Автор</th>
                         <th class="w-auto">Содержание</th>
@@ -23,10 +23,10 @@
                     </tr>
                     @foreach($feedback as $review)
                         <tr>
-                            <td>{{$review->author}}</td>
-                            <td>{{Str::limit($review->content, 100)}}</td>
-                            <td>{{$review->created_at}}</td>
-                            <td>
+                            <td class="align-middle">{{$review->author}}</td>
+                            <td class="align-middle">{{Str::limit($review->content, 100)}}</td>
+                            <td class="align-middle">{{$review->created_at}}</td>
+                            <td class="align-middle">
                                 @for ($i = 1; $i <= $review->rating ; $i++)
                                     <span class="fa fa-star checked"></span>
                                 @endfor
@@ -34,7 +34,7 @@
                                     <span class="fa fa-star"></span>
                                 @endfor
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 @if ($review->moderated == 1)
                                     <span class="text-success">Опубликован</span>
                                 @elseif ($review->blocked == 1)
@@ -43,7 +43,7 @@
                                     <span class="text-muted">Не проверен</span>
                                 @endif
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 <a href="{{route('moderationEdit', $review->id)}}" role="button" class="btn btn-primary">Просмотреть</a>
                             </td>
                         </tr>

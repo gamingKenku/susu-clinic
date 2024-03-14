@@ -21,7 +21,7 @@ class StaffFactory extends Factory
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'patronym' => fake()->firstNameMale(),
-            'specialities' => fake()->randomHtml(),
+            'specialities' => fake()->text(),
             'experience' => fake()->dateTime(),
             'staff_type' => Arr::random(['doctor', 'nurse', 'administrator']),
         ];
