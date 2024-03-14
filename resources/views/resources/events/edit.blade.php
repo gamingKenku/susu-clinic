@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <form method="POST" class="needs-validation" novalidate action="{{ route('events.update', $event->id) }}" id="edit_event_form" name="edit_event_form" accept-charset="UTF-8" enctype="multipart/form-data">
+            <form method="POST" class="quill-form needs-validation" novalidate action="{{ route('events.update', $event->id) }}" id="edit_event_form" name="edit_event_form" accept-charset="UTF-8" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
             @include ('resources.events.form', [

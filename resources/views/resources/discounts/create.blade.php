@@ -26,7 +26,7 @@
                 </div>
             @endif
 
-            <form method="POST" class="needs-validation" novalidate action="{{ route('discounts.store') }}" accept-charset="UTF-8" id="create_discount_form" name="create_discount_form" >
+            <form method="POST" class="quill-form needs-validation" novalidate action="{{ route('discounts.store') }}" accept-charset="UTF-8" id="create_discount_form" name="create_discount_form" >
             {{ csrf_field() }}
             @include ('resources.discounts.form', [
                                         'discount' => null,

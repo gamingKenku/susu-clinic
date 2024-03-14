@@ -36,7 +36,7 @@
             <dt class="text-lg-end col-lg-2 col-xl-3">Заголовок</dt>
             <dd class="col-lg-10 col-xl-9">{{ $discount->header }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Содержание</dt>
-            <dd class="col-lg-10 col-xl-9">{{ $discount->markup }}</dd>
+            <dd class="col-lg-10 col-xl-9">{!! $discount->markup !!}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата начала акции</dt>
             <dd class="col-lg-10 col-xl-9">{{ $discount->start_date }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата окончания акции</dt>

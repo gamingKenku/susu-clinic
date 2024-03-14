@@ -15,6 +15,9 @@ select2();
 import "/node_modules/select2/dist/css/select2.css";
 
 import Quill from 'quill';
+import "/node_modules/quill/dist/quill.core.css";
+import "/node_modules/quill/dist/quill.snow.css";
+
 
 // import 'bootstrap-select';
 import { createApp } from 'vue';
@@ -52,22 +55,73 @@ Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, 
 
 app.mount('#app');
 
+
 $(document).ready(function () {
+    
     $(".refresh-button").on("click", function(event) {
         let unchecked_flag = $(event.target).data('unchecked-flag');
-    
+        
         let url = window.location.href;
         url = url.split('?')[0];
         
         if (url.indexOf('?') > -1){
             url += '&unchecked=' + unchecked_flag;
-         } else {
+        } else {
             url += '?unchecked=' + unchecked_flag;
-         }
-         window.location.href = url;
+        }
+        window.location.href = url;
     });
-
+    
     $(".selectpicker").select2({
         theme: "bootstrap-5",
     });
+    
+    // const create_event_quill = new Quill('#event_content_editor', {
+    //     modules: {
+    //         toolbar: [
+    //             [{ header: [1, 2, false] }],    
+    //             ['bold', 'italic'],
+    //             ['link', 'blockquote'],
+    //             [{ list: 'ordered' }, { list: 'bullet' }],
+    //         ],
+    //       },
+    //     placeholder: 'Введите содержание...',
+    //     theme: 'snow',
+    // });
+
+    // $("#create_event_form").on('submit', function() {
+    //     $("#content").val($("#event_content_editor .ql-editor").html()) 
+    // })
+
+    $('.quill-editor').each(function() {
+        new Quill(this, {
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],    
+                    ['bold', 'italic'],
+                    ['link', 'blockquote'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                ],
+            },
+            placeholder: 'Введите содержание...',
+            theme: 'snow',
+        });
+    });
+    
+    // $(".quill-form").on('submit', function() {
+    //     var editor = $(this).find('.ql-editor');
+    //     $(this).find('.quill-content').val(editor.html());
+    // });
+
+    // $(".quill-form").on('submit', function() {
+    //     var editor = $(this).find('.ql-editor');
+    //     $(this).find('.quill-content').val(editor.html());
+    // });
+
+    $(".quill-form").on('submit', function() {
+        $(this).find('.editor-container').each(function() {
+            var editor = $(this).find('.ql-editor');
+            $(this).siblings('.quill-content').val(editor.html());
+        });
+    });    
 });

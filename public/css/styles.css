@@ -13,3 +13,11 @@
 .checked {
     color: orange;
 }
+
+#editor-container {
+    height: 100%;
+    /* added these styles */
+    flex: 1;
+    display: flex; 
+    flex-direction: column;
+  }

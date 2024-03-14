@@ -10,7 +10,10 @@
 <div class="mb-3 row">
     <label for="description" class="col-form-label text-lg-end col-lg-2 col-xl-3">Описание</label>
     <div class="col-lg-10 col-xl-9">
-        <textarea class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" id="description" required="true">{{ old('description', optional($position)->description) }}</textarea>
+        <input class="quill-content" name="description" type="hidden" id="description">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('description') ? ' is-invalid' : '' }}"></div>
+        </div>
         {!! $errors->first('description', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
@@ -18,7 +21,10 @@
 <div class="mb-3 row">
     <label for="responsibilities" class="col-form-label text-lg-end col-lg-2 col-xl-3">Обязанности</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('responsibilities') ? ' is-invalid' : '' }}" name="responsibilities" type="text" id="responsibilities" value="{{ old('responsibilities', optional($position)->responsibilities) }}" minlength="1" maxlength="16777215" required="true" placeholder="Введите обязанности...">
+        <input class="quill-content" name="responsibilities" type="hidden" id="responsibilities">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('responsibilities') ? ' is-invalid' : '' }}"></div>
+        </div>
         {!! $errors->first('responsibilities', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
@@ -26,7 +32,10 @@
 <div class="mb-3 row">
     <label for="requirements" class="col-form-label text-lg-end col-lg-2 col-xl-3">Требования</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('requirements') ? ' is-invalid' : '' }}" name="requirements" type="text" id="requirements" value="{{ old('requirements', optional($position)->requirements) }}" minlength="1" maxlength="16777215" required="true" placeholder="Введите требования...">
+        <input class="quill-content" name="requirements" type="hidden" id="requirements">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('requirements') ? ' is-invalid' : '' }}"></div>
+        </div>        
         {!! $errors->first('requirements', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
@@ -34,7 +43,10 @@
 <div class="mb-3 row">
     <label for="conditions" class="col-form-label text-lg-end col-lg-2 col-xl-3">Условия</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('conditions') ? ' is-invalid' : '' }}" name="conditions" type="text" id="conditions" value="{{ old('conditions', optional($position)->conditions) }}" minlength="1" maxlength="16777215" required="true" placeholder="Введите условия...">
+        <input class="quill-content" name="conditions" type="hidden" id="conditions">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('conditions') ? ' is-invalid' : '' }}"></div>
+        </div>        
         {!! $errors->first('conditions', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>

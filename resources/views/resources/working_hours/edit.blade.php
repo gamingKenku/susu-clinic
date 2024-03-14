@@ -1,17 +1,17 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
     <div class="card text-bg-theme">
   
          <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">{{ !empty($title) ? $title : 'Сотрудник' }}</h4>
+            <h4 class="m-0">{{ !empty($title) ? $title : 'Working Hours' }}</h4>
             <div>
-                <a href="{{ route('staff.index') }}" class="btn btn-primary" title="Показать все">
+                <a href="{{ route('working_hours.working_hours.index') }}" class="btn btn-primary" title="Show All Working Hours">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
 
-                <a href="{{ route('staff.create') }}" class="btn btn-secondary" title="Создать">
+                <a href="{{ route('working_hours.working_hours.create') }}" class="btn btn-secondary" title="Create New Working Hours">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>
                 </a>
             </div>
@@ -29,15 +29,15 @@
                 </div>
             @endif
 
-            <form method="POST" class="quill-form needs-validation" novalidate action="{{ route('staff.update', $staff->id) }}" id="edit_staff_form" name="edit_staff_form" accept-charset="UTF-8" enctype="multipart/form-data">
+            <form method="POST" class="needs-validation" novalidate action="{{ route('working_hours.working_hours.update', $workingHours->id) }}" id="edit_working_hours_form" name="edit_working_hours_form" accept-charset="UTF-8" >
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
-            @include ('resources.staff.form', [
-                                        'staff' => $staff,
+            @include ('working_hours.form', [
+                                        'workingHours' => $workingHours,
                                       ])
 
                 <div class="col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">
-                    <input class="btn btn-primary" type="submit" value="Сохранить">
+                    <input class="btn btn-primary" type="submit" value="Update">
                 </div>
             </form>
 

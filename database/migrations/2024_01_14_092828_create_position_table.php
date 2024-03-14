@@ -18,7 +18,7 @@ return new class extends Migration
             $table->mediumText('responsibilities');
             $table->mediumText('requirements');
             $table->mediumText('conditions');
-            $table->boolean('has_vacancy');
+            $table->boolean('has_vacancy')->default(false);
             $table->timestamps();
         });
     }

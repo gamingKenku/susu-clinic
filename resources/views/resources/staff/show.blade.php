@@ -40,7 +40,7 @@
             <dt class="text-lg-end col-lg-2 col-xl-3">Отчество</dt>
             <dd class="col-lg-10 col-xl-9">{{ $staff->patronym }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Специализации</dt>
-            <dd class="col-lg-10 col-xl-9">{{ $staff->specialities }}</dd>
+            <dd class="col-lg-10 col-xl-9">{!! $staff->specialities !!}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Фотография</dt>
             <dd class="col-lg-10 col-xl-9">{{ $staff->photo_path }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Стаж работы</dt>

@@ -1,13 +1,13 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
     <div class="card text-bg-theme">
 
          <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">Создание должности</h4>
+            <h4 class="m-0">Create New Working Hours</h4>
             <div>
-                <a href="{{ route('positions.index') }}" class="btn btn-primary" title="Показать все">
+                <a href="{{ route('working_hours.working_hours.index') }}" class="btn btn-primary" title="Show All Working Hours">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
             </div>
@@ -26,14 +26,14 @@
                 </div>
             @endif
 
-            <form method="POST" class="quill-form needs-validation" novalidate action="{{ route('positions.store') }}" accept-charset="UTF-8" id="create_position_form" name="create_position_form" >
+            <form method="POST" class="needs-validation" novalidate action="{{ route('working_hours.working_hours.store') }}" accept-charset="UTF-8" id="create_working_hours_form" name="create_working_hours_form" >
             {{ csrf_field() }}
-            @include ('resources.positions.form', [
-                                        'position' => null,
+            @include ('working_hours.form', [
+                                        'workingHours' => null,
                                       ])
 
                 <div class="col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">
-                    <input class="btn btn-primary" type="submit" value="Сохранить">
+                    <input class="btn btn-primary" type="submit" value="Add">
                 </div>
 
             </form>

@@ -7,10 +7,21 @@
     </div>
 </div>
 
-<div class="mb-3 row">
+{{-- <div class="mb-3 row">
     <label for="content" class="col-form-label text-lg-end col-lg-2 col-xl-3">Содержание</label>
     <div class="col-lg-10 col-xl-9">
         <input class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" type="text" id="content" value="{{ old('content', optional($event)->content) }}" minlength="1" maxlength="16777215" required="true" placeholder="Введите содержание...">
+        {!! $errors->first('content', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div> --}}
+
+<div class="mb-3 row">
+    <label for="content" class="col-form-label text-lg-end col-lg-2 col-xl-3">Содержание</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="quill-content" name="content" type="hidden" id="content">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('content') ? ' is-invalid' : '' }}"></div>
+        </div>
         {!! $errors->first('content', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>

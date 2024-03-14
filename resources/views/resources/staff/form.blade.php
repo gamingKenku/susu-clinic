@@ -24,9 +24,12 @@
 </div>
 
 <div class="mb-3 row">
-    <label for="specialities" class="col-form-label text-lg-end col-lg-2 col-xl-3">Специализация</label>
+    <label for="specialities" class="col-form-label text-lg-end col-lg-2 col-xl-3">Специализации</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('specialities') ? ' is-invalid' : '' }}" name="specialities" type="text" id="specialities" value="{{ old('specialities', optional($staff)->specialities) }}" minlength="1" maxlength="16777215" required="true" placeholder="Введите специализации сотрудника...">
+        <input class="quill-content" name="specialities" type="hidden" id="specialities">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('specialities') ? ' is-invalid' : '' }}"></div>
+        </div>           
         {!! $errors->first('specialities', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>

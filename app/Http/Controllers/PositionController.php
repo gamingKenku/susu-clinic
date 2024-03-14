@@ -47,7 +47,7 @@ class PositionController extends Controller
             'responsibilities' => ['required', 'max:16777215'],
             'requirements' => ['required', 'max:16777215'],
             'conditions' => ['required', 'max:16777215'],
-            'has_vacancy' => ['required', 'boolean'],
+            'has_vacancy' => ['boolean'],
             'staff' => ['array'], 
             'staff.*' => ['exists:staff,id'],
         ]);
@@ -58,8 +58,11 @@ class PositionController extends Controller
             'responsibilities' =>  $validated_data['responsibilities'],
             'requirements' =>  $validated_data['requirements'],
             'conditions' =>  $validated_data['conditions'],
-            'has_vacancy' => $validated_data['has_vacancy'],
         ]);
+
+        if (in_array('has_vacancy', $validated_data)) {
+            $position->has_vacansy = $validated_data['has_vacansy'];
+        }
 
         $position->staff()->attach($validated_data['staff']);
 

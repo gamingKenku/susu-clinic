@@ -36,7 +36,7 @@
             <dt class="text-lg-end col-lg-2 col-xl-3">Заголовок</dt>
             <dd class="col-lg-10 col-xl-9">{{ $event->header }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Содержание</dt>
-            <dd class="col-lg-10 col-xl-9">{{ $event->content }}</dd>
+            <dd class="col-lg-10 col-xl-9">{!! $event->content !!}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Картинка</dt>
             <dd class="col-lg-10 col-xl-9">{{ $event->picture_path }}</dd>
             <dt class="text-lg-end col-lg-2 col-xl-3">Дата создания</dt>

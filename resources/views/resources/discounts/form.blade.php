@@ -10,7 +10,10 @@
 <div class="mb-3 row">
     <label for="markup" class="col-form-label text-lg-end col-lg-2 col-xl-3">Содержание</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('markup') ? ' is-invalid' : '' }}" name="markup" type="text" id="markup" value="{{ old('markup', optional($discount)->markup) }}" minlength="1" maxlength="16777215" required="true" placeholder="Введите содержание...">
+        <input class="quill-content" name="markup" type="hidden" id="markup">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('markup') ? ' is-invalid' : '' }}"></div>
+        </div>
         {!! $errors->first('markup', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
@@ -29,7 +32,7 @@
                 @endforeach
             @elseif (old('services') != null)
                 @foreach ($services as $key => $service)
-                    <option value="{{ $service->id }}" {{ in_array($service->id, old('service')) ? 'selected' : '' }}>
+                    <option value="{{ $service->id }}" {{ in_array($service->id, old('services')) ? 'selected' : '' }}>
                         {{ $service->name }} ({{ $service->category->name }})
                     </option>
                 @endforeach

@@ -21,7 +21,7 @@
 <div class="mb-3 row">
     <label for="category_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">Категория</label>
     <div class="col-lg-10 col-xl-9">
-        <select class="form-select{{ $errors->has('category_id') ? ' is-invalid' : '' }}" id="category_id"
+        <select class="selectpicker form-select{{ $errors->has('category_id') ? ' is-invalid' : '' }}" id="category_id"
             name="category_id" required="true">
             <option value="" style="display: none;"
                 {{ old('category_id', optional($service)->category_id ?: '') == '' ? 'selected' : '' }} disabled
