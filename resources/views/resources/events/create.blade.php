@@ -26,7 +26,7 @@
                 </div>
             @endif
 
-            <form method="POST" class="needs-validation" novalidate action="{{ route('events.store') }}" accept-charset="UTF-8" id="create_event_form" name="create_event_form" >
+            <form method="POST" class="needs-validation" novalidate action="{{ route('events.store') }}" accept-charset="UTF-8" id="create_event_form" name="create_event_form" enctype="multipart/form-data">
             {{ csrf_field() }}
             @include ('resources.events.form', [
                                         'event' => null,

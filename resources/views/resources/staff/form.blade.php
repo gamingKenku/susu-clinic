@@ -31,18 +31,11 @@
     </div>
 </div>
 
-<div class="mb-3 row">
-    <label for="photo_path" class="col-form-label text-lg-end col-lg-2 col-xl-3">Фотография</label>
-    <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('photo_path') ? ' is-invalid' : '' }}" name="photo_path" type="text" id="photo_path" value="{{ old('photo_path', optional($staff)->photo_path) }}" maxlength="255" placeholder="Вставьте фотографию сотрудника...">
-        {!! $errors->first('photo_path', '<div class="invalid-feedback">:message</div>') !!}
-    </div>
-</div>
 
 <div class="mb-3 row">
     <label for="experience" class="col-form-label text-lg-end col-lg-2 col-xl-3">Стаж работы</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('experience') ? ' is-invalid' : '' }}" name="experience" type="text" id="experience" value="{{ old('experience', optional($staff)->experience) }}" required="true" placeholder="Введите стаж работы сотрудника...">
+        <input class="form-control{{ $errors->has('experience') ? ' is-invalid' : '' }}" name="experience" type="date" id="experience" value="{{ old('experience', optional($staff)->experience) }}" required="true" placeholder="Введите стаж работы сотрудника...">
         {!! $errors->first('experience', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
@@ -51,17 +44,68 @@
     <label for="staff_type" class="col-form-label text-lg-end col-lg-2 col-xl-3">Тип сотрудника</label>
     <div class="col-lg-10 col-xl-9">
         <select class="form-select{{ $errors->has('staff_type') ? ' is-invalid' : '' }}" id="staff_type" name="staff_type" required="true">
-        	    <option value="" style="display: none;" {{ old('staff_type', optional($staff)->staff_type ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите тип сотрудника...</option>
+            <option value="" style="display: none;" {{ old('staff_type', optional($staff)->staff_type ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите тип сотрудника...</option>
         	@foreach (['doctor' => 'Врач',
                         'nurse' => 'Медсестра/медбрат',
                         'administrator' => 'Руководство'] as $key => $text)
 			    <option value="{{ $key }}" {{ old('staff_type', optional($staff)->staff_type) == $key ? 'selected' : '' }}>
 			    	{{ $text }}
 			    </option>
-			@endforeach
+                @endforeach
+            </select>
+            
+            {!! $errors->first('staff_type', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+</div>
+
+<div class="mb-3 row">
+    <label for="positions[]" class="col-form-label text-lg-end col-lg-2 col-xl-3">Должности</label>
+    <div class="col-lg-10 col-xl-9">
+        <select multiple class="selectpicker form-control {{ $errors->has('positions') ? ' is-invalid' : '' }}" id="positions"
+            name="positions[]" required="true">
+            {{-- <option value="" style="display: none;" {{ old('category_id', optional($position)->category_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите категорию...</option> --}}
+            @if ($staff != null)
+                @foreach ($positions as $key => $position)
+                    <option value="{{ $position->id }}" {{ in_array($position->id, $staff->positions->pluck('id')->toArray()) ? 'selected' : '' }}>
+                        {{ $position->name }}
+                    </option>
+                @endforeach
+            @elseif (old('positions') != null)
+                @foreach ($positions as $key => $position)
+                    <option value="{{ $position->id }}" {{ in_array($position->id, old('positions')) ? 'selected' : '' }}>
+                        {{ $position->name }} 
+                    </option>
+                @endforeach
+            @else
+                @foreach ($positions as $key => $position)
+                    <option value="{{ $position->id }}">
+                        {{ $position->name }} 
+                    </option>
+                @endforeach   
+            @endif
         </select>
-        
-        {!! $errors->first('staff_type', '<div class="invalid-feedback">:message</div>') !!}
+
+        {!! $errors->first('positions', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 
+<div class="mb-3 row">
+    <label for="photo_path" class="col-form-label text-lg-end col-lg-2 col-xl-3">Фотография</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="form-control{{ $errors->has('photo_path') ? ' is-invalid' : '' }}" name="photo_path" type="file" id="photo_path" maxlength="255" placeholder="Вставьте фотографию сотрудника...">
+        {!! $errors->first('photo_path', '<div class="invalid-feedback">:message</div>') !!}
+        @if(optional($staff)->photo_path)
+                <p>Текущая фотография: {{ optional($staff)->photo_path }}</p>
+        @endif
+    </div>
+</div>
+
+@if($staff)
+    <div class="mb-3 row">
+        <label for="keep_file" class="col-form-label text-lg-end col-lg-2 col-xl-3">Не менять картинку</label>
+        <div class="col-lg-10 col-xl-9">
+            <input class="form-check-input{{ $errors->has('keep_file') ? ' is-invalid' : '' }}" name="keep_file" type="checkbox" id="keep_file" value="1" minlength="1" required="true" checked>
+            {!! $errors->first('keep_file', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+    </div>
+@endif

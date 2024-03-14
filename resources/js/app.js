@@ -4,7 +4,19 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+// require('jquery');
+// require('@popperjs/core');
 import './bootstrap';
+import $ from 'jquery';
+
+import select2 from 'select2';
+select2();
+
+import "/node_modules/select2/dist/css/select2.css";
+
+import Quill from 'quill';
+
+// import 'bootstrap-select';
 import { createApp } from 'vue';
 
 /**
@@ -53,5 +65,9 @@ $(document).ready(function () {
             url += '?unchecked=' + unchecked_flag;
          }
          window.location.href = url;
+    });
+
+    $(".selectpicker").select2({
+        theme: "bootstrap-5",
     });
 });

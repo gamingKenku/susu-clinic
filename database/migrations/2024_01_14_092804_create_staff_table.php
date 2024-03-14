@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('patronym')->nullable();
             $table->mediumText('specialities');
             $table->string('photo_path')->nullable();
-            $table->timestamp('experience');
+            $table->date('experience');
             $table->enum('staff_type', ['doctor', 'nurse', 'administrator']);
             $table->timestamps();
         });

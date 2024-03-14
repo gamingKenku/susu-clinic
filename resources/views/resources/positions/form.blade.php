@@ -49,8 +49,37 @@
             </label>
         </div>
 
-
         {!! $errors->first('has_vacancy', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 
+<div class="mb-3 row">
+    <label for="staff[]" class="col-form-label text-lg-end col-lg-2 col-xl-3">Сотрудники на должности</label>
+    <div class="col-lg-10 col-xl-9">
+        <select multiple class="selectpicker form-control {{ $errors->has('staff') ? ' is-invalid' : '' }}" id="staff"
+            name="staff[]" required="true">
+            {{-- <option value="" style="display: none;" {{ old('category_id', optional($staff)->category_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите категорию...</option> --}}
+            @if ($position != null)
+                @foreach ($staff as $key => $staff)
+                    <option value="{{ $staff->id }}" {{ in_array($staff->id, $position->staff->pluck('id')->toArray()) ? 'selected' : '' }}>
+                        {{ $staff->first_name }} {{ $staff->last_name }} {{ $staff->patronym }}
+                    </option>
+                @endforeach
+            @elseif (old('staff') != null)
+                @foreach ($staff as $key => $staff)
+                    <option value="{{ $staff->id }}" {{ in_array($staff->id, old('staff')) ? 'selected' : '' }}>
+                        {{ $staff->first_name }} {{ $staff->last_name }} {{ $staff->patronym }}
+                    </option>
+                @endforeach
+            @else
+                @foreach ($staff as $key => $staff)
+                    <option value="{{ $staff->id }}">
+                        {{ $staff->first_name }} {{ $staff->last_name }} {{ $staff->patronym }}
+                    </option>
+                @endforeach   
+            @endif
+        </select>
+
+        {!! $errors->first('staff', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>

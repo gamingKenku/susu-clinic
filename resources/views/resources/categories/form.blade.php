@@ -11,7 +11,7 @@
 <div class="mb-3 row">
     <label for="clinic_id" class="col-form-label text-lg-end col-lg-2 col-xl-3">Клиника</label>
     <div class="col-lg-10 col-xl-9">
-        <select class="form-select{{ $errors->has('clinic_id') ? ' is-invalid' : '' }}" id="clinic_id" name="clinic_id" required="true">
+        <select class="selectpicker form-select{{ $errors->has('clinic_id') ? ' is-invalid' : '' }}" id="clinic_id" name="clinic_id" required="true">
         	    <option value="" style="display: none;" {{ old('clinic_id', optional($categories)->clinic_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите клинику</option>
         	@foreach ($clinics as $key => $clinic)
 			    <option value="{{ $key }}" {{ old('clinic_id', optional($categories)->clinic_id) == $key ? 'selected' : '' }}>

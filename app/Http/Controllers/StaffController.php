@@ -59,8 +59,12 @@ class StaffController extends Controller
             'staff_type' => $validated_data['staff_type']
         ]);
 
-        $path = $request->file('photo_path')->storeAs('staff_photos', "staff{$staff->id}" . '.' . $request->file('photo_path')->getExtension());
-        $staff->photo_path = $path;
+        if ($request->hasFile('photo_path'))
+        {
+            $path = $request->file('photo_path')->storeAs('staff_photos', "staff{$staff->id}" . '.' . $request->file('photo_path')->getClientOriginalExtension());
+            $staff->photo_path = $path;
+        }
+
         $staff->positions()->attach($validated_data['positions']);
 
         $staff->save();
@@ -116,9 +120,17 @@ class StaffController extends Controller
         $staff->staff_type = $validated_data['staff_type'];
         $staff->positions()->sync($validated_data['positions']);
 
-        Storage::delete($staff->photo_path);
-        $path = $request->file('photo_path')->storeAs('staff_photos', "staff{$staff->id}" . '.'. $request->file('photo_path')->getExtension());
-        $staff->photo_path = $path;
+        if (!$request->has('keep_file'))
+        {
+            Storage::delete($staff->photo_path);
+            $staff->photo_path = null;
+            
+            if ($request->hasFile('photo_path'))
+            {
+                $path = $request->file('photo_path')->storeAs('event_pictures', "photo{$staff->id}" . '.' . $request->file('photo_path')->getClientOriginalExtension());
+                $staff->photo_path = $path;
+            }
+        }
 
         $staff->save();
 

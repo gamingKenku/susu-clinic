@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('header');
             $table->mediumText('markup');
-            $table->timestamp('start_date')->nullable();
-            $table->timestamp('end_date')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }

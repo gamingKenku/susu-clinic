@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <form method="POST" class="needs-validation" novalidate action="{{ route('staff.update', $staff->id) }}" id="edit_staff_form" name="edit_staff_form" accept-charset="UTF-8" >
+            <form method="POST" class="needs-validation" novalidate action="{{ route('staff.update', $staff->id) }}" id="edit_staff_form" name="edit_staff_form" accept-charset="UTF-8" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input name="_method" type="hidden" value="PUT">
             @include ('resources.staff.form', [

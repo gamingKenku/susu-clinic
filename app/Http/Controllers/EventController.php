@@ -40,7 +40,7 @@ class EventController extends Controller
         $validated_data = $request->validate([
             'header' => ['required', 'max:255'],
             'content' => ['required', 'max:16777215'],
-            'picture_path' => ['file', 'image'],
+            'picture_path' => ['image'],
         ]);
 
         $event = Event::create([
@@ -48,8 +48,11 @@ class EventController extends Controller
             'content' => $validated_data['content'],
         ]);
 
-        $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getExtension());
-        $event->picture_path = $path;
+        if ($request->hasFile('picture_path'))
+        {
+            $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getClientOriginalExtension());
+            $event->picture_path = $path;
+        }
 
         $event->save();
 
@@ -92,9 +95,17 @@ class EventController extends Controller
         $event->header = $validated_data['header'];
         $event->content = $validated_data['content'];
 
-        Storage::delete($event->picture_path);
-        $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getExtension());
-        $event->picture_path = $path;
+        if (!$request->has('keep_file'))
+        {
+            Storage::delete($event->picture_path);
+            $event->picture_path = null;
+            
+            if ($request->hasFile('picture_path'))
+            {
+                $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getClientOriginalExtension());
+                $event->picture_path = $path;
+            }
+        }
 
         $event->save();
 
