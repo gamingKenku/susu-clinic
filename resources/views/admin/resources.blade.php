@@ -30,7 +30,7 @@
                                         @endif
                                     </td>
                                     <td class="align-middle text-end"><a role="button" class="btn btn-primary"
-                                            href="{{ route('resources') . '/' . $table }}">Просмотреть</a></td>
+                                            href="{{ route('resources') . '/' . str_replace('_', '-', $table) }}">Просмотреть</a></td>
                                 </tr>
                             @endforeach
                         </table>

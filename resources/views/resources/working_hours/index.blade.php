@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 
@@ -6,24 +6,24 @@
         <div class="alert alert-success alert-dismissible" role="alert">
             {!! session('success_message') !!}
 
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
         </div>
     @endif
 
     <div class="card text-bg-theme">
 
         <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h4 class="m-0">Working Hours</h4>
+            <h4 class="m-0">Рабочие часы</h4>
             <div>
-                <a href="{{ route('working_hours.working_hours.create') }}" class="btn btn-secondary" title="Create New Working Hours">
+                <a href="{{ route('working-hours.create') }}" class="btn btn-secondary" title="Создать">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>
                 </a>
             </div>
         </div>
         
-        @if(count($workingHoursObjects) == 0)
+        @if(count($staff) == 0)
             <div class="card-body text-center">
-                <h4>No Working Hours Available.</h4>
+                <h4>Рабочие часы пока не созданы</h4>
             </div>
         @else
         <div class="card-body p-0">
@@ -32,37 +32,40 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>Weekday</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Staff</th>
+                            <th>ФИО сотрудника</th>
+                            <th>Понедельник</th>
+                            <th>Вторник</th>
+                            <th>Среда</th>
+                            <th>Четверг</th>
+                            <th>Пятница</th>
+                            <th>Суббота</th>
+                            <th>Воскресенье</th>
 
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($workingHoursObjects as $workingHours)
+                    @foreach($staff as $staff_member)
                         <tr>
-                            <td class="align-middle">{{ $workingHours->weekday }}</td>
-                            <td class="align-middle">{{ $workingHours->start_time }}</td>
-                            <td class="align-middle">{{ $workingHours->end_time }}</td>
-                            <td class="align-middle">{{ optional($workingHours->Staff)->first_name }}</td>
+                            <td class="align-middle">{{ $staff_member->first_name }} {{ $staff_member->last_name }} {{ $staff_member->patronym }}</td>
+                            @for($i = 0; $i <= 6; $i++)
+                                <td class="align-middle">{{ optional($staff_member->workingHours->where('weekday', '=', $i)->where('staff_id', '=', $staff_member->id)->first())->start_time }} - {{ optional($staff_member->workingHours->where('weekday', '=', $i)->where('staff_id', '=', $staff_member->id)->first())->end_time }}</td>
+                            @endfor
 
                             <td class="text-end">
-
-                                <form method="POST" action="{!! route('working_hours.working_hours.destroy', $workingHours->id) !!}" accept-charset="UTF-8">
+                                <form method="POST" action="{!! route('working-hours.destroy', $staff_member->id) !!}" accept-charset="UTF-8">
                                 <input name="_method" value="DELETE" type="hidden">
                                 {{ csrf_field() }}
 
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('working_hours.working_hours.show', $workingHours->id ) }}" class="btn btn-info" title="Show Working Hours">
+                                        <a href="{{ route('working-hours.show', $staff_member->id ) }}" class="btn btn-info" title="Показать">
                                             <span class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></span>
                                         </a>
-                                        <a href="{{ route('working_hours.working_hours.edit', $workingHours->id ) }}" class="btn btn-primary" title="Edit Working Hours">
+                                        <a href="{{ route('working-hours.edit', $staff_member->id ) }}" class="btn btn-primary" title="Редактировать">
                                             <span class="fa-regular fa-pen-to-square" aria-hidden="true"></span>
                                         </a>
 
-                                        <button type="submit" class="btn btn-danger" title="Delete Working Hours" onclick="return confirm(&quot;Click Ok to delete Working Hours.&quot;)">
+                                        <button type="submit" class="btn btn-danger" title="Удалить" onclick="return confirm(&quot;Click Ok to delete Working Hours.&quot;)">
                                             <span class="fa-regular fa-trash-can" aria-hidden="true"></span>
                                         </button>
                                     </div>
@@ -77,7 +80,7 @@
 
             </div>
 
-            {!! $workingHoursObjects->links('pagination') !!}
+            {!! $staff->links() !!}
         </div>
         
         @endif

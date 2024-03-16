@@ -18,7 +18,7 @@ class WorkingHoursController extends Controller
     public function index()
     {
         return view('resources.working_hours.index', [
-            'working_hours' => WorkingHours::query()->orderBy('staff_id')->orderBy('weekday'),
+            'staff' => Staff::query()->orderBy('staff_type')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym')->paginate(25),
         ]);
     }
 

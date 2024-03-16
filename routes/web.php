@@ -12,6 +12,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkingHoursController;
 use App\Http\Controllers\VacancyController;
 use App\Models\Clinic;
 use Illuminate\Support\Facades\Route;
@@ -40,12 +41,19 @@ Route::resources([
     'admin/resources/services' => ServiceController::class,
     'admin/resources/discounts' => DiscountsController::class,
     'admin/resources/staff' => StaffController::class,
-    'admin/resources/working-hours' => ClinicController::class,
     'admin/resources/positions' => PositionController::class,
+    'admin/resources/working-hours' => WorkingHoursController::class,
     // 'admin/resources/vacancies' => VacancyController::class,
     'admin/resources/users' => UserController::class,
 ]);
 
+// Route::get('admin/resources/working-hours', [WorkingHoursController::class, 'index'])->name('working_hours.index');
+// Route::get('admin/resources/working-hours/create', [WorkingHoursController::class, 'create'])->name('working_hours.create');
+// Route::post('admin/resources/working-hours', [WorkingHoursController::class, 'store'])->name('working_hours.store');
+// Route::get('admin/resources/working-hours/{id}', [WorkingHoursController::class, 'show'])->name('working_hours.show');
+// Route::get('admin/resources/working-hours/{id}/edit', [WorkingHoursController::class, 'edit'])->name('working_hours.edit');
+// Route::put('admin/resources/working-hours/{id}', [WorkingHoursController::class, 'update'])->name('working_hours.update');
+// Route::delete('admin/resources/working-hours/{id}', [WorkingHoursController::class, 'destroy'])->name('working_hours.destroy');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home/staff', [HomeController::class, 'staff'])->name('staffIndex');
