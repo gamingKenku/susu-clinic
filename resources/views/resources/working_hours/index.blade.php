@@ -48,9 +48,16 @@
                     @foreach($staff as $staff_member)
                         <tr>
                             <td class="align-middle">{{ $staff_member->first_name }} {{ $staff_member->last_name }} {{ $staff_member->patronym }}</td>
-                            @for($i = 0; $i <= 6; $i++)
-                                <td class="align-middle">{{ optional($staff_member->workingHours->where('weekday', '=', $i)->where('staff_id', '=', $staff_member->id)->first())->start_time }} - {{ optional($staff_member->workingHours->where('weekday', '=', $i)->where('staff_id', '=', $staff_member->id)->first())->end_time }}</td>
-                            @endfor
+                            @if ($staff_member->workingHours()->exists())
+                                @for($i = 0; $i <= 6; $i++)
+                                    <td class="align-middle">{{ optional($staff_member->workingHours->where('weekday', '=', $i)->where('staff_id', '=', $staff_member->id)->first())->start_time }} - {{ optional($staff_member->workingHours->where('weekday', '=', $i)->where('staff_id', '=', $staff_member->id)->first())->end_time }}</td>
+                                @endfor        
+                            @else
+                                @for($i = 0; $i <= 6; $i++)
+                                    <td class="align-middle"> - </td>
+                                @endfor                         
+                            @endif
+                            
 
                             <td class="text-end">
                                 <form method="POST" action="{!! route('working-hours.destroy', $staff_member->id) !!}" accept-charset="UTF-8">

@@ -60,7 +60,7 @@ class WorkingHoursController extends Controller
     public function show(string $id)
     {
         return view('resources.working_hours.show', [
-            'working_hours' => WorkingHours::query()->findOrFail($id),
+            'staff' => Staff::query()->findOrFail($id),
         ]);
     }
 
@@ -70,8 +70,7 @@ class WorkingHoursController extends Controller
     public function edit(string $id)
     {
         return view('resources.working_hours.edit', [
-            'staff' => Staff::all(),
-            'working_hours' => WorkingHours::query()->findOrFail($id),
+            'staff' => Staff::findOrFail($id),
         ]);
     }
 
