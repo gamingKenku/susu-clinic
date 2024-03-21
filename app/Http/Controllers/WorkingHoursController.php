@@ -80,17 +80,13 @@ class WorkingHoursController extends Controller
     public function update(Request $request, string $id)
     {
         $validated_data = $request->validate([
-            'weekday' => ['required', 'integer', 'between:0,6'],
-            'start_time' => ['required', 'date', 'date_format:H:i'],
-            'end_time' => ['required', 'date', 'date_format:H:i', 'after:start_time'],
+            'start_time.*' => ['date', 'date_format:H:i'],
+            'end_time.*' => ['date', 'date_format:H:i', 'after:start_time'],
             'staff_id' => ['required', 'exists:staff,id'],
         ]);
 
         $working_hours = WorkingHours::query()->findOrFail($id);
 
-        $working_hours->weekday = $validated_data['weekday'];
-        $working_hours->start_time = $validated_data['start_time'];
-        $working_hours->end_time = $validated_data['end_time'];
         $working_hours->staff()->associate(Staff::query()->findOrFail($validated_data['staff_id']));
 
         $working_hours->save();

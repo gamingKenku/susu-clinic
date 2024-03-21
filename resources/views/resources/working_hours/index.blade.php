@@ -14,11 +14,11 @@
 
         <div class="card-header d-flex justify-content-between align-items-center p-3">
             <h4 class="m-0">Рабочие часы</h4>
-            <div>
+            {{-- <div>
                 <a href="{{ route('working-hours.create') }}" class="btn btn-secondary" title="Создать">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>
                 </a>
-            </div>
+            </div> --}}
         </div>
         
         @if(count($staff) == 0)

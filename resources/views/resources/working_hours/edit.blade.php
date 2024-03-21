@@ -11,9 +11,9 @@
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
 
-                <a href="{{ route('working-hours.create') }}" class="btn btn-secondary" title="Создать">
+                {{-- <a href="{{ route('working-hours.create') }}" class="btn btn-secondary" title="Создать">
                     <span class="fa-solid fa-plus" aria-hidden="true"></span>
-                </a>
+                </a> --}}
             </div>
         </div>
 
