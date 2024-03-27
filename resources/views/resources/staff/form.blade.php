@@ -26,7 +26,7 @@
 <div class="mb-3 row">
     <label for="specialities" class="col-form-label text-lg-end col-lg-2 col-xl-3">Специализации</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="specialities" type="hidden" id="specialities">
+        <input class="quill-content" name="specialities" type="hidden" id="specialities" value="{{ old('specialities', optional($staff)->specialities) }}">
         <div class="editor-container">
             <div class="quill-editor {{ $errors->has('specialities') ? ' is-invalid' : '' }}"></div>
         </div>           

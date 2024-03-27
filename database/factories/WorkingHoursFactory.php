@@ -18,8 +18,8 @@ class WorkingHoursFactory extends Factory
     {
         return [
             'weekday' => fake()->numberBetween(0, 6),
-            'start_time' => fake()->time(),
-            'end_time' => fake()->time(),
+            'start_time' => fake()->time('H:i'),
+            'end_time' => fake()->time('H:i'),
         ];
     }
 }

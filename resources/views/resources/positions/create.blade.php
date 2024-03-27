@@ -30,6 +30,7 @@
             {{ csrf_field() }}
             @include ('resources.positions.form', [
                                         'position' => null,
+                                        'staff' => $staff,
                                       ])
 
                 <div class="col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">

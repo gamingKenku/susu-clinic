@@ -18,7 +18,7 @@
 <div class="mb-3 row">
     <label for="content" class="col-form-label text-lg-end col-lg-2 col-xl-3">Содержание</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="content" type="hidden" id="content">
+        <input class="quill-content" name="content" type="hidden" id="content" value="{{ old('content', optional($event)->content) }}">
         <div class="editor-container">
             <div class="quill-editor {{ $errors->has('content') ? ' is-invalid' : '' }}"></div>
         </div>

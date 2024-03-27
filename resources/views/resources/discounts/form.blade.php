@@ -10,7 +10,7 @@
 <div class="mb-3 row">
     <label for="markup" class="col-form-label text-lg-end col-lg-2 col-xl-3">Содержание</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="markup" type="hidden" id="markup">
+        <input class="quill-content" name="markup" type="hidden" id="markup" value="{{ old('markup', optional($discount)->markup) }}">
         <div class="editor-container">
             <div class="quill-editor {{ $errors->has('markup') ? ' is-invalid' : '' }}"></div>
         </div>

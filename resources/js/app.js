@@ -75,26 +75,9 @@ $(document).ready(function () {
     $(".selectpicker").select2({
         theme: "bootstrap-5",
     });
-    
-    // const create_event_quill = new Quill('#event_content_editor', {
-    //     modules: {
-    //         toolbar: [
-    //             [{ header: [1, 2, false] }],    
-    //             ['bold', 'italic'],
-    //             ['link', 'blockquote'],
-    //             [{ list: 'ordered' }, { list: 'bullet' }],
-    //         ],
-    //       },
-    //     placeholder: 'Введите содержание...',
-    //     theme: 'snow',
-    // });
-
-    // $("#create_event_form").on('submit', function() {
-    //     $("#content").val($("#event_content_editor .ql-editor").html()) 
-    // })
 
     $('.quill-editor').each(function() {
-        new Quill(this, {
+        var quill = new Quill(this, {
             modules: {
                 toolbar: [
                     [{ header: [1, 2, false] }],    
@@ -106,6 +89,8 @@ $(document).ready(function () {
             placeholder: 'Введите содержание...',
             theme: 'snow',
         });
+
+        quill.root.innerHTML = $(this).parent().siblings('.quill-content').val();
     });
     
     // $(".quill-form").on('submit', function() {
@@ -124,4 +109,10 @@ $(document).ready(function () {
             $(this).siblings('.quill-content').val(editor.html());
         });
     });    
+
+    $(".clear-button").click(function(){
+        var row = $(this).data('row');
+        $("#start_time_" + row).val('');
+        $("#end_time_" + row).val('');
+    });
 });

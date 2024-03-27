@@ -10,7 +10,7 @@
 <div class="mb-3 row">
     <label for="description" class="col-form-label text-lg-end col-lg-2 col-xl-3">Описание</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="description" type="hidden" id="description">
+        <input class="quill-content" name="description" type="hidden" id="description" value="{{ old('description', optional($position)->description) }}">
         <div class="editor-container">
             <div class="quill-editor {{ $errors->has('description') ? ' is-invalid' : '' }}"></div>
         </div>
@@ -21,7 +21,7 @@
 <div class="mb-3 row">
     <label for="responsibilities" class="col-form-label text-lg-end col-lg-2 col-xl-3">Обязанности</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="responsibilities" type="hidden" id="responsibilities">
+        <input class="quill-content" name="responsibilities" type="hidden" id="responsibilities" value="{{ old('responsibilities', optional($position)->responsibilities) }}">
         <div class="editor-container">
             <div class="quill-editor {{ $errors->has('responsibilities') ? ' is-invalid' : '' }}"></div>
         </div>
@@ -32,7 +32,7 @@
 <div class="mb-3 row">
     <label for="requirements" class="col-form-label text-lg-end col-lg-2 col-xl-3">Требования</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="requirements" type="hidden" id="requirements">
+        <input class="quill-content" name="requirements" type="hidden" id="requirements" value="{{ old('requirements', optional($position)->requirements) }}">
         <div class="editor-container">
             <div class="quill-editor {{ $errors->has('requirements') ? ' is-invalid' : '' }}"></div>
         </div>        
@@ -43,7 +43,7 @@
 <div class="mb-3 row">
     <label for="conditions" class="col-form-label text-lg-end col-lg-2 col-xl-3">Условия</label>
     <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="conditions" type="hidden" id="conditions">
+        <input class="quill-content" name="conditions" type="hidden" id="conditions" value="{{ old('conditions', optional($position)->conditions) }}">
         <div class="editor-container">
             <div class="quill-editor {{ $errors->has('conditions') ? ' is-invalid' : '' }}"></div>
         </div>        
@@ -72,21 +72,21 @@
             name="staff[]" required="true">
             {{-- <option value="" style="display: none;" {{ old('category_id', optional($staff)->category_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите категорию...</option> --}}
             @if ($position != null)
-                @foreach ($staff as $key => $staff)
-                    <option value="{{ $staff->id }}" {{ in_array($staff->id, $position->staff->pluck('id')->toArray()) ? 'selected' : '' }}>
-                        {{ $staff->first_name }} {{ $staff->last_name }} {{ $staff->patronym }}
+                @foreach ($staff as $key => $staffMember)
+                    <option value="{{ $staffMember->id }}" {{ in_array($staffMember->id, $position->staff->pluck('id')->toArray()) ? 'selected' : '' }}>
+                        {{ $staffMember->first_name }} {{ $staffMember->last_name }} {{ $staffMember->patronym }}
                     </option>
                 @endforeach
             @elseif (old('staff') != null)
-                @foreach ($staff as $key => $staff)
-                    <option value="{{ $staff->id }}" {{ in_array($staff->id, old('staff')) ? 'selected' : '' }}>
-                        {{ $staff->first_name }} {{ $staff->last_name }} {{ $staff->patronym }}
+                @foreach ($staff as $key => $staffMember)
+                    <option value="{{ $staffMember->id }}" {{ in_array($staffMember->id, old('staff')) ? 'selected' : '' }}>
+                        {{ $staffMember->first_name }} {{ $staffMember->last_name }} {{ $staffMember->patronym }}
                     </option>
                 @endforeach
             @else
-                @foreach ($staff as $key => $staff)
-                    <option value="{{ $staff->id }}">
-                        {{ $staff->first_name }} {{ $staff->last_name }} {{ $staff->patronym }}
+                @foreach ($staff as $key => $staffMember)
+                    <option value="{{ $staffMember->id }}">
+                        {{ $staffMember->first_name }} {{ $staffMember->last_name }} {{ $staffMember->patronym }}
                     </option>
                 @endforeach   
             @endif

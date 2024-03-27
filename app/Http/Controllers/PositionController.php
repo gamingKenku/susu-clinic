@@ -77,7 +77,7 @@ class PositionController extends Controller
     public function show(string $id)
     {
         return view('resources.positions.show', [
-            'position' => Position::query()->findOrFail($id)
+            'position' => Position::query()->findOrFail($id),
         ]);
     }
 
@@ -87,7 +87,12 @@ class PositionController extends Controller
     public function edit(string $id)
     {
         return view('resources.positions.edit', [
-            'position' => Position::query()->findOrFail($id)
+            'position' => Position::query()->findOrFail($id),
+            'staff' => Staff::query()
+                ->orderBy('first_name')
+                ->orderBy('last_name')
+                ->orderBy('patronym')
+                ->get(),
         ]);
     }
 

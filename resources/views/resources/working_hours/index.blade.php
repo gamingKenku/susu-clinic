@@ -72,9 +72,9 @@
                                             <span class="fa-regular fa-pen-to-square" aria-hidden="true"></span>
                                         </a>
 
-                                        <button type="submit" class="btn btn-danger" title="Удалить" onclick="return confirm(&quot;Click Ok to delete Working Hours.&quot;)">
+                                        {{-- <button type="submit" class="btn btn-danger" title="Удалить" onclick="return confirm(&quot;Click Ok to delete Working Hours.&quot;)">
                                             <span class="fa-regular fa-trash-can" aria-hidden="true"></span>
-                                        </button>
+                                        </button> --}}
                                     </div>
 
                                 </form>

@@ -34,6 +34,7 @@
             <input name="_method" type="hidden" value="PUT">
             @include ('resources.positions.form', [
                                         'position' => $position,
+                                        'staff' => $staff,
                                       ])
 
                 <div class="col-lg-10 col-xl-9 offset-lg-2 offset-xl-3">
