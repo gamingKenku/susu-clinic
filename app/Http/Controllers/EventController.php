@@ -50,7 +50,7 @@ class EventController extends Controller
 
         if ($request->hasFile('picture_path'))
         {
-            $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getClientOriginalExtension());
+            $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getClientOriginalExtension(), 'public');
             $event->picture_path = $path;
         }
 
@@ -97,12 +97,15 @@ class EventController extends Controller
 
         if (!$request->has('keep_file'))
         {
-            Storage::delete($event->picture_path);
+            if ($event->picture_path) {
+                Storage::disk('public')->delete($event->picture_path);
+            }
+
             $event->picture_path = null;
             
             if ($request->hasFile('picture_path'))
             {
-                $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getClientOriginalExtension());
+                $path = $request->file('picture_path')->storeAs('event_pictures', "event{$event->id}" . '.' . $request->file('picture_path')->getClientOriginalExtension(), 'public');
                 $event->picture_path = $path;
             }
         }
@@ -119,8 +122,8 @@ class EventController extends Controller
     {
         $event = Event::query()->findOrFail($id);
 
-        if (isset($event->picture_path)) {
-            Storage::delete(optional($event->picture_path));
+        if ($event->picture_path) {
+            Storage::disk('public')->delete($event->picture_path);
         }
         
         $event->delete();

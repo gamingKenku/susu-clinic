@@ -94,16 +94,19 @@
 
 <div class="mb-3 row">
     <label for="photo_path" class="col-form-label text-lg-end col-lg-2 col-xl-3">Фотография</label>
-    <div class="col-lg-10 col-xl-9">
-        <input class="form-control{{ $errors->has('photo_path') ? ' is-invalid' : '' }}" name="photo_path" type="file" id="photo_path" maxlength="255" placeholder="Вставьте фотографию сотрудника...">
+    <div class="col-lg-10 col-xl-9 d-flex flex-column align-items-start">
+        <input {{ optional($staff)->photo_path ? 'disabled hidden' : '' }} class="form-control {{ $errors->has('photo_path') ? ' is-invalid' : '' }}" name="photo_path" type="file" id="photo_path" maxlength="255" placeholder="Вставьте фотографию сотрудника...">
         {!! $errors->first('photo_path', '<div class="invalid-feedback">:message</div>') !!}
         @if(optional($staff)->photo_path)
-                <p>Текущая фотография: {{ optional($staff)->photo_path }}</p>
+            <img name="resource-file" id="resource-file" src="{{ asset("storage/" . $staff->photo_path) }}" alt="{{ $staff->photo_path }}" class="mt-3">
         @endif
+        <button type="button" {{ optional($staff)->photo_path ? '' : 'disabled hidden' }} name="change-file-btn" id="change-file-btn" class="btn btn-primary mt-3 mb-3">Сбросить фотографию</button>
+        <input class="form-check-input" name="keep_file" type="checkbox" id="keep_file" value="1" minlength="1" required="true" readonly hidden selected>
     </div>
 </div>
 
-@if($staff)
+
+{{-- @if($staff)
     <div class="mb-3 row">
         <label for="keep_file" class="col-form-label text-lg-end col-lg-2 col-xl-3">Не менять картинку</label>
         <div class="col-lg-10 col-xl-9">
@@ -111,4 +114,4 @@
             {!! $errors->first('keep_file', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
-@endif
+@endif --}}

@@ -115,4 +115,12 @@ $(document).ready(function () {
         $("#start_time_" + row).val('');
         $("#end_time_" + row).val('');
     });
+
+    $("#change-file-btn").click(function () {
+        $("#resource-file").prop('disabled', true).prop('hidden', true);
+        $("#photo_path").prop('disabled', false).prop('hidden', false);
+        $("#picture_path").prop('disabled', false).prop('hidden', false);
+        $("#keep_file").prop('selected', false);
+        $(this).prop('disabled', true).prop('hidden', true);
+    });
 });

@@ -38,18 +38,20 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated_data = $request->validate([
             'first_name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'],
             'patronym' => ['max:255'],
             'specialities' => ['required', 'max:16777215'],
             'experience' => ['required', 'date', 'before:now'],
-            'photo_path' => ['file', 'image'],
+            'photo_path' => ['image'],
             'staff_type' => ['required', 'in:doctor,nurse,administrator'],
             'positions' => ['array'],
             'positions.*' => ['exists:positions,id'],
         ]);
 
+        
         $staff = Staff::create([
             'first_name' => $validated_data['first_name'],
             'last_name' => $validated_data['last_name'],
@@ -58,14 +60,17 @@ class StaffController extends Controller
             'experience' => $validated_data['experience'],
             'staff_type' => $validated_data['staff_type']
         ]);
-
+        
         if ($request->hasFile('photo_path'))
         {
-            $path = $request->file('photo_path')->storeAs('staff_photos', "staff{$staff->id}" . '.' . $request->file('photo_path')->getClientOriginalExtension());
+            // dd($request->hasFile('photo_path'));
+            $path = $request->file('photo_path')->storeAs('staff_photos', "staff{$staff->id}" . '.' . $request->file('photo_path')->getClientOriginalExtension(), 'public');
             $staff->photo_path = $path;
         }
 
-        $staff->positions()->attach($validated_data['positions']);
+        // dd($validated_data);
+        
+        $staff->positions()->attach($validated_data['positions']  ?? []);
 
         $staff->save();
 
@@ -101,10 +106,10 @@ class StaffController extends Controller
         $validated_data = $request->validate([
             'first_name' => ['required', 'max:255'],
             'last_name' => ['required', 'max:255'],
-            'patronym' => ['max:255', 'string'],
+            'patronym' => ['max:255'],
             'specialities' => ['required', 'max:16777215'],
             'experience' => ['required', 'date', 'before:now'],
-            'photo_path' => ['file', 'image'],
+            'photo_path' => ['image'],
             'staff_type' => ['required', 'in:doctor,nurse,administrator'],
             'positions' => ['array'],
             'positions.*' => ['exists:positions,id'],
@@ -112,22 +117,27 @@ class StaffController extends Controller
 
         $staff = Staff::query()->findOrFail($id);
 
+        // dd($staff);
+
         $staff->first_name = $validated_data['first_name'];
         $staff->last_name = $validated_data['last_name'];
         $staff->patronym = $validated_data['patronym'];
         $staff->specialities = $validated_data['specialities'];
         $staff->experience = $validated_data['experience'];
         $staff->staff_type = $validated_data['staff_type'];
-        $staff->positions()->sync($validated_data['positions']);
+        $staff->positions()->sync($validated_data['positions'] ?? []);
 
         if (!$request->has('keep_file'))
         {
-            Storage::delete($staff->photo_path);
+            if ($staff->photo_path) {
+                Storage::disk('public')->delete($staff->photo_path);
+            }
+
             $staff->photo_path = null;
             
             if ($request->hasFile('photo_path'))
             {
-                $path = $request->file('photo_path')->storeAs('event_pictures', "photo{$staff->id}" . '.' . $request->file('photo_path')->getClientOriginalExtension());
+                $path = $request->file('photo_path')->storeAs('staff_photos', "photo{$staff->id}" . '.' . $request->file('photo_path')->getClientOriginalExtension(), 'public');
                 $staff->photo_path = $path;
             }
         }
@@ -144,7 +154,9 @@ class StaffController extends Controller
     {
         $staff = Staff::query()->findOrFail($id);
 
-        Storage::delete($staff->photo_path);
+        if ($staff->photo_path) {
+            Storage::disk('public')->delete($staff->photo_path);
+        }        
 
         $staff->delete();
         
