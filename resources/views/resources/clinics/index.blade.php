@@ -26,7 +26,7 @@
 
                 @include('resources.filter')
 
-                <h4>Клиники пока не созданы.</h4>
+                <h4>Клиники не были найдены.</h4>
             </div>
         @else
             <div class="card-body p-0">

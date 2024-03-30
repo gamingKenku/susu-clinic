@@ -22,8 +22,11 @@
         </div>
         
         @if(count($categoriesObjects) == 0)
+
+            @include('resources.filter')
+        
             <div class="card-body text-center">
-                <h4>Категорий пока нет.</h4>
+                <h4>Категории не были найдены.</h4>
             </div>
         @else
         <div class="card-body p-0">

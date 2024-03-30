@@ -22,7 +22,10 @@ class DiscountsController extends Controller
 
         if ($request->has('filter'))
         {
-            $discounts = $this->filterColumns($discounts, ['header', 'start_date', 'end_date',], $request->input('filter'));
+            $discounts = $this->filterColumns($discounts, $request->input('filter'), ['header', 'start_date', 'end_date']);
+            $discounts = $this->filterRelatedColumns($discounts, $request->input('filter'), [
+                'services' => ['name']
+            ]);
         }
 
         $discounts = $discounts->orderBy('start_date')->paginate(25);

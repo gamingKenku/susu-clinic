@@ -21,7 +21,7 @@ class EventController extends Controller
 
         if ($request->has('filter')) 
         {
-            $events = $this->filterColumns($events, ['header', 'created_at', 'updated_at'], $request->input('filter'));
+            $events = $this->filterColumns($events, $request->input('filter'), ['header', 'created_at', 'updated_at']);
         }
 
         $events = $events->orderBy('created_at', 'desc')->paginate(25);

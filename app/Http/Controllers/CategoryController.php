@@ -22,13 +22,10 @@ class CategoryController extends Controller
 
         if ($request->has('filter'))
         {
-            $filter = $request->input('filter');
-            $categories = $categories->where(function ($query) use ($filter) {
-            $query->where('name', 'LIKE', '%'. $filter .'%')
-                  ->orWhereHas('clinic', function ($query) use ($filter) {
-                      $query->orWhere('name', 'LIKE', '%' . $filter .  '%');
-                  });
-            });
+            $categories = $this->filterColumns($categories, $request->input('filter'), ['name']);
+            $categories = $this->filterRelatedColumns($categories, $request->input('filter'), [
+                'clinic' => ['name']
+            ]);
         }
         
         $categories = $categories->orderBy('clinic_id')->paginate(25);

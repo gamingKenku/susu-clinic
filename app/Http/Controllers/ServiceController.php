@@ -17,10 +17,27 @@ class ServiceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $services = Service::query();
+
+        if ($request->has('filter'))
+        {
+            $services = $this->filterColumns($services, $request->input('filter'), ['name', 'price']);
+            $services = $this->filterRelatedColumns($services, $request->input('filter'), [
+                'discounts' => [
+                    'header',
+                ],
+                'category' => [
+                    'name',
+                ]
+            ]);
+        }
+
+        $services = $services->orderBy('category_id')->paginate(25);
+
         return view('resources.services.index', [
-            'services' => Service::query()->orderBy('category_id')->paginate(25)
+            'services' => $services
         ]);
     }
 

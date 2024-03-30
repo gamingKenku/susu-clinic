@@ -26,7 +26,7 @@
 
                 @include('resources.filter')
 
-                <h4>Должностей пока нет.</h4>
+                <h4>Должности не были найдены.</h4>
             </div>
         @else
         <div class="card-body p-0">

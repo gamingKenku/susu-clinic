@@ -41,6 +41,7 @@
                             <th>Имя</th>
                             <th>Фамилия</th>
                             <th>Отчество</th>
+                            <th>Тип сотрудника</th>
 
                             <th></th>
                         </tr>
@@ -51,6 +52,7 @@
                             <td class="align-middle">{{ $staff->first_name }}</td>
                             <td class="align-middle">{{ $staff->last_name }}</td>
                             <td class="align-middle">{{ $staff->patronym }}</td>
+                            <td class="align-middle">{{ __(ucfirst($staff->staff_type)) }}</td>
 
                             <td class="text-end">
 

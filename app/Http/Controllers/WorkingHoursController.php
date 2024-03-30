@@ -16,10 +16,38 @@ class WorkingHoursController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $staff = Staff::query();
+
+        if ($request->has('filter'))
+        {
+            $staff_types = [
+                'врач' => 'doctor',
+                'медсестра' => 'nurse',
+                'медбрат' => 'nurse',
+                'руководство' => 'administrator'
+            ];
+
+            $filter = strtolower($request->input('filter'));
+            $filter = $staff_types[strtolower($request->input('filter'))] ?? $filter;
+
+            $staff = $this->filterColumns($staff, $filter, [
+                'first_name',
+                'last_name',
+                'patronym',
+                'staff_type',
+                'experience'
+            ]);
+            $staff = $this->filterRelatedColumns($staff, $filter, [
+                'positions' => ['name'],
+            ]);        
+        }
+
+        $staff = $staff->orderBy('staff_type')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym')->paginate(25);
+
         return view('resources.working_hours.index', [
-            'staff' => Staff::query()->orderBy('staff_type')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym')->paginate(25),
+            'staff' => $staff
         ]);
     }
 

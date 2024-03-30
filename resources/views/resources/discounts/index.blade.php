@@ -22,8 +22,11 @@
         </div>
         
         @if(count($discounts) == 0)
+
+            @include('resources.filter')
+
             <div class="card-body text-center">
-                <h4>Акций пока нет.</h4>
+                <h4>Акции не были найдены.</h4>
             </div>
         @else
         <div class="card-body p-0">

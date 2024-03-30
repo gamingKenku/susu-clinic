@@ -22,7 +22,7 @@ class UserController extends Controller
 
         if ($request->has('filter'))
         {
-            $users = $this->filterColumns($users, ['username', 'email', 'first_name', 'last_name', 'patronym'], $request->input('filter'));
+            $users = $this->filterColumns($users, $request->input('filter'), ['username', 'email', 'first_name', 'last_name', 'patronym']);
         }
 
         $users = $users->orderBy('username')->paginate(25);

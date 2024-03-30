@@ -21,7 +21,7 @@ class ClinicController extends Controller
 
         if ($request->has('filter'))
         {
-            $clinicsObjects = $this->filterColumns($clinicsObjects, ['name', 'address'], $request->input('filter'));
+            $clinicsObjects = $this->filterColumns($clinicsObjects, $request->input('filter'), ['name', 'address']);
         }
 
         $clinicsObjects = $clinicsObjects->orderBy('name')->paginate(25);

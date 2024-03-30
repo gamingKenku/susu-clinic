@@ -15,10 +15,26 @@ class PositionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $positions = Position::query();
+
+        if ($request->has('filter'))
+        {
+            $positions = $this->filterColumns($positions, $request->input('filter'), ['name']);
+            $positions = $this->filterRelatedColumns($positions, $request->input('filter'), [
+                'staff' => [
+                    'first_name',
+                    'last_name',
+                    'patronym'
+                ]
+            ]);
+        }
+
+        $positions = $positions->orderBy('name')->paginate(25);
+
         return view('resources.positions.index', [
-            'positions' => Position::query()->orderBy('name')->paginate(25),
+            'positions' => $positions,
         ]);
     }
 

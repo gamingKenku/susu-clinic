@@ -26,7 +26,7 @@
 
                 @include('resources.filter')
 
-                <h4>Рабочие часы пока не созданы</h4>
+                <h4>Рабочие часы не были найдены.</h4>
             </div>
         @else
         <div class="card-body p-0">
@@ -39,6 +39,7 @@
                     <thead>
                         <tr>
                             <th>ФИО сотрудника</th>
+                            <th>Тип сотрудника</th>
                             <th>Понедельник</th>
                             <th>Вторник</th>
                             <th>Среда</th>
@@ -54,6 +55,7 @@
                     @foreach($staff as $staff_member)
                         <tr>
                             <td class="align-middle">{{ $staff_member->first_name }} {{ $staff_member->last_name }} {{ $staff_member->patronym }}</td>
+                            <td class="align-middle">{{ __(ucfirst($staff_member->staff_type)) }}</td>
                             @if ($staff_member->workingHours()->exists())
                                 @for($i = 0; $i <= 6; $i++)
                                     <td class="align-middle">{{ optional($staff_member->workingHours->where('weekday', '=', $i)->where('staff_id', '=', $staff_member->id)->first())->start_time }} - {{ optional($staff_member->workingHours->where('weekday', '=', $i)->where('staff_id', '=', $staff_member->id)->first())->end_time }}</td>

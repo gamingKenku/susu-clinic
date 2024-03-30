@@ -26,7 +26,7 @@
 
                 @include('resources.filter')
 
-                <h4>Новостей пока нет.</h4>
+                <h4>Новости не были найдены.</h4>
             </div>
         @else
         <div class="card-body p-0">
