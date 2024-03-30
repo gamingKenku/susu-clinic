@@ -23,10 +23,16 @@
         
         @if(count($staff) == 0)
             <div class="card-body text-center">
+
+                @include('resources.filter')
+
                 <h4>Рабочие часы пока не созданы</h4>
             </div>
         @else
         <div class="card-body p-0">
+
+            @include('resources.filter')
+
             <div class="table-responsive">
 
                 <table class="table table-striped ">

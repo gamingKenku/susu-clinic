@@ -16,10 +16,19 @@ class DiscountsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $discounts = Discount::query();
+
+        if ($request->has('filter'))
+        {
+            $discounts = $this->filterColumns($discounts, ['header', 'start_date', 'end_date',], $request->input('filter'));
+        }
+
+        $discounts = $discounts->orderBy('start_date')->paginate(25);
+
         return view('resources.discounts.index', [
-            'discounts' => Discount::query()->orderBy('start_date')->paginate(25),
+            'discounts' => $discounts,
         ]);
     }
 

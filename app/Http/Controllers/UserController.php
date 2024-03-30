@@ -16,10 +16,19 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $users = User::query();
+
+        if ($request->has('filter'))
+        {
+            $users = $this->filterColumns($users, ['username', 'email', 'first_name', 'last_name', 'patronym'], $request->input('filter'));
+        }
+
+        $users = $users->orderBy('username')->paginate(25);
+
         return view('resources.users.index', [
-            'users' => User::query()->orderBy('username')->paginate(25),
+            'users' => $users,
         ]);
     }
 

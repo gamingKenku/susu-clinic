@@ -15,9 +15,16 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::query()->orderBy('created_at', 'desc')->paginate(25);
+        $events = Event::query();
+
+        if ($request->has('filter')) 
+        {
+            $events = $this->filterColumns($events, ['header', 'created_at', 'updated_at'], $request->input('filter'));
+        }
+
+        $events = $events->orderBy('created_at', 'desc')->paginate(25);
 
         return view('resources.events.index', [
             'events' => $events

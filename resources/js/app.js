@@ -123,4 +123,23 @@ $(document).ready(function () {
         $("#keep_file").prop('selected', false);
         $(this).prop('disabled', true).prop('hidden', true);
     });
+
+    $("#filter-btn").click(function () {
+        let url = window.location.href;
+        url = url.split('?')[0];
+
+        let filter = $(this).siblings('#filter').val();
+
+        if (filter == '') 
+        {
+            window.location.href = url;
+            return;
+        }
+
+        window.location.href = url + "?filter=" + filter;
+    });
+
+    $("#clear-filter-btn").click(function () {
+        window.location.href = window.location.href.split('?')[0];
+    });
 });

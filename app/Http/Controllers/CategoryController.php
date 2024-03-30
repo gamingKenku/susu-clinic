@@ -16,9 +16,22 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::query()->orderBy('clinic_id')->paginate(25);
+        $categories = Category::query();
+
+        if ($request->has('filter'))
+        {
+            $filter = $request->input('filter');
+            $categories = $categories->where(function ($query) use ($filter) {
+            $query->where('name', 'LIKE', '%'. $filter .'%')
+                  ->orWhereHas('clinic', function ($query) use ($filter) {
+                      $query->orWhere('name', 'LIKE', '%' . $filter .  '%');
+                  });
+            });
+        }
+        
+        $categories = $categories->orderBy('clinic_id')->paginate(25);
 
         return view('resources.categories.index', ['categoriesObjects' => $categories]);
     }

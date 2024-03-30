@@ -15,9 +15,16 @@ class ClinicController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clinicsObjects = Clinic::paginate(25);
+        $clinicsObjects = Clinic::query();
+
+        if ($request->has('filter'))
+        {
+            $clinicsObjects = $this->filterColumns($clinicsObjects, ['name', 'address'], $request->input('filter'));
+        }
+
+        $clinicsObjects = $clinicsObjects->orderBy('name')->paginate(25);
 
         return view('resources.clinics.index', ['clinicsObjects' => $clinicsObjects]);
     }
