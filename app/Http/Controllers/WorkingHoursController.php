@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Staff;
 use App\Models\WorkingHours;
+use App\Rules\EndTimeAfter;
+use App\Rules\HasEndTime;
+use App\Rules\HasStartTime;
 use App\Rules\WorkingHoursEndTimeAfter;
 use Illuminate\Http\Request;
 
@@ -113,12 +116,23 @@ class WorkingHoursController extends Controller
     {
         // dd($id, $request->all());
 
-        $validated_data = $request->validate([
+        $weekdays_rules = array_map(function ($weekday_index) use ($request) {
+            $end_time = ["end_time.$weekday_index" => [new HasEndTime($request->input("start_time.$weekday_index")), new EndTimeAfter($request->input("start_time.$weekday_index"))]];
+            $start_time = ["start_time.$weekday_index" => [new HasStartTime($request->input("end_time.$weekday_index"))]];
+        
+            return array_merge($end_time, $start_time);
+        }, [0, 1, 2, 3, 4, 5, 6]);
+
+        $weekdays_rules = [
             'start_time.*' => ['nullable', 'date_format:H:i'],
             'end_time.*' => ['nullable', 'date_format:H:i'],
             'start_time' => ['array', 'required'],
-            'end_time' => ['array', 'required', new WorkingHoursEndTimeAfter($request->input('start_time'))],
-        ]);
+            'end_time' => ['array', 'required'],
+        ] + array_merge(...$weekdays_rules);
+
+        // dd($weekdays_rules);
+
+        $validated_data = $request->validate($weekdays_rules);
 
         for($i = 0; $i <= 6; $i++)
         {
