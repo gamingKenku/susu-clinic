@@ -28,11 +28,11 @@
         <div class="mb-3 row">
             <label for="start_time[{{ $index }}]" class="col-form-label text-lg-end col-lg-2 col-xl-3">{{ $weekday }}</label>
             <div class="col-lg-4 col-xl-3">
-                <input class="d-flex-inline form-control {{ $errors->has("start_time[$index]") || $errors->has("start_time") ? ' is-invalid' : '' }}" name="start_time[{{ $index }}]" type="time" id="start_time_{{ $index }}" value="{{ old("start_time.$index", $start_time_array[$index]) }}" required="true">
+                <input class="d-flex-inline form-control {{ $errors->has("start_time.$index") || $errors->has("start_time") ? ' is-invalid' : '' }}" name="start_time[{{ $index }}]" type="time" id="start_time_{{ $index }}" value="{{ old("start_time.$index", $start_time_array[$index]) }}" required="true">
                 {!! $errors->first("start_time[$index]", '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-lg-4 col-xl-3">
-                <input class="d-flex-inline form-control {{ $errors->has("end_time[$index]") || $errors->has("end_time") ? ' is-invalid' : '' }}" name="end_time[{{ $index }}]" type="time" id="end_time_{{ $index }}" value="{{ old("end_time.$index", $end_time_array[$index]) }}" required="true">
+                <input class="d-flex-inline form-control {{ $errors->has("end_time.$index") || $errors->has("end_time") ? ' is-invalid' : '' }}" name="end_time[{{ $index }}]" type="time" id="end_time_{{ $index }}" value="{{ old("end_time.$index", $end_time_array[$index]) }}" required="true">
                 {!! $errors->first("end_time[$index]", '<div class="invalid-feedback">:message</div>') !!}
             </div>
             <div class="col-lg-2 col-xl-3">
