@@ -32,8 +32,8 @@ class WorkingHoursController extends Controller
                 'руководство' => 'administrator'
             ];
 
-            $filter = strtolower($request->input('filter'));
-            $filter = $staff_types[strtolower($request->input('filter'))] ?? $filter;
+            $filter = mb_strtolower($request->input('filter'));
+            $filter = $staff_types[$filter] ?? $filter;
 
             $staff = $this->filterColumns($staff, $filter, [
                 'first_name',
@@ -114,7 +114,7 @@ class WorkingHoursController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // dd($id, $request->all());
+        // dd($request->all());
 
         $weekdays_rules = array_map(function ($weekday_index) use ($request) {
             $end_time = ["end_time.$weekday_index" => [new HasEndTime($request->input("start_time.$weekday_index")), new EndTimeAfter($request->input("start_time.$weekday_index"))]];
