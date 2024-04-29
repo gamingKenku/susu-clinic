@@ -57,6 +57,9 @@ Route::resources([
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home/staff', [HomeController::class, 'staff'])->name('staffIndex');
+Route::get('/home/management', [HomeController::class, '']);
+Route::get('/home/services', [HomeController::class, 'servicesIndex'])->name('servicesIndex');
+Route::get('/home/services/{id}', [HomeController::class, 'servicesShow'])->name('servicesShow');
 Route::get('/home/feedback', [HomeController::class, 'feedbackIndex'])->name('feedbackIndex');
 Route::get('/home/feedback/create', [HomeController::class, 'feedbackCreate'])->name('feedbackCreate');
 Route::post('/home/feedback', [HomeController::class, 'feedbackStore'])->name('feedbackStore');

@@ -1,0 +1,4 @@
+.bg-light-gray {
+    --bs-bg-opacity: 1;
+    background-color: #D3D3D3 !important;
+}
