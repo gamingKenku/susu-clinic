@@ -29,6 +29,13 @@ class HomeController extends Controller
         ]);
     }
 
+    public function about()
+    {
+        return view('home.about', [
+            
+        ]);
+    }
+
     public function staffIndex(Request $request)
     {
         $staff = Staff::query();
@@ -45,8 +52,15 @@ class HomeController extends Controller
 
         $staff = $staff->paginate(16);
 
-        return view('home.staff', [
+        return view('home.staff.index', [
             'staff' => $staff,
+        ]);
+    }
+
+    public function staffShow(Request $request, $id)
+    {
+        return view('home.staff.show', [
+            'staff' => Staff::findOrFail($id),
         ]);
     }
 

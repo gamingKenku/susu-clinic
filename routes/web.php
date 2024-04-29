@@ -56,13 +56,22 @@ Route::resources([
 // Route::delete('admin/resources/working-hours/{id}', [WorkingHoursController::class, 'destroy'])->name('working_hours.destroy');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/home/staff', [HomeController::class, 'staff'])->name('staffIndex');
-Route::get('/home/management', [HomeController::class, '']);
+Route::get('/home/about', [HomeController::class, 'about'])->name('about');
+Route::get('/home/management', [HomeController::class, 'managementIndex'])->name('managementIndex');
+Route::get('/home/staff', [HomeController::class, 'staffIndex'])->name('staffIndex');
+Route::get('/home/staff/{id}', [HomeController::class, 'staffShow'])->name('staffShow');
 Route::get('/home/services', [HomeController::class, 'servicesIndex'])->name('servicesIndex');
 Route::get('/home/services/{id}', [HomeController::class, 'servicesShow'])->name('servicesShow');
+Route::get('/home/contacts', [HomeController::class, 'contactsIndex'])->name('contactsIndex');
 Route::get('/home/feedback', [HomeController::class, 'feedbackIndex'])->name('feedbackIndex');
 Route::get('/home/feedback/create', [HomeController::class, 'feedbackCreate'])->name('feedbackCreate');
 Route::post('/home/feedback', [HomeController::class, 'feedbackStore'])->name('feedbackStore');
+Route::get('/home/schedule', [HomeController::class, 'workingHoursIndex'])->name('workingHoursIndex');
+Route::get('/home/discounts', [HomeController::class, 'discountsIndex'])->name('discountsIndex');
+Route::get('/home/discounts/{id}', [HomeController::class, 'discountsShow'])->name('discountsShow');
+Route::get('/home/vacancies', [HomeController::class, 'vacanciesIndex'])->name('vacanciesIndex');
+Route::get('/home/vacancies/{id}', [HomeController::class, 'vacanciesShow'])->name('vacanciesShow');
+
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('/admin/resources', [AdminController::class, 'resources'])->name('resources');

@@ -36,28 +36,31 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="">О центре</a>
+                            <a class="nav-link" href="{{ route('about') }}">О центре</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('managementIndex') }}">Руководство</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('staffIndex') }}">Специалисты</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Услуги</a>
+                            <a class="nav-link" href="{{ route('servicesIndex') }}">Услуги</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Контакты</a>
+                            <a class="nav-link" href="{{ route('contactsIndex') }}">Контакты</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('feedbackIndex') }}">Отзывы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Расписание</a>
+                            <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Акции</a>
+                            <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Вакансии</a>
+                            <a class="nav-link" href="{{ route('vacanciesIndex') }}">Вакансии</a>
                         </li>
                     </ul>
 
