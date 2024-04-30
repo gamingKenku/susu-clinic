@@ -23,54 +23,52 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Медицинский центр ЮУрГУ
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <div class="shadow-sm">
+            <nav class="navbar navbar-expand-md navbar-light bg-white">
+                <div class="container">
+                    <a class="navbar-brand me-auto" href="{{ url('/') }}">
+                        Медицинский центр ЮУрГУ
+                    </a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('about') }}">О центре</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('managementIndex') }}">Руководство</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('staffIndex') }}">Специалисты</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('servicesIndex') }}">Услуги</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('contactsIndex') }}">Контакты</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('feedbackIndex') }}">Отзывы</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('vacanciesIndex') }}">Вакансии</a>
-                        </li>
-                    </ul>
+                    <div class="ms-auto d-none d-md-block">
+                        (номера телефонов)
+                    </div>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        
-                    </ul>
+                    <div class="ms-auto d-none d-md-block">
+                        (электронная почта)
+                    </div>
+
+                    <div class="ms-auto d-none d-md-block">
+                        @foreach ($clinics as $clinic)
+                            <a href="{{ route('contactsIndex') . "/#clinic$clinic->id" }}">{{ $clinic->name }}</a> <br>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+            <nav class="navbar navbar-expand-md navbar-light bg-white">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <div class="d-flex flex-column">
+                            <div class="navbar-nav me-auto">
+                                <a class="nav-link" href="{{ route('about') }}">О центре</a>
+                                <a class="nav-link" href="{{ route('managementIndex') }}">Руководство</a>
+                                <a class="nav-link" href="{{ route('staffIndex') }}">Специалисты</a>
+                                <a class="nav-link" href="{{ route('servicesIndex') }}">Услуги</a>
+                                <a class="nav-link" href="{{ route('contactsIndex') }}">Контакты</a>
+                                <a class="nav-link" href="{{ route('feedbackIndex') }}">Отзывы</a>
+                                <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
+                                <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
 
         <main class="py-4">
             @yield('content')
