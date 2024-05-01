@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @php
-    $categories_chunks = $services->chunk(6);
+    $categories_chunks = $categories->chunk(6);
 @endphp
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md">
-                @if ($events)
+        @if ($events->isNotEmpty())
+            <div class="row justify-content-center">
+                <div class="col-md mb-3">
                     <div id="eventsCarousel" class="carousel slide" data-bs-ride="carousel">
                         {{-- <div class="carousel-indicators">
                         <button type="button" data-bs-target="#eventsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -37,9 +37,9 @@
                             <span class="visually-hidden">Следующий</span>
                         </button>
                     </div>
-                @endif
+                </div>
             </div>
-        </div>
+        @endif
         <div class="row justify-content-center">
             @foreach ($discounts as $discount)
                 <div class="col-md">
@@ -60,16 +60,17 @@
                         <div class="card-header">Категории услуг</div>
                         <div class="card-body">
                             @foreach ($categories_chunk as $category)
-                                <a href="{{ route('servicesIndex', ['category' => $category->name]) }}" class="card-text">{{ $category->name }}</a>
+                                <a href="{{ route('servicesIndex', ['category' => $category->name]) }}"
+                                    class="card-text">{{ $category->name }}</a> <br>
                             @endforeach
                         </div>
                     </div>
                 </div>
             @endforeach
             <div class="col-md-1">
-                
+
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 d-flex">
                 <a class="btn btn-primary align-self-center" href="{{ route('servicesIndex') }}">Открыть все услуги</a>
             </div>
         </div>
