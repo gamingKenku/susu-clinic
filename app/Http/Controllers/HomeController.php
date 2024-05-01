@@ -22,9 +22,9 @@ class HomeController extends Controller
     public function index()
     {
         return view('home.index', [
-            'events' => Event::query()->latest()->take(5),
-            'discounts' => Discount::query()->latest()->take(3),
-            'categories' => Category::query()->orderBy('created_at')->take(15),
+            'events' => Event::query()->latest()->take(5)->get(),
+            'discounts' => Discount::query()->latest()->take(3)->get(),
+            'categories' => Category::query()->orderBy('created_at')->take(18)->get(),
             'clinics' => Clinic::all(),
         ]);
     }
