@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    Расписание сотрудников
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center mb-0 mb-md-3">

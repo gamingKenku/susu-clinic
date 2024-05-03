@@ -186,14 +186,21 @@ class HomeController extends Controller
     public function vacanciesIndex()
     {
         return view('home.vacancies.index', [
-            'positions' => Position::query()->where('has_vacancy', '=', true)->paginate(10),
+            'vacancies' => Position::query()->where('has_vacancy', '=', true)->paginate(10),
         ]);
     }
 
     public function vacanciesShow(string $id)
     {
+        $vacancy = Position::query()->findOrFail($id);
+
+        if (!$vacancy->has_vacancy)
+        {
+            abort(404);
+        }
+
         return view('home.vacancies.show', [
-            'position' => Position::query()->findOrFail($id),
+            'vacancy' => $vacancy,
         ]);
     }
 

@@ -4,6 +4,10 @@
     $feedback_chunks = $feedback->chunk(2);
 @endphp
 
+@section('title')
+    Отзывы
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center mb-5">

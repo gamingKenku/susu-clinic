@@ -5,6 +5,10 @@
     $experience_year = Carbon::createFromFormat('Y-m-d', $staff->experience)->year
 @endphp
 
+@section('title')
+    Сотрудники медицинского центра
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row mb-3 justify-content-center">
