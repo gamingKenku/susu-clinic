@@ -236,5 +236,8 @@
     "Categories": "Категории",
     "Doctor": "Врач",
     "Nurse": "Медсестра/медбрат",
-    "Administrator": "Руководство"
+    "Administrator": "Руководство",
+    "doctor": "врач",
+    "nurse": "медработник",
+    "administrator": "руководство"
 }

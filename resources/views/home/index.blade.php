@@ -7,21 +7,16 @@
 @section('content')
     <div class="container">
         @if ($events->isNotEmpty())
-            <div class="row justify-content-center">
-                <div class="col-md mb-3">
+            <div class="row justify-content-center mb-5">
+                <div class="col-md">
                     <div id="eventsCarousel" class="carousel slide" data-bs-ride="carousel">
-                        {{-- <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#eventsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#eventsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#eventsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div> --}}
                         <div class="carousel-inner">
                             @foreach ($events as $event)
-                                <div class="carousel-item active">
-                                    <img src="{{ $event->picture_path }}" class="d-block w-100">
-                                    <div class="carousel-caption d-none d-md-block">
+                                <div class="carousel-item @if ($loop->index == 0) active @endif">
+                                    <img src="{{ $event->picture_path ? asset('storage/' . $event->picture_path) : asset('storage/event_pictures/event_default.jpg') }}"
+                                        class="d-block w-100">
+                                    <div class="carousel-caption">
                                         <h5>{{ $event->header }}</h5>
-                                        <p>{{ Str::limit($event->content, 100) }}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -40,39 +35,46 @@
                 </div>
             </div>
         @endif
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
             @foreach ($discounts as $discount)
-                <div class="col-md">
-                    <div class="card">
-                        <div class="card-body">
+                <div class="col-md d-flex mb-3 mb-md-0">
+                    <div class="card flex-fill">
+                        <div class="card-header">Акция</div>
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $discount->header }}</h5>
-                            <p class="card-text">{{ $discount->content }}</p>
-                            <a href="{{ route('discountsShow', $discount->id) }}" class="btn btn-primary">Просмотреть</a>
+                            <p class="card-text flex-grow-1">{{ $discount->content }}</p>
+                            @if ($discount->end_date)
+                                <p class="card-text"><small class="text-muted">Акция действует до {{ $discount->end_date }}</small></p>
+                            @endif
+                            <a href="{{ route('discountsShow', $discount->id) }}"
+                                class="btn btn-primary mt-auto">Просмотреть</a>
                         </div>
                     </div>
                 </div>
             @endforeach
-        </div>
+        </div>        
         <div class="row justify-content-center">
             @foreach ($categories_chunks as $categories_chunk)
-                <div class="col-md">
-                    <div class="card">
+                <div class="col-md d-flex mb-3 mb-md-0">
+                    <div class="card flex-fill d-flex flex-column">
                         <div class="card-header">Категории услуг</div>
                         <div class="card-body">
                             @foreach ($categories_chunk as $category)
-                                <a href="{{ route('servicesIndex', ['category' => $category->name]) }}"
+                                <a href="{{ route('servicesIndex', ['category' => $category->id, 'filter' => $category->clinic->name]) }}"
                                     class="card-text">{{ $category->name }}</a> <br>
                             @endforeach
                         </div>
+                        <div class="mt-auto"></div> <!-- This will push the content to the top -->
                     </div>
                 </div>
             @endforeach
             <div class="col-md-1">
-
+        
             </div>
             <div class="col-md-2 d-flex">
                 <a class="btn btn-primary align-self-center" href="{{ route('servicesIndex') }}">Открыть все услуги</a>
             </div>
         </div>
+        
     </div>
 @endsection

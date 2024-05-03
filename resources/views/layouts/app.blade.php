@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,12 +17,17 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    
+
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
+
 <body>
+    @php
+        use App\Models\Clinic;
+    @endphp
+
     <div id="app">
         <div class="shadow-sm">
             <nav class="navbar navbar-expand-md navbar-light bg-white">
@@ -39,7 +45,7 @@
                     </div>
 
                     <div class="ms-auto d-none d-md-block">
-                        @foreach ($clinics as $clinic)
+                        @foreach (Clinic::all() as $clinic)
                             <a href="{{ route('contactsIndex') . "/#clinic$clinic->id" }}">{{ $clinic->name }}</a> <br>
                         @endforeach
                     </div>
@@ -47,10 +53,12 @@
             </nav>
             <nav class="navbar navbar-expand-md navbar-light bg-white">
                 <div class="container">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-    
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <div class="d-flex flex-column">
@@ -63,6 +71,7 @@
                                 <a class="nav-link" href="{{ route('feedbackIndex') }}">Отзывы</a>
                                 <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
                                 <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
+                                <a class="nav-link" href="{{ route('vacanciesIndex') }}">Вакансии</a>
                             </div>
                         </div>
                     </div>
@@ -73,6 +82,13 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container">
+                <span class="text-muted">Медицинский центр ЮУрГУ</span>
+            </div>
+        </footer>
     </div>
 </body>
+
 </html>

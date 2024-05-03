@@ -1,3 +1,11 @@
-<div>
-    <!-- The whole future lies in uncertainty: live immediately. - Seneca -->
+@extends('layouts.app')
+
+@section('title')
+    Вакансии
+@endsection
+
+@section('content')
+<div class="container">
+    
 </div>
+@endsection

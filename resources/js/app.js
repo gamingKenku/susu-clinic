@@ -142,4 +142,53 @@ $(document).ready(function () {
     $("#clear-filter-btn").click(function () {
         window.location.href = window.location.href.split('?')[0];
     });
+    
+    $(".staff-type-filter-btn").click(function () {
+        let url = window.location.href;
+        url = url.split('?')[0];
+
+        let filter = $(this).data("staff-type");
+
+        if (filter == '') 
+        {
+            window.location.href = url;
+            return;
+        }
+
+        window.location.href = url + "?filter=" + filter;
+    });
+
+    $(".clinic-filter-btn").click(function () {
+        let url = window.location.href;
+        url = url.split('?')[0];
+
+        let filter = $(this).data("clinic-name");
+
+        if (filter == '') 
+        {
+            window.location.href = url;
+            return;
+        }
+
+        window.location.href = url + "?filter=" + filter;
+    });
+
+    $('.rating-star').click(function () {
+        let index = $(this).data('index');
+
+        $("#rating-stars .rating-star").removeClass('checked')
+        $("#rating-stars .rating-star").slice(0, index).addClass('checked');
+
+        $('#rating').val(index);
+    });
+
+    $('.btn-category').click(function () {
+        let category_id = $(this).data('category-id');
+
+        $('#services-card').removeClass('d-none');
+        $('.btn-category').removeClass('btn-primary').addClass('btn-secondary');
+        $(this).removeClass('btn-secondary').addClass('btn-primary');
+        $('.service-row').addClass('d-none');
+        $('*[data-service-category="' + category_id + '"]').removeClass('d-none');
+    });
 });

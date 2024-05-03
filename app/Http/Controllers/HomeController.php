@@ -9,7 +9,9 @@ use App\Models\Event;
 use App\Models\Feedback;
 use App\Models\Staff;
 use App\Models\Position;
+use App\Models\Service;
 use App\Models\WorkingHours;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -40,20 +42,35 @@ class HomeController extends Controller
     {
         $staff = Staff::query();
 
-        if ($request->has('last_name_filter')) {
-            $last_name_filter = $request->input('last_name_filter');
+        if ($request->has('filter')) 
+        {
+            $staff_types = [
+                'врач' => 'doctor',
+                'медсестра' => 'nurse',
+                'медбрат' => 'nurse',
+                'руководство' => 'administrator'
+            ];
 
-            $staff = $staff->where('last_name', 'like', "%{{$last_name_filter}}%");
-        }
+            $filter = strtolower($request->input('filter'));
+            $filter = $staff_types[strtolower($request->input('filter'))] ?? $filter;
 
-        if ($request->has('type_filter')) {
-            $staff = $staff->where('staff_type', '=', $request->input('type_filter'));
+            $staff = $this->filterColumns($staff, $filter, [
+                'first_name',
+                'last_name',
+                'patronym',
+                'staff_type',
+                'experience'
+            ]);
+            $staff = $this->filterRelatedColumns($staff, $filter, [
+                'positions' => ['name'],
+            ]);
         }
 
         $staff = $staff->paginate(16);
 
         return view('home.staff.index', [
             'staff' => $staff,
+            'clinics' => Clinic::all(),
         ]);
     }
 
@@ -72,6 +89,7 @@ class HomeController extends Controller
                             ->where('blocked', '=', false)
                             ->orderBy('created_at')
                             ->paginate(12),
+            'clinics' => Clinic::all(),
         ]);
     }
 
@@ -101,10 +119,25 @@ class HomeController extends Controller
         return redirect(route('feedbackIndex'));
     }
 
-    public function servicesIndex()
-    {
+    public function servicesIndex(Request $request)
+    {    
+        if ($request->has('filter')) 
+        {
+            $filter = strtolower($request->input('filter'));
+    
+            $categories = Clinic::where('name', '=', $filter)->first()->categories;
+        }
+        else 
+        {
+            $categories = Clinic::where('name', '=', Clinic::first()->name)->first()->categories;
+        }
+
+        $services = Service::query()->whereIn('category_id', $categories->pluck('id'))->get();
+    
         return view('home.services.index', [
             'clinics' => Clinic::all(),
+            'categories' => $categories,
+            'services' => $services,
         ]);
     }
     
@@ -131,8 +164,15 @@ class HomeController extends Controller
 
     public function discountsIndex()
     {
+        $now = Carbon::now();
+
+        $current_discounts = Discount::query()
+            ->where('start_date', '<=', $now)
+            ->where('end_date', '>=', $now)
+            ->paginate(10);
+
         return view('home.discounts.index', [
-            'discounts' => Discount::query()->latest()->paginate(10),
+            'discounts' => $current_discounts,
         ]);
     }
 
@@ -161,12 +201,18 @@ class HomeController extends Controller
     {
         $staff = Staff::query();
 
-        if ($request->has('last_name_filter')) {
-            $last_name_filter = $request->input('last_name_filter');
-            $staff = Staff::query()->where('staff_type', '=', 'doctor')->where('last_name', 'like', "%{{$last_name_filter}}%");
+        if ($request->has('filter')) 
+        {
+            $filter = strtolower($request->input('filter'));
+
+            $staff = $this->filterColumns($staff, $filter, [
+                'first_name',
+                'last_name',
+                'patronym',
+            ]);
         }
 
-        $staff = $staff->get();
+        $staff = $staff->paginate(15);
 
         return view('home.working_hours', [
             'staff' => $staff, 

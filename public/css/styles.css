@@ -14,6 +14,10 @@
     color: orange;
 }
 
+.star-hover {
+    color: yellow;
+}
+
 #editor-container {
     height: 100%;
     /* added these styles */
@@ -25,4 +29,44 @@
 .bg-light-gray {
     --bs-bg-opacity: 1;
     background-color: #D3D3D3 !important;
+}
+
+.carousel-item img {
+    height: 600px;
+    object-fit: cover;
+}
+
+@media (max-width: 575.98px) { 
+    .carousel-item img {
+        height: 200px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .carousel-item img {
+        height: 300px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .carousel-item img {
+        height: 400px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .carousel-item img {
+        height: 500px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 1200px) { 
+    .carousel-item img {
+        height: 600px;
+        object-fit: cover;
+    }
 }
