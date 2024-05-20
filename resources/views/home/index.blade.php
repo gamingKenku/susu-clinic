@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @php
+    use Carbon\Carbon;
     $categories_chunks = $categories->chunk(6);
 @endphp
 
@@ -13,8 +14,9 @@
                         <div class="carousel-inner">
                             @foreach ($events as $event)
                                 <div class="carousel-item @if ($loop->index == 0) active @endif">
-                                    <img src="{{ $event->picture_path ? asset('storage/' . $event->picture_path) : asset('storage/event_pictures/event_default.jpg') }}"
-                                        class="d-block w-100">
+                                    <a href="{{ route('eventShow', $event->id) }}"><img
+                                            src="{{ $event->picture_path ? asset('storage/' . $event->picture_path) : asset('storage/event_pictures/event_default.jpg') }}"
+                                            class="d-block w-100"></a>
                                     <div class="carousel-caption">
                                         <h5>{{ $event->header }}</h5>
                                     </div>
@@ -44,7 +46,13 @@
                             <h5 class="card-title">{{ $discount->header }}</h5>
                             <p class="card-text flex-grow-1">{{ $discount->content }}</p>
                             @if ($discount->end_date)
-                                <p class="card-text"><small class="text-muted">Акция действует до {{ $discount->end_date }}</small></p>
+                                @php
+                                    $end_date_string = Carbon::createFromFormat('Y-m-d', $discount->end_date)->format(
+                                        'd.m.Y',
+                                    );
+                                @endphp
+                                <p class="card-text"><small class="text-muted">Акция действует до
+                                        {{ $end_date_string }}</small></p>
                             @endif
                             <a href="{{ route('discountsShow', $discount->id) }}"
                                 class="btn btn-primary mt-auto">Просмотреть</a>
@@ -52,7 +60,7 @@
                     </div>
                 </div>
             @endforeach
-        </div>        
+        </div>
         <div class="row justify-content-center">
             @foreach ($categories_chunks as $categories_chunk)
                 <div class="col-md d-flex mb-3 mb-md-0">
@@ -69,12 +77,12 @@
                 </div>
             @endforeach
             <div class="col-md-1">
-        
+
             </div>
             <div class="col-md-2 d-flex">
                 <a class="btn btn-primary align-self-center" href="{{ route('servicesIndex') }}">Открыть все услуги</a>
             </div>
         </div>
-        
+
     </div>
 @endsection

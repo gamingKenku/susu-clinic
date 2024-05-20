@@ -25,9 +25,16 @@ class HomeController extends Controller
     {
         return view('home.index', [
             'events' => Event::query()->latest()->take(5)->get(),
-            'discounts' => Discount::query()->latest()->take(3)->get(),
+            'discounts' => Discount::query()->whereDate('start_date', '<=', now('Asia/Yekaterinburg'))->whereDate('end_date', '>=', now('Asia/Yekaterinburg'))->latest('end_date')->take(3)->get(),
             'categories' => Category::query()->orderBy('created_at')->take(18)->get(),
             'clinics' => Clinic::all(),
+        ]);
+    }
+
+    public function eventShow(string $id, Request $request)
+    {
+        return view('home.events.show', [
+            'event' => Event::findOrFail($id),
         ]);
     }
 

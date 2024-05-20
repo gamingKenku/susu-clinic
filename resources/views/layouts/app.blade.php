@@ -32,17 +32,12 @@
         <div class="shadow-sm">
             <nav class="navbar navbar-expand-md navbar-light bg-white">
                 <div class="container">
+                    <a class="navbar-brand me-3" href="{{ url('/') }}">
+                        <img style="width: 100px; height: 100px;" class="w-100" src="{{ asset('storage/logo.svg') }}" alt="">
+                    </a>
                     <a class="navbar-brand me-auto" href="{{ url('/') }}">
                         Медицинский центр ЮУрГУ
                     </a>
-
-                    <div class="ms-auto d-none d-md-block">
-                        (номера телефонов)
-                    </div>
-
-                    <div class="ms-auto d-none d-md-block">
-                        (электронная почта)
-                    </div>
 
                     <div class="ms-auto d-none d-md-block">
                         @foreach (Clinic::all() as $clinic)

@@ -56,6 +56,7 @@ Route::resources([
 // Route::delete('admin/resources/working-hours/{id}', [WorkingHoursController::class, 'destroy'])->name('working_hours.destroy');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/news/{id}', [HomeController::class, 'eventShow'])->name('eventShow');
 Route::get('/home/about', [HomeController::class, 'about'])->name('about');
 Route::get('/home/management', [HomeController::class, 'managementIndex'])->name('managementIndex');
 Route::get('/home/staff', [HomeController::class, 'staffIndex'])->name('staffIndex');

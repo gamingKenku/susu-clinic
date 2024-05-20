@@ -70,3 +70,7 @@
         object-fit: cover;
     }
 }
+
+.btn-primary {
+    color: #ffffff !important;
+}
