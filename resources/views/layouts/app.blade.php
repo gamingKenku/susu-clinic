@@ -33,17 +33,19 @@
             <nav class="navbar navbar-expand-md navbar-light bg-white">
                 <div class="container">
                     <a class="navbar-brand me-3" href="{{ url('/') }}">
-                        <img style="width: 100px; height: 100px;" class="w-100" src="{{ asset('storage/logo.svg') }}" alt="">
+                        <img style="width: 100px; height: 100px;" class="w-100" src="{{ asset('storage/logo.svg') }}"
+                            alt="">
                     </a>
                     <a class="navbar-brand me-auto" href="{{ url('/') }}">
                         Медицинский центр ЮУрГУ
                     </a>
 
-                    <div class="ms-auto d-none d-md-block">
+                    {{-- <div class="ms-auto d-none d-md-block">
                         @foreach (Clinic::all() as $clinic)
-                            <a href="{{ route('contactsIndex') . "/#clinic$clinic->id" }}">{{ $clinic->name }}</a> <br>
+                            <a href="{{ route('contactsIndex') . "/#clinic$clinic->id" }}">{{ $clinic->name }}</a>
+                            <br>
                         @endforeach
-                    </div>
+                    </div> --}}
                 </div>
             </nav>
             <nav class="navbar navbar-expand-md navbar-light bg-white">
@@ -78,7 +80,7 @@
             @yield('content')
         </main>
 
-        <footer class="footer mt-auto py-3 bg-light">
+        <footer class="footer mt-auto py-3">
             <div class="container">
                 <span class="text-muted">Медицинский центр ЮУрГУ</span>
             </div>

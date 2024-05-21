@@ -41,7 +41,7 @@
             @foreach ($discounts as $discount)
                 <div class="col-md d-flex mb-3 mb-md-0">
                     <div class="card flex-fill">
-                        <div class="card-header">Акция</div>
+                        <h5 class="card-header">Акция</h5>
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $discount->header }}</h5>
                             <p class="card-text flex-grow-1">{{ $discount->content }}</p>
@@ -65,11 +65,11 @@
             @foreach ($categories_chunks as $categories_chunk)
                 <div class="col-md d-flex mb-3 mb-md-0">
                     <div class="card flex-fill d-flex flex-column">
-                        <div class="card-header">Категории услуг</div>
+                        <h5 class="card-header">Категории услуг</h5>
                         <div class="card-body">
                             @foreach ($categories_chunk as $category)
                                 <a href="{{ route('servicesIndex', ['category' => $category->id, 'filter' => $category->clinic->name]) }}"
-                                    class="card-text">{{ $category->name }}</a> <br>
+                                    class="card-text fs-5 link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ $category->name }}</a> <br>
                             @endforeach
                         </div>
                         <div class="mt-auto"></div> <!-- This will push the content to the top -->

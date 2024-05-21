@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,8 @@ class DiscountFactory extends Factory
         return [
             'header' => fake()->sentence(),
             'markup' => fake()->text(),
+            'start_date' => Carbon::now()->subDays(rand(1, 14)),
+            'end_date' => Carbon::now()->addDays(rand(1, 14))
         ];
     }
 }

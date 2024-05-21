@@ -26,7 +26,7 @@ class HomeController extends Controller
         return view('home.index', [
             'events' => Event::query()->latest()->take(5)->get(),
             'discounts' => Discount::query()->whereDate('start_date', '<=', now('Asia/Yekaterinburg'))->whereDate('end_date', '>=', now('Asia/Yekaterinburg'))->latest('end_date')->take(3)->get(),
-            'categories' => Category::query()->orderBy('created_at')->take(18)->get(),
+            'categories' => Category::query()->orderBy('name')->take(18)->get(),
             'clinics' => Clinic::all(),
         ]);
     }
@@ -47,7 +47,10 @@ class HomeController extends Controller
 
     public function staffIndex(Request $request)
     {
-        $staff = Staff::query();
+        $staff = Staff::query()
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->orderBy('patronym');
 
         if ($request->has('filter')) 
         {
@@ -94,7 +97,7 @@ class HomeController extends Controller
             'feedback' => Feedback::query()
                             ->where('moderated', '=', true)
                             ->where('blocked', '=', false)
-                            ->orderBy('created_at')
+                            ->latest('created_at')
                             ->paginate(12),
             'clinics' => Clinic::all(),
         ]);
@@ -132,14 +135,14 @@ class HomeController extends Controller
         {
             $filter = strtolower($request->input('filter'));
     
-            $categories = Clinic::where('name', '=', $filter)->first()->categories;
+            $categories = Clinic::where('name', '=', $filter)->first()->categories()->orderBy('name')->get();
         }
         else 
         {
-            $categories = Clinic::where('name', '=', Clinic::first()->name)->first()->categories;
+            $categories = Clinic::where('name', '=', Clinic::first()->name)->first()->categories()->orderBy('name')->get();
         }
 
-        $services = Service::query()->whereIn('category_id', $categories->pluck('id'))->get();
+        $services = Service::query()->whereIn('category_id', $categories->pluck('id'))->orderBy('name')->get();
     
         return view('home.services.index', [
             'clinics' => Clinic::all(),
@@ -213,7 +216,11 @@ class HomeController extends Controller
 
     public function workingHoursIndex(Request $request)
     {
-        $staff = Staff::query();
+        $staff = Staff::query()
+            ->whereIn('staff_type', ['doctor', 'administrator'])
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->orderBy('patronym');
 
         if ($request->has('filter')) 
         {

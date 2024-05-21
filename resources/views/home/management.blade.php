@@ -21,10 +21,10 @@
                                     <h4 class="card-text">Ольга Сергеевна Веселова</h4>
                                     <h5 class="card-text">Врач общей практики</h5>
                                     <br>
-                                    <a href="mailto:veselovaos@susu.ru">veselovaos@susu.ru</a>
+                                    <a class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover" href="mailto:veselovaos@susu.ru">veselovaos@susu.ru</a>
                                     <br><br>
-                                    <p class="font-italic">
-                                        <a
+                                    <p class="fst-italic">
+                                        <a class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
                                         href="https://www.susu.ru/ru/news/2018/03/10/za-zdorovyy-obraz-zhizni-intervyu-s-direktorom-medicinskogo-centra-olgoy-veselovoy">За
                                         здоровый образ жизни: интервью с директором
                                         Медицинского центра ЮУрГУ Ольгой Веселовой</a>

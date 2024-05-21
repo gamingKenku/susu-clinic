@@ -22,9 +22,9 @@
     height: 100%;
     /* added these styles */
     flex: 1;
-    display: flex; 
+    display: flex;
     flex-direction: column;
-  }
+}
 
 .bg-light-gray {
     --bs-bg-opacity: 1;
@@ -36,35 +36,35 @@
     object-fit: cover;
 }
 
-@media (max-width: 575.98px) { 
+@media (max-width: 575.98px) {
     .carousel-item img {
         height: 200px;
         object-fit: cover;
     }
 }
 
-@media (min-width: 576px) and (max-width: 767.98px) { 
+@media (min-width: 576px) and (max-width: 767.98px) {
     .carousel-item img {
         height: 300px;
         object-fit: cover;
     }
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) { 
+@media (min-width: 768px) and (max-width: 991.98px) {
     .carousel-item img {
         height: 400px;
         object-fit: cover;
     }
 }
 
-@media (min-width: 992px) and (max-width: 1199.98px) { 
+@media (min-width: 992px) and (max-width: 1199.98px) {
     .carousel-item img {
         height: 500px;
         object-fit: cover;
     }
 }
 
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
     .carousel-item img {
         height: 600px;
         object-fit: cover;
@@ -73,4 +73,15 @@
 
 .btn-primary {
     color: #ffffff !important;
+}
+
+.card-header {
+    color: #ffffff !important;
+    background-color: rgba(33, 173, 155, 255) !important;
+    border-color: rgba(33, 173, 155, 255) !important;
+}
+
+.card {
+    border-width: rgba(33, 173, 155, 255) !important;
+    border-color: rgba(33, 173, 155, 255) !important;
 }
