@@ -58,18 +58,16 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <div class="d-flex flex-column">
-                            <div class="navbar-nav me-auto">
-                                <a class="nav-link" href="{{ route('about') }}">О центре</a>
-                                <a class="nav-link" href="{{ route('managementIndex') }}">Руководство</a>
-                                <a class="nav-link" href="{{ route('staffIndex') }}">Специалисты</a>
-                                <a class="nav-link" href="{{ route('servicesIndex') }}">Услуги</a>
-                                <a class="nav-link" href="{{ route('contactsIndex') }}">Контакты</a>
-                                <a class="nav-link" href="{{ route('feedbackIndex') }}">Отзывы</a>
-                                <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
-                                <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
-                                <a class="nav-link" href="{{ route('vacanciesIndex') }}">Вакансии</a>
-                            </div>
+                        <div class="navbar-nav me-auto">
+                            <a class="nav-link" href="{{ route('about') }}">О центре</a>
+                            <a class="nav-link" href="{{ route('managementIndex') }}">Руководство</a>
+                            <a class="nav-link" href="{{ route('staffIndex') }}">Специалисты</a>
+                            <a class="nav-link" href="{{ route('servicesIndex') }}">Услуги</a>
+                            <a class="nav-link" href="{{ route('contactsIndex') }}">Контакты</a>
+                            <a class="nav-link" href="{{ route('feedbackIndex') }}">Отзывы</a>
+                            <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
+                            <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
+                            <a class="nav-link" href="{{ route('vacanciesIndex') }}">Вакансии</a>
                         </div>
                     </div>
                 </div>
@@ -82,7 +80,14 @@
 
         <footer class="footer mt-auto py-3">
             <div class="container">
-                <span class="text-muted">Медицинский центр ЮУрГУ</span>
+                <div class="d-flex">
+                    <div class="me-auto">
+                        <span class="text-muted">Медицинский центр ЮУрГУ</span>
+                    </div>
+                    <div class="ms-auto">
+                        
+                    </div>
+                </div>
             </div>
         </footer>
     </div>

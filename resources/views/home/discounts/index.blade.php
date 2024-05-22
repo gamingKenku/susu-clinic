@@ -10,6 +10,7 @@
 
 @section('content')
     <div class="container">
+        <h3 class="mb-3">Акции на данный момент</h3>
         <div class="row justify-content-center">
             <div class="col-md">
                 @foreach ($discounts as $discount)

@@ -10,13 +10,14 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center mb-5">
+        <h3 class="mb-3">Отзывы</h3>
+        <div class="row justify-content-center mb-3">
             <div class="col-md d-flex flex-md-row flex-column">
                 <a href="{{ route('feedbackCreate') }}" class="btn btn-primary me-0 me-md-3 mb-3 mb-md-0">Оставить отзыв</a>
             </div>
         </div>
         @foreach ($feedback_chunks as $feedback_chunk)
-            <div class="row justify-content-center mb-0 mb-md-5">
+            <div class="row justify-content-center mb-0 mb-md-3">
                 @foreach ($feedback_chunk as $review)
                     <div class="col-md-6 d-flex mb-3 mb-md-0">
                         <div class="card flex-fill">

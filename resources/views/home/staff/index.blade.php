@@ -10,6 +10,7 @@
 
 @section('content')
     <div class="container">
+        <h3 class="mb-3">Сотрудники медицинского центра</h3>
         <div class="row justify-content-center mb-0 mb-md-3">
             <div class="col-md d-flex flex-md-row flex-column">
                 <button class="btn btn-primary me-0 me-md-3 mb-3 mb-md-0 staff-type-filter-btn" data-staff-type="doctor" type="button">Врачи</button>

@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="container">
+        <h3 class="mb-3">Предоставляемые услуги</h3>
         <div class="row justify-content-center mb-0 mb-md-3">
             <div class="col-md d-flex flex-md-row flex-column">
                 @if(!Request::input('filter'))

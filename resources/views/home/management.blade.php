@@ -8,6 +8,7 @@
     <div class="container">
         <div class="row justify-content-center align-items-start">
             <div class="col">
+                <h3 class="mb-3">Руководство</h3>
                 <div class="card">
                     <div class="card-body">
                         <div class="container-fluid">
