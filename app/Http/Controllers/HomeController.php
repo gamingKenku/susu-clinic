@@ -13,6 +13,7 @@ use App\Models\Service;
 use App\Models\WorkingHours;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -238,5 +239,10 @@ class HomeController extends Controller
         return view('home.working_hours', [
             'staff' => $staff, 
         ]);
+    }
+
+    public function licenseShow(Request $request)
+    {
+        return response()->file(public_path() . "\storage\license.pdf");
     }
 }

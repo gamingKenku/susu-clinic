@@ -72,7 +72,7 @@ Route::get('/home/discounts', [HomeController::class, 'discountsIndex'])->name('
 Route::get('/home/discounts/{id}', [HomeController::class, 'discountsShow'])->name('discountsShow');
 Route::get('/home/vacancies', [HomeController::class, 'vacanciesIndex'])->name('vacanciesIndex');
 Route::get('/home/vacancies/{id}', [HomeController::class, 'vacanciesShow'])->name('vacanciesShow');
-
+Route::get('/home/license', [HomeController::class, 'licenseShow'])->name('licenseShow');
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('/admin/resources', [AdminController::class, 'resources'])->name('resources');

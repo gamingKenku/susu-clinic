@@ -85,3 +85,7 @@
     border-width: rgba(33, 173, 155, 255) !important;
     border-color: rgba(33, 173, 155, 255) !important;
 }
+
+.footer {
+    border-color: rgba(218,44,30,255) !important;
+}
