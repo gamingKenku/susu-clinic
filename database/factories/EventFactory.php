@@ -16,9 +16,19 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
+        $headers = file(storage_path('app\factories_content\events\headers.txt'), FILE_IGNORE_NEW_LINES);
+        $contents = file(storage_path('app\factories_content\events\contents.txt'), FILE_IGNORE_NEW_LINES);   
+
+        if (count($headers) <= count($contents)) {
+            $index = array_rand($headers);
+        }
+        else {
+            $index = array_rand($contents);
+        }
+
         return [
-            'header' => fake()->sentence(),
-            'content' => fake()->text(),
+            'header' => $headers[$index],
+            'content' => $contents[$index],
         ];
     }
 }

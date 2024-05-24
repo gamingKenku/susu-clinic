@@ -19,7 +19,7 @@ class ClinicSeeder extends Seeder
         Clinic::factory()
             ->count(2)
             ->has(Category::factory()
-                ->count(5)
+                ->count(9)
                 ->has(Service::factory()
                     ->count(5)))
             ->create();

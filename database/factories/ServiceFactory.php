@@ -16,8 +16,10 @@ class ServiceFactory extends Factory
      */
     public function definition(): array
     {
+        $names = file(storage_path('app\factories_content\services\names.txt'), FILE_IGNORE_NEW_LINES);
+
         return [
-            'name' => fake()->word(),
+            'name' => $names[array_rand($names)],
             'price' => fake()->randomFloat(2, 1, 2000),
         ];
     }

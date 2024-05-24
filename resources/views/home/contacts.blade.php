@@ -11,9 +11,9 @@
                 <div class="card">
                     <h4 class="card-header">Контакты</h4>
                     <div class="card-body">
-                        <p class="card-text">Адрес: 454080, г. Челябинск, ул. Сони Кривой 60, 2 этаж</p>
+                        {{-- <p class="card-text">Адрес: 454080, г. Челябинск, ул. Сони Кривой 60, 2 этаж</p> --}}
                         <p class="card-text">Телефон: +7 (351) 267-91-43</p>
-                        <p class="card-text">E-mail: <a href="mailto:medcentrsusu@mail.ru">medcentrsusu@mail.ru</a>, <a href="mailto:krylovasf@susu.ru">krylovasf@susu.ru</a></p>
+                        <p class="card-text">E-mail: <a href="mailto:krylovasf@susu.ru">krylovasf@susu.ru</a></p>
                         <p class="card-text">Группа ВК: <a href="http://vk.com/medcentrsusu">vk.com/medcentrsusu</a></p>
                         <p class="card-text">Время работы: 09:00-17:00</p>
                         <h4 class="card-title">Адреса отделений</h4>

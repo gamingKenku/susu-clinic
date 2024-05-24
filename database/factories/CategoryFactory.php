@@ -16,8 +16,10 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $names = file(storage_path('app\factories_content\categories\names.txt'), FILE_IGNORE_NEW_LINES);
+
         return [
-            'name' => fake()->word(),
+            'name' => $names[array_rand($names)],
         ];
     }
 }
