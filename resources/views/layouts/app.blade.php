@@ -31,7 +31,7 @@
     <div id="app">
         <div style="min-height: 100vh" class="d-flex flex-column">
             <div class="shadow-sm overflow-auto">
-                <nav class="navbar navbar-expand-md navbar-light bg-white">
+                <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom border-primary">
                     <div class="container">
                         <a class="navbar-brand me-3" href="{{ url('/') }}">
                             <img style="width: 100px; height: 100px;" class="w-100"
@@ -43,7 +43,7 @@
 
                     </div>
                 </nav>
-                <nav class="navbar navbar-expand-md navbar-light bg-white">
+                <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom border-primary">
                     <div class="container">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

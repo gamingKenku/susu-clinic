@@ -47,9 +47,7 @@
                             <p class="card-text flex-grow-1">{{ $discount->content }}</p>
                             @if ($discount->end_date)
                                 @php
-                                    $end_date_string = Carbon::createFromFormat('Y-m-d', $discount->end_date)->format(
-                                        'd.m.Y',
-                                    );
+                                    $end_date_string = Carbon::createFromFormat('Y-m-d', $discount->end_date)->format('d.m.Y');
                                 @endphp
                                 <p class="card-text"><small class="text-muted">Акция действует до
                                         {{ $end_date_string }}</small></p>
@@ -72,13 +70,11 @@
                                     class="card-text fs-5 link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ $category->name }}</a> <br>
                             @endforeach
                         </div>
-                        <div class="mt-auto"></div> <!-- This will push the content to the top -->
+                        <div class="mt-auto"></div>
                     </div>
                 </div>
             @endforeach
-            <div class="col-md-1">
-
-            </div>
+            <div class="col-md-1"></div>
             <div class="col-md-2 d-flex">
                 <a class="btn btn-primary align-self-center" href="{{ route('servicesIndex') }}">Открыть все услуги</a>
             </div>
