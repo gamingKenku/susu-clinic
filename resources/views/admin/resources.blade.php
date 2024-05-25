@@ -12,7 +12,7 @@
 
             <div class="row">
                 <div class="col">
-                    <div class="table-responsivce">
+                    <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>
                                 <th>Название</th>

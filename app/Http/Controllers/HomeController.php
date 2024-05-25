@@ -42,7 +42,7 @@ class HomeController extends Controller
     public function about()
     {
         return view('home.about', [
-            
+            'about' => Storage::get('content_html\about.html'),
         ]);
     }
 
@@ -170,6 +170,7 @@ class HomeController extends Controller
     {
         return view('home.contacts', [
             'clinics' => Clinic::all(),
+            'contacts' => Storage::get('content_html\contacts.html'),
         ]);
     }
 
@@ -243,6 +244,6 @@ class HomeController extends Controller
 
     public function licenseShow(Request $request)
     {
-        return response()->file(public_path() . "\storage\license.pdf");
+        return response()->file(public_path() . "\storage\license.pdf")->setPrivate();
     }
 }

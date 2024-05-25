@@ -44,6 +44,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('moderationIndex', ['unchecked' => true]) }}">Модерация</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contentIndex') }}">Контент</a>
+                        </li>
                     </ul>
                     @endif
 

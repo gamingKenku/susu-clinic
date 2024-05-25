@@ -7,7 +7,9 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DiscountsController;
+use App\Http\Controllers\LinksController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StaffController;
@@ -43,8 +45,8 @@ Route::resources([
     'admin/resources/staff' => StaffController::class,
     'admin/resources/positions' => PositionController::class,
     'admin/resources/working-hours' => WorkingHoursController::class,
-    // 'admin/resources/vacancies' => VacancyController::class,
     'admin/resources/users' => UserController::class,
+    'admin/content/links' => LinksController::class
 ]);
 
 // Route::get('admin/resources/working-hours', [WorkingHoursController::class, 'index'])->name('working_hours.index');
@@ -80,6 +82,14 @@ Route::get('/admin/resources', [AdminController::class, 'resources'])->name('res
 Route::get('/admin/moderation', [AdminController::class, 'moderationIndex'])->name('moderationIndex');
 Route::get('/admin/moderation/{feedback}', [AdminController::class, 'moderationEdit'])->name('moderationEdit');
 Route::put('/admin/moderation/{feedback}', [AdminController::class, 'moderationUpdate'])->name('moderationUpdate');
+
+Route::get('/admin/content', [ContentController::class, 'index'])->name('contentIndex');
+Route::get('/admin/content/about', [ContentController::class, 'aboutEdit'])->name('aboutEdit');
+Route::put('/admin/content/about', [ContentController::class, 'aboutUpdate'])->name('aboutUpdate');
+Route::get('/admin/content/contancts', [ContentController::class, 'contactsEdit'])->name('contactsEdit');
+Route::put('/admin/content/contacts', [ContentController::class, 'contactsUpdate'])->name('contactsUpdate');
+Route::get('/admin/content/license', [ContentController::class, 'licenseEdit'])->name('licenseEdit');
+Route::put('/admin/content/license', [ContentController::class, 'licenseUpdate'])->name('licenseUpdate');
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [LoginController::class, 'login'])->name('login');

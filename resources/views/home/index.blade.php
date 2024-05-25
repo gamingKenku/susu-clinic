@@ -61,7 +61,7 @@
         </div>
         <div class="row justify-content-center">
             @foreach ($categories_chunks as $categories_chunk)
-                <div class="col-md d-flex mb-3 mb-md-0">
+                <div class="col-lg d-flex mb-3 mb-lg-0">
                     <div class="card flex-fill d-flex flex-column">
                         <h5 class="card-header">Категории услуг</h5>
                         <div class="card-body">
@@ -74,8 +74,8 @@
                     </div>
                 </div>
             @endforeach
-            <div class="col-md-1"></div>
-            <div class="col-md-2 d-flex">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2 d-flex">
                 <a class="btn btn-primary align-self-center" href="{{ route('servicesIndex') }}">Открыть все услуги</a>
             </div>
         </div>

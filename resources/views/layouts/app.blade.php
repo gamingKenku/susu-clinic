@@ -26,6 +26,7 @@
 <body>
     @php
         use App\Models\Clinic;
+        use App\Models\Link;
     @endphp
 
     <div id="app">
@@ -43,7 +44,7 @@
 
                     </div>
                 </nav>
-                <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom border-primary">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-primary">
                     <div class="container">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -53,16 +54,32 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <!-- Left Side Of Navbar -->
-                            <div class="navbar-nav me-auto">
-                                <a class="nav-link" href="{{ route('about') }}">О центре</a>
-                                <a class="nav-link" href="{{ route('managementIndex') }}">Руководство</a>
-                                <a class="nav-link" href="{{ route('staffIndex') }}">Специалисты</a>
-                                <a class="nav-link" href="{{ route('servicesIndex') }}">Услуги</a>
-                                <a class="nav-link" href="{{ route('contactsIndex') }}">Контакты</a>
-                                <a class="nav-link" href="{{ route('feedbackIndex') }}">Отзывы</a>
-                                <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
-                                <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
-                                <a class="nav-link" href="{{ route('vacanciesIndex') }}">Вакансии</a>
+                            <div class="navbar-nav me-auto bg-primary rounded">
+
+                                {{-- <div>
+                                    <a class="nav-link" href="{{ route('about') }}">О центре</a>
+                                    <a class="nav-link" href="{{ route('managementIndex') }}">Руководство</a>
+                                    <a class="nav-link" href="{{ route('staffIndex') }}">Специалисты</a>
+                                    <a class="nav-link" href="{{ route('servicesIndex') }}">Услуги</a>
+                                    <a class="nav-link" href="{{ route('contactsIndex') }}">Контакты</a>
+                                    <a class="nav-link" href="{{ route('feedbackIndex') }}">Отзывы</a>
+                                    <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
+                                    <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
+                                    <a class="nav-link" href="{{ route('vacanciesIndex') }}">Вакансии</a>
+                                </div> --}}
+
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="{{ route('about') }}">О центре</a>
+                                    <a class="btn btn-primary" href="{{ route('managementIndex') }}">Руководство</a>
+                                    <a class="btn btn-primary" href="{{ route('staffIndex') }}">Специалисты</a>
+                                    <a class="btn btn-primary" href="{{ route('servicesIndex') }}">Услуги</a>
+                                    <a class="btn btn-primary" href="{{ route('contactsIndex') }}">Контакты</a>
+                                    <a class="btn btn-primary" href="{{ route('feedbackIndex') }}">Отзывы</a>
+                                    <a class="btn btn-primary" href="{{ route('workingHoursIndex') }}">Расписание</a>
+                                    <a class="btn btn-primary" href="{{ route('discountsIndex') }}">Акции</a>
+                                    <a class="btn btn-primary" href="{{ route('vacanciesIndex') }}">Вакансии</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -81,13 +98,16 @@
                             <a href="{{ route('licenseShow') }}">Лицензия</a>
                         </div>
                         <div class="ms-auto d-flex flex-column">
-                            <a href="https://74.rospotrebnadzor.ru">Управление Роспотребнадзора по Челябинской
+                            {{-- <a href="https://74.rospotrebnadzor.ru">Управление Роспотребнадзора по Челябинской
                                 области</a>
                             <a
                                 href="https://pravmin.gov74.ru/prav/ispolnitelnaya-vlast-0/perechen-organov-ispolnitelnoy-vlasti-chelyabinskoy-oblasti/minzdrav.htm">Министерство
                                 здравоохранения Челябинской области</a>
                             <a href="http://www.roszdravnadzor.ru">Росздравнадзор</a>
-                            <a href="https://epp.genproc.gov.ru/web/proc_74">Прокуратура Челябинской области</a>
+                            <a href="https://epp.genproc.gov.ru/web/proc_74">Прокуратура Челябинской области</a> --}}
+                            @foreach (Link::all() as $link)
+                                <a href="{{ $link->link }}">{{ $link->title }}</a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

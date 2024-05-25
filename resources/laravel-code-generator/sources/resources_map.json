@@ -43,5 +43,10 @@
         "model-name": "WorkingHours",
         "resource-file": "working_hours.json",
         "table-name": "working_hours"
+    },
+    {
+        "model-name": "Link",
+        "resource-file": "links.json",
+        "table-name": "links"
     }
 ]
