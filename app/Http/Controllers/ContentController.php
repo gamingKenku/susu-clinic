@@ -79,19 +79,4 @@ class ContentController extends Controller
 
         return redirect(route('contentIndex'));
     }
-
-    public function linksIndex()
-    {
-        
-    }
-
-    public function linksEdit()
-    {
-
-    }
-
-    public function linksUpdate()
-    {
-
-    }
 }

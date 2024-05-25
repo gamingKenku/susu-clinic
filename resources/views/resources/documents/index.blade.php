@@ -23,7 +23,7 @@
         
         @if(count($documents) == 0)
             <div class="card-body text-center">
-                <h4>No Documents Available.</h4>
+                <h4>Документы пока не созданы</h4>
 
                 @include('resources.filter')
 
@@ -35,11 +35,10 @@
             
             <div class="table-responsive">
 
-                <table class="table table-striped ">
+                <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Document Path</th>
-                            <th>Name</th>
+                            <th>Название</th>
 
                             <th></th>
                         </tr>
@@ -47,7 +46,6 @@
                     <tbody>
                     @foreach($documents as $document)
                         <tr>
-                            <td class="align-middle">{{ $document->document_path }}</td>
                             <td class="align-middle">{{ $document->name }}</td>
 
                             <td class="text-end">

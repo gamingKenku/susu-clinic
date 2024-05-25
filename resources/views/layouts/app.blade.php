@@ -54,9 +54,9 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <!-- Left Side Of Navbar -->
-                            <div class="navbar-nav me-auto bg-primary rounded">
+                            <div class="navbar-nav me-auto mt-3 mt-lg-0 rounded">
 
-                                {{-- <div>
+                                <div class="d-lg-none">
                                     <a class="nav-link" href="{{ route('about') }}">О центре</a>
                                     <a class="nav-link" href="{{ route('managementIndex') }}">Руководство</a>
                                     <a class="nav-link" href="{{ route('staffIndex') }}">Специалисты</a>
@@ -66,9 +66,10 @@
                                     <a class="nav-link" href="{{ route('workingHoursIndex') }}">Расписание</a>
                                     <a class="nav-link" href="{{ route('discountsIndex') }}">Акции</a>
                                     <a class="nav-link" href="{{ route('vacanciesIndex') }}">Вакансии</a>
-                                </div> --}}
+                                    <a class="nav-link" href="{{ route('documentsIndex') }}">Документы</a>
+                                </div>
 
-                                <div class="btn-group">
+                                <div class="d-none d-lg-flex btn-group">
                                     <a class="btn btn-primary" href="{{ route('about') }}">О центре</a>
                                     <a class="btn btn-primary" href="{{ route('managementIndex') }}">Руководство</a>
                                     <a class="btn btn-primary" href="{{ route('staffIndex') }}">Специалисты</a>
@@ -78,6 +79,7 @@
                                     <a class="btn btn-primary" href="{{ route('workingHoursIndex') }}">Расписание</a>
                                     <a class="btn btn-primary" href="{{ route('discountsIndex') }}">Акции</a>
                                     <a class="btn btn-primary" href="{{ route('vacanciesIndex') }}">Вакансии</a>
+                                    <a class="btn btn-primary" href="{{ route('documentsIndex') }}">Документы</a>
                                 </div>
 
                             </div>

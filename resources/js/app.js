@@ -120,7 +120,8 @@ $(document).ready(function () {
         $("#resource-file").prop('disabled', true).prop('hidden', true);
         $("#photo_path").prop('disabled', false).prop('hidden', false);
         $("#picture_path").prop('disabled', false).prop('hidden', false);
-        $("#keep_file").prop('selected', false);
+        $("#document_path").prop('disabled', false).prop('hidden', false);
+        $("#keep_file").prop('checked', false);
         $(this).prop('disabled', true).prop('hidden', true);
     });
 

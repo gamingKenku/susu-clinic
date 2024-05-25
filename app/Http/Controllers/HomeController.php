@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Clinic;
 use App\Models\Discount;
+use App\Models\Document;
 use App\Models\Event;
 use App\Models\Feedback;
 use App\Models\Staff;
@@ -245,5 +246,18 @@ class HomeController extends Controller
     public function licenseShow(Request $request)
     {
         return response()->file(public_path() . "\storage\license.pdf")->setPrivate();
+    }
+
+    public function documentsIndex(Request $request)
+    {
+        return view('home.documents.index', [
+            'documents' => Document::orderBy('name')->paginate(15),
+        ]);
+    }
+
+    public function documentsShow($id)
+    {
+        $path = Document::findOrFail($id)->document_path;
+        return response()->file(public_path() . "\storage\\" . $path);
     }
 }

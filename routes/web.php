@@ -75,6 +75,8 @@ Route::get('/home/discounts/{id}', [HomeController::class, 'discountsShow'])->na
 Route::get('/home/vacancies', [HomeController::class, 'vacanciesIndex'])->name('vacanciesIndex');
 Route::get('/home/vacancies/{id}', [HomeController::class, 'vacanciesShow'])->name('vacanciesShow');
 Route::get('/home/license', [HomeController::class, 'licenseShow'])->name('licenseShow');
+Route::get('/home/documents', [HomeController::class, 'documentsIndex'])->name('documentsIndex');
+Route::get('/home/documents/{id}', [HomeController::class, 'documentsShow'])->name('documentsShow');
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('/admin/resources', [AdminController::class, 'resources'])->name('resources');
