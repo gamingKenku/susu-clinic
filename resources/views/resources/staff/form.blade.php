@@ -101,7 +101,7 @@
             <img name="resource-file" id="resource-file" src="{{ asset("storage/" . $staff->photo_path) }}" alt="{{ $staff->photo_path }}" class="mt-3">
         @endif
         <button type="button" {{ optional($staff)->photo_path ? '' : 'disabled hidden' }} name="change-file-btn" id="change-file-btn" class="btn btn-primary mt-3 mb-3">Сбросить фотографию</button>
-        <input class="form-check-input" name="keep_file" type="checkbox" id="keep_file" value="1" minlength="1" required="true" readonly hidden checked>
+        <input class="form-check-input" name="keep_file" type="checkbox" id="keep_file" value="1" minlength="1" required="true" readonly hidden {{ optional($staff)->photo_path ? 'checked' : '' }}>
     </div>
 </div>
 

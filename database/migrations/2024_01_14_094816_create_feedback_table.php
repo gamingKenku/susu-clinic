@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('mail');
             $table->boolean('moderated');
             $table->boolean('blocked');
+            $table->boolean('confirmed');
+            $table->string('confirmation_token');
             $table->timestamps();
         });
     }

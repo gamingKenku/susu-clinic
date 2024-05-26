@@ -44,10 +44,10 @@ class AdminController extends Controller
     public function moderationIndex(Request $request)
     {
         if (!$request->boolean('unchecked')) {
-            $feedback = Feedback::paginate(15);
+            $feedback = Feedback::where('confirmed', '=', true)->paginate(15);
         }
         else {
-            $feedback = Feedback::query()->where('moderated', '=', false)->paginate(15);
+            $feedback = Feedback::query()->where('confirmed', '=', true)->where('moderated', '=', false)->paginate(15);
         }
 
         return view('admin.moderation.index', [

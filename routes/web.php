@@ -68,6 +68,7 @@ Route::get('/home/services/{id}', [HomeController::class, 'servicesShow'])->name
 Route::get('/home/contacts', [HomeController::class, 'contactsIndex'])->name('contactsIndex');
 Route::get('/home/feedback', [HomeController::class, 'feedbackIndex'])->name('feedbackIndex');
 Route::get('/home/feedback/create', [HomeController::class, 'feedbackCreate'])->name('feedbackCreate');
+Route::get('/home/feedback/confirmation/{id}/{confirmation_token}', [HomeController::class, 'feedbackConfirm'])->name('feedbackConfirm');
 Route::post('/home/feedback', [HomeController::class, 'feedbackStore'])->name('feedbackStore');
 Route::get('/home/schedule', [HomeController::class, 'workingHoursIndex'])->name('workingHoursIndex');
 Route::get('/home/discounts', [HomeController::class, 'discountsIndex'])->name('discountsIndex');
@@ -88,7 +89,7 @@ Route::put('/admin/moderation/{feedback}', [AdminController::class, 'moderationU
 Route::get('/admin/content', [ContentController::class, 'index'])->name('contentIndex');
 Route::get('/admin/content/about', [ContentController::class, 'aboutEdit'])->name('aboutEdit');
 Route::put('/admin/content/about', [ContentController::class, 'aboutUpdate'])->name('aboutUpdate');
-Route::get('/admin/content/contancts', [ContentController::class, 'contactsEdit'])->name('contactsEdit');
+Route::get('/admin/content/contacts', [ContentController::class, 'contactsEdit'])->name('contactsEdit');
 Route::put('/admin/content/contacts', [ContentController::class, 'contactsUpdate'])->name('contactsUpdate');
 Route::get('/admin/content/license', [ContentController::class, 'licenseEdit'])->name('licenseEdit');
 Route::put('/admin/content/license', [ContentController::class, 'licenseUpdate'])->name('licenseUpdate');

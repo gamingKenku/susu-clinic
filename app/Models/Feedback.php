@@ -16,6 +16,8 @@ class Feedback extends Model
         'mail',
         'moderated',
         'blocked',
+        'confirmed',
+        'confirmation_token'
     ];
 
     protected $table = 'feedback';

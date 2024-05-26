@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Feedback>
@@ -23,6 +24,8 @@ class FeedbackFactory extends Factory
             'mail' => fake()->safeEmail(),
             'moderated' => false,
             'blocked' => false,
+            'confirmed' => true,
+            'confirmation_token' => Str::random(32),
         ];
     }
 }

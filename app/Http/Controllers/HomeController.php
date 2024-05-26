@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FeedbackConfirmation;
+use App\Mail\UncheckedFeedbacNotification;
 use App\Models\Category;
 use App\Models\Clinic;
 use App\Models\Discount;
@@ -11,10 +13,12 @@ use App\Models\Feedback;
 use App\Models\Staff;
 use App\Models\Position;
 use App\Models\Service;
-use App\Models\WorkingHours;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -119,16 +123,45 @@ class HomeController extends Controller
             'mail' => ['required', 'max:255', 'email'],
         ]);
 
-        Feedback::create([
+        $confirmation_token = Str::random(32);
+
+        $feedback = Feedback::create([
             'content' => $validated_data['content'],
             'author' => $validated_data['author'],
             'rating' => $validated_data['rating'],
             'mail' => $validated_data['mail'],
             'moderated' => false,
             'blocked' => false,
+            'confirmed' => false,
+            'confirmation_token' => $confirmation_token
         ]);
 
+        Mail::to($validated_data['mail'])->send(new FeedbackConfirmation($feedback));
+
+        session()->flash('success_message', 'Ваш отзыв был отправлен! На указанный вами адрес электронной почты было отправлено письмо для подтвердения.');
+
         return redirect(route('feedbackIndex'));
+    }
+
+    public function feedbackConfirm(Request $request, string $id, string $confirmation_token)
+    {  
+        $feedback = Feedback::findOrFail($id);
+
+        if ($feedback->confirmation_token == $confirmation_token)
+        {
+            $feedback->confirmed = true;
+            $feedback->save();
+
+            Mail::to(Config::get('feedback.emails_to_notify'))->send(new UncheckedFeedbacNotification($feedback));
+            
+            session()->flash('success_message', 'Ваш отзыв успешно подтвержден! Он будет опубликован после прохождения модерации.');
+
+            return redirect(route('feedbackIndex'));
+        }
+        else 
+        {
+            return redirect(route('feedbackIndex'));
+        }
     }
 
     public function servicesIndex(Request $request)

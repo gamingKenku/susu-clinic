@@ -10,6 +10,13 @@
 
 @section('content')
     <div class="container">
+        @if (Session::has('success_message'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                {!! session('success_message') !!}
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+            </div>
+        @endif
         <h3 class="mb-3">Отзывы</h3>
         <div class="row justify-content-center mb-3">
             <div class="col-md d-flex flex-md-row flex-column">
