@@ -123,6 +123,17 @@ class HomeController extends Controller
             'mail' => ['required', 'max:255', 'email'],
         ]);
 
+        if (Feedback::query()
+            ->where('mail', '=', $validated_data['mail'])
+            ->where('moderated', '=', false)
+            ->where('blocked', '=', false)
+            ->exists())
+        {
+            return redirect(route('feedbackCreate'))->withErrors([
+                'general_errors' => ['Похоже что вы уже отправили отзыв, и он пока не прошёл модерацию! Это может занять некоторое время, Вы сможете отправлять новые отзывы сразу после этого.'],
+            ])->withInput($request->all());
+        }
+
         $confirmation_token = Str::random(32);
 
         $feedback = Feedback::create([
