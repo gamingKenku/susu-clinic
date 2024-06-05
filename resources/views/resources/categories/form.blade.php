@@ -13,8 +13,8 @@
     <div class="col-lg-10 col-xl-9">
         <select class="selectpicker form-select{{ $errors->has('clinic_id') ? ' is-invalid' : '' }}" id="clinic_id" name="clinic_id" required="true">
         	    <option value="" style="display: none;" {{ old('clinic_id', optional($categories)->clinic_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите клинику</option>
-        	@foreach ($clinics as $key => $clinic)
-			    <option value="{{ $key }}" {{ old('clinic_id', optional($categories)->clinic_id) == $key ? 'selected' : '' }}>
+        	@foreach ($clinics as $clinic)
+			    <option value="{{ $clinic->id }}" {{ old('clinic_id', optional($categories)->clinic_id) == $clinic->id ? 'selected' : '' }}>
 			    	{{ $clinic->name }}
 			    </option>
 			@endforeach

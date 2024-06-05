@@ -71,7 +71,10 @@ class ServiceController extends Controller
             'category_id' => $validated_data['category_id'],
         ]);
 
-        $service->discounts()->attach($validated_data['discounts']);
+        if (array_key_exists('discounts', $validated_data))
+        {
+            $service->discounts()->attach($validated_data['discounts']);
+        }
 
         $service->save();
 
@@ -116,7 +119,10 @@ class ServiceController extends Controller
         $service->name = $validated_data['name'];
         $service->price = $validated_data['price'];
         $service->category()->associate(Category::query()->findOrFail($validated_data['category_id']));
-        $service->discounts()->sync($validated_data['discounts']);
+        if (array_key_exists('discounts', $validated_data))
+        {
+            $service->discounts()->sync($validated_data['discounts']);
+        }
         
         $service->save();
 

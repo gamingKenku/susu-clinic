@@ -53,7 +53,6 @@
                         </button>
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <!-- Left Side Of Navbar -->
                             <div class="navbar-nav me-auto mt-3 mt-lg-0 rounded">
 
                                 <div class="d-lg-none">

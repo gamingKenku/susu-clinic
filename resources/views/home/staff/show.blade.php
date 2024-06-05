@@ -19,7 +19,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4 mb-3 mb-md-0">
-                                    <img class="w-100 mb-1" src="{{ $staff->photo_path ? asset('storage/' . $staff_member->photo_path) : asset('storage/staff_photos/staff_default.jpg') }}">
+                                    <img class="w-100 mb-1" src="{{ $staff->photo_path ? asset('storage/' . $staff->photo_path) : asset('storage/staff_photos/staff_default.jpg') }}">
                                     <h5 class="text-center">{{ $staff->last_name }} {{ $staff->first_name }} {{ $staff->patronym }}, {{ __($staff->staff_type) }}</h5>
                                 </div>
                                 <div class="col-md">
