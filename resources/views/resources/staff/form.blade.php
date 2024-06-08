@@ -24,18 +24,6 @@
 </div>
 
 <div class="mb-3 row">
-    <label for="specialities" class="col-form-label text-lg-end col-lg-2 col-xl-3">Специализации</label>
-    <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="specialities" type="hidden" id="specialities" value="{{ old('specialities', optional($staff)->specialities) }}">
-        <div class="editor-container">
-            <div class="quill-editor {{ $errors->has('specialities') ? ' is-invalid' : '' }}"></div>
-        </div>           
-        {!! $errors->first('specialities', '<div class="invalid-feedback">:message</div>') !!}
-    </div>
-</div>
-
-
-<div class="mb-3 row">
     <label for="experience" class="col-form-label text-lg-end col-lg-2 col-xl-3">Стаж работы</label>
     <div class="col-lg-10 col-xl-9">
         <input class="form-control{{ $errors->has('experience') ? ' is-invalid' : '' }}" name="experience" type="date" id="experience" value="{{ old('experience', optional($staff)->experience) }}" required="true" placeholder="Введите стаж работы сотрудника...">
@@ -67,16 +55,16 @@
         <select multiple class="selectpicker form-control {{ $errors->has('positions') ? ' is-invalid' : '' }}" id="positions"
             name="positions[]" required="true">
             {{-- <option value="" style="display: none;" {{ old('category_id', optional($position)->category_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите категорию...</option> --}}
-            @if ($staff != null)
-                @foreach ($positions as $key => $position)
-                    <option value="{{ $position->id }}" {{ in_array($position->id, $staff->positions->pluck('id')->toArray()) ? 'selected' : '' }}>
-                        {{ $position->name }}
-                    </option>
-                @endforeach
-            @elseif (old('positions') != null)
+            @if (old('positions') != null)
                 @foreach ($positions as $key => $position)
                     <option value="{{ $position->id }}" {{ in_array($position->id, old('positions')) ? 'selected' : '' }}>
                         {{ $position->name }} 
+                    </option>
+                @endforeach
+            @elseif ($staff != null)
+                @foreach ($positions as $key => $position)
+                    <option value="{{ $position->id }}" {{ in_array($position->id, $staff->positions->pluck('id')->toArray()) ? 'selected' : '' }}>
+                        {{ $position->name }}
                     </option>
                 @endforeach
             @else
@@ -98,13 +86,23 @@
         <input {{ optional($staff)->photo_path ? 'disabled hidden' : '' }} class="form-control {{ $errors->has('photo_path') ? ' is-invalid' : '' }}" name="photo_path" type="file" id="photo_path" maxlength="255" placeholder="Вставьте фотографию сотрудника...">
         {!! $errors->first('photo_path', '<div class="invalid-feedback">:message</div>') !!}
         @if(optional($staff)->photo_path)
-            <img name="resource-file" id="resource-file" src="{{ asset("storage/" . $staff->photo_path) }}" alt="{{ $staff->photo_path }}" class="mt-3">
+            <img height="200" width="300" name="resource-file" id="resource-file" src="{{ asset("storage/" . $staff->photo_path) }}" alt="{{ $staff->photo_path }}" class="mt-3">
         @endif
         <button type="button" {{ optional($staff)->photo_path ? '' : 'disabled hidden' }} name="change-file-btn" id="change-file-btn" class="btn btn-primary mt-3 mb-3">Сбросить фотографию</button>
         <input class="form-check-input" name="keep_file" type="checkbox" id="keep_file" value="1" minlength="1" required="true" readonly hidden {{ optional($staff)->photo_path ? 'checked' : '' }}>
     </div>
 </div>
 
+<div class="mb-3 row">
+    <label for="specialities" class="col-form-label text-lg-end col-lg-2 col-xl-3">Специализации</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="quill-content" name="specialities" type="hidden" id="specialities" value="{{ old('specialities', optional($staff)->specialities) }}">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('specialities') ? ' is-invalid' : '' }}"></div>
+        </div>           
+        {!! $errors->first('specialities', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
 
 {{-- @if($staff)
     <div class="mb-3 row">

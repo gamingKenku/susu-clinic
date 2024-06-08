@@ -34,7 +34,7 @@ class ServiceController extends Controller
             ]);
         }
 
-        $services = $services->orderBy('category_id')->paginate(25);
+        $services = $services->orderBy('category_id')->orderBy('name')->paginate(25);
 
         return view('resources.services.index', [
             'services' => $services

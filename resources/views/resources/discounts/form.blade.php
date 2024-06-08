@@ -8,31 +8,20 @@
 </div>
 
 <div class="mb-3 row">
-    <label for="markup" class="col-form-label text-lg-end col-lg-2 col-xl-3">Содержание</label>
-    <div class="col-lg-10 col-xl-9">
-        <input class="quill-content" name="markup" type="hidden" id="markup" value="{{ old('markup', optional($discount)->markup) }}">
-        <div class="editor-container">
-            <div class="quill-editor {{ $errors->has('markup') ? ' is-invalid' : '' }}"></div>
-        </div>
-        {!! $errors->first('markup', '<div class="invalid-feedback">:message</div>') !!}
-    </div>
-</div>
-
-<div class="mb-3 row">
     <label for="services" class="col-form-label text-lg-end col-lg-2 col-xl-3">Действует на услуги</label>
     <div class="col-lg-10 col-xl-9">
         <select multiple class="selectpicker form-select{{ $errors->has('services') ? ' is-invalid' : '' }}" id="services"
             name="services[]" required="true">
             {{-- <option value="" style="display: none;" {{ old('category_id', optional($service)->category_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите категорию...</option> --}}
-            @if ($discount != null)
+            @if (old('services') != null)
                 @foreach ($services as $key => $service)
-                    <option value="{{ $service->id }}" {{ in_array($service->id, $discount->services->pluck('id')->toArray()) ? 'selected' : '' }}>
+                    <option value="{{ $service->id }}" {{ in_array($service->id, old('services')) ? 'selected' : '' }}>
                         {{ $service->name }} ({{ $service->category->name }})
                     </option>
                 @endforeach
-            @elseif (old('services') != null)
+            @elseif ($discount != null)
                 @foreach ($services as $key => $service)
-                    <option value="{{ $service->id }}" {{ in_array($service->id, old('services')) ? 'selected' : '' }}>
+                    <option value="{{ $service->id }}" {{ in_array($service->id, $discount->services->pluck('id')->toArray()) ? 'selected' : '' }}>
                         {{ $service->name }} ({{ $service->category->name }})
                     </option>
                 @endforeach
@@ -46,6 +35,17 @@
         </select>
 
         {!! $errors->first('discounts', '<div class="invalid-feedback">:message</div>') !!}
+    </div>
+</div>
+
+<div class="mb-3 row">
+    <label for="markup" class="col-form-label text-lg-end col-lg-2 col-xl-3">Содержание</label>
+    <div class="col-lg-10 col-xl-9">
+        <input class="quill-content" name="markup" type="hidden" id="markup" value="{{ old('markup', optional($discount)->markup) }}">
+        <div class="editor-container">
+            <div class="quill-editor {{ $errors->has('markup') ? ' is-invalid' : '' }}"></div>
+        </div>
+        {!! $errors->first('markup', '<div class="invalid-feedback">:message</div>') !!}
     </div>
 </div>
 

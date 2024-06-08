@@ -25,13 +25,13 @@
             <div class="card-body text-center">
                 <h4>Документы пока не созданы</h4>
 
-                @include('resources.filter')
+                {{-- @include('resources.filter') --}}
 
             </div>
         @else
         <div class="card-body p-0">
             
-            @include('resources.filter')
+            {{-- @include('resources.filter') --}}
             
             <div class="table-responsive">
 

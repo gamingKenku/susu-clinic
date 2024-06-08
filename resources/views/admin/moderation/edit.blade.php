@@ -38,7 +38,7 @@
                 <input name="blocked" id="blocked" type="hidden" value="1">
                 <input name="moderated" id="moderated" type="hidden" value="0">
                 <input name="deleted" id="deleted" type="hidden" value="1">
-                <button class="btn btn-danger" type="submit">Заблокировать и удалить</button>
+                <button class="btn btn-danger" type="submit">Удалить</button>
             </form>
 
             <form class="d-inline" method="post" action="{{ route('moderationUpdate', $feedback->id) }}">

@@ -54,7 +54,7 @@
                     <tbody>
                     @foreach($staff as $staff_member)
                         <tr>
-                            <td class="align-middle">{{ $staff_member->first_name }} {{ $staff_member->last_name }} {{ $staff_member->patronym }}</td>
+                            <td class="align-middle">{{ $staff_member->last_name }} {{ $staff_member->first_name }} {{ $staff_member->patronym }}</td>
                             <td class="align-middle">{{ __(ucfirst($staff_member->staff_type)) }}</td>
                             @if ($staff_member->workingHours()->exists())
                                 @for($i = 0; $i <= 6; $i++)

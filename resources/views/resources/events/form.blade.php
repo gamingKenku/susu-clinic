@@ -32,7 +32,7 @@
         <input {{ optional($event)->picture_path ? 'disabled hidden' : '' }} class="form-control{{ $errors->has('picture_path') ? ' is-invalid' : '' }}" name="picture_path" type="file" id="picture_path" maxlength="255" placeholder="Вставьте картинку...">
         {!! $errors->first('picture_path', '<div class="invalid-feedback">:message</div>') !!}
         @if(optional($event)->picture_path)
-            <img name="resource-file" id="resource-file" src="{{ asset("storage/" . $event->picture_path) }}" alt="{{ $event->picture_path }}" class="mt-3">
+            <img style="height: 200px; width: 300px" name="resource-file" id="resource-file" src="{{ asset("storage/" . $event->picture_path) }}" alt="{{ $event->picture_path }}" class="mt-3">
         @endif
         <button type="button" {{ optional($event)->picture_path ? '' : 'disabled hidden' }} name="change-file-btn" id="change-file-btn" class="btn btn-primary mt-3 mb-3">Сбросить картинку</button>
         <input class="form-check-input" name="keep_file" type="checkbox" id="keep_file" value="1" minlength="1" required="true" readonly hidden {{ optional($event)->picture_path ? 'checked' : '' }}>

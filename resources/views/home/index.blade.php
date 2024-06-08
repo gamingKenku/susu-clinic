@@ -18,7 +18,7 @@
                                             src="{{ $event->picture_path ? asset('storage/' . $event->picture_path) : asset('storage/event_pictures/event_default.jpg') }}"
                                             class="d-block w-100"></a>
                                     <div class="carousel-caption">
-                                        <h5 style="text-shadow: 2px 2px 4px #000000;">{{ $event->header }}</h5>
+                                        <h3 style="text-shadow: 2px 2px 4px #000000;">{{ $event->header }}</h3>
                                     </div>
                                 </div>
                             @endforeach

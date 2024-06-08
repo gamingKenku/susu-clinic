@@ -71,15 +71,15 @@
         <select multiple class="selectpicker form-control {{ $errors->has('staff') ? ' is-invalid' : '' }}" id="staff"
             name="staff[]" required="true">
             {{-- <option value="" style="display: none;" {{ old('category_id', optional($staff)->category_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите категорию...</option> --}}
-            @if ($position != null)
+            @if (old('staff') != null)
                 @foreach ($staff as $key => $staffMember)
-                    <option value="{{ $staffMember->id }}" {{ in_array($staffMember->id, $position->staff->pluck('id')->toArray()) ? 'selected' : '' }}>
+                    <option value="{{ $staffMember->id }}" {{ in_array($staffMember->id, old('staff')) ? 'selected' : '' }}>
                         {{ $staffMember->first_name }} {{ $staffMember->last_name }} {{ $staffMember->patronym }}
                     </option>
                 @endforeach
-            @elseif (old('staff') != null)
+            @elseif ($position != null)
                 @foreach ($staff as $key => $staffMember)
-                    <option value="{{ $staffMember->id }}" {{ in_array($staffMember->id, old('staff')) ? 'selected' : '' }}>
+                    <option value="{{ $staffMember->id }}" {{ in_array($staffMember->id, $position->staff->pluck('id')->toArray()) ? 'selected' : '' }}>
                         {{ $staffMember->first_name }} {{ $staffMember->last_name }} {{ $staffMember->patronym }}
                     </option>
                 @endforeach

@@ -14,7 +14,7 @@
                         <div class="container-fluid">
                             <div class="row justify-content-center align-items-start">
                                 <div class="col-4 col-lg-2">
-                                    <img class="w-100" src="{{ asset('storage/staff_photos/head_physician.jpg') }}"
+                                    <img class="w-100" src="{{ asset('storage/staff_photos/head_physician.png') }}"
                                         alt="">
                                 </div>
                                 <div class="col">

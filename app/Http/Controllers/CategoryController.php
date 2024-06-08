@@ -28,7 +28,7 @@ class CategoryController extends Controller
             ]);
         }
         
-        $categories = $categories->orderBy('clinic_id')->paginate(25);
+        $categories = $categories->orderBy('clinic_id')->orderBy('name')->paginate(25);
 
         return view('resources.categories.index', ['categoriesObjects' => $categories]);
     }

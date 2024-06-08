@@ -91,8 +91,6 @@ class EventController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // dd($request->all());
-
         $validated_data = $request->validate([
             'header' => ['required', 'max:255'],
             'content' => ['required', 'max:16777215'],

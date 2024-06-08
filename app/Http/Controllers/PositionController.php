@@ -63,7 +63,7 @@ class PositionController extends Controller
             'responsibilities' => ['required', 'max:16777215'],
             'requirements' => ['required', 'max:16777215'],
             'conditions' => ['required', 'max:16777215'],
-            'has_vacancy' => ['boolean'],
+            'has_vacancy' => ['boolean', 'nullable'],
             'staff' => ['array'], 
             'staff.*' => ['exists:staff,id'],
         ]);
@@ -80,7 +80,7 @@ class PositionController extends Controller
             $position->has_vacansy = $validated_data['has_vacansy'];
         }
 
-        $position->staff()->attach($validated_data['staff']);
+        $position->staff()->attach($validated_data['staff'] ?? []);
 
         $position->save();
 
@@ -123,7 +123,7 @@ class PositionController extends Controller
             'responsibilities' => ['required', 'max:16777215'],
             'requirements' => ['required', 'max:16777215'],
             'conditions' => ['required', 'max:16777215'],
-            'has_vacancy' => ['required', 'boolean'],
+            'has_vacancy' => ['boolean', 'nullable'],
             'staff' => ['array'], 
             'staff.*' => ['exists:staff,id'],
         ]);
@@ -134,9 +134,15 @@ class PositionController extends Controller
         $position->responsibilities = $validated_data['responsibilities'];
         $position->requirements = $validated_data['requirements'];
         $position->conditions = $validated_data['conditions'];
-        $position->has_vacancy = $validated_data['has_vacancy'];
 
-        $position->staff()->sync($validated_data['staff']);
+        if (array_key_exists('has_vacancy', $validated_data)) {
+            $position->has_vacancy = $validated_data['has_vacancy'];
+        }
+        else {
+            $position->has_vacancy = false;
+        }
+
+        $position->staff()->sync($validated_data['staff'] ?? []);
         
         $position->save();
 

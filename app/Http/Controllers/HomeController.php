@@ -149,7 +149,7 @@ class HomeController extends Controller
 
         Mail::to($validated_data['mail'])->send(new FeedbackConfirmation($feedback));
 
-        session()->flash('success_message', 'Ваш отзыв был отправлен! На указанный вами адрес электронной почты было отправлено письмо для подтвердения.');
+        session()->flash('success_message', 'Ваш отзыв был отправлен! На указанный Вами адрес электронной почты было отправлено письмо для подтверждения.');
 
         return redirect(route('feedbackIndex'));
     }
@@ -263,25 +263,28 @@ class HomeController extends Controller
 
     public function workingHoursIndex(Request $request)
     {
-        $staff = Staff::query()
-            ->whereIn('staff_type', ['doctor', 'administrator'])
-            ->orderBy('last_name')
-            ->orderBy('first_name')
-            ->orderBy('patronym');
+        $staff = Staff::query();
 
         if ($request->has('filter')) 
         {
-            $filter = strtolower($request->input('filter'));
+            $filter = mb_strtolower($request->input('filter'));
 
             $staff = $this->filterColumns($staff, $filter, [
                 'first_name',
                 'last_name',
                 'patronym',
             ]);
+
         }
-
-        $staff = $staff->paginate(15);
-
+        
+        $staff = $staff
+            ->whereIn('staff_type', ['doctor', 'administrator'])
+            ->orderBy('staff_type')
+            ->orderBy('last_name')
+            ->orderBy('first_name')
+            ->orderBy('patronym')
+            ->paginate(25);
+        
         return view('home.working_hours', [
             'staff' => $staff, 
         ]);

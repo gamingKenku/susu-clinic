@@ -44,15 +44,15 @@
         <select multiple class="selectpicker form-select{{ $errors->has('discounts') ? ' is-invalid' : '' }}" id="discounts"
             name="discounts[]" required="true">
             {{-- <option value="" style="display: none;" {{ old('category_id', optional($service)->category_id ?: '') == '' ? 'selected' : '' }} disabled selected>Выберите категорию...</option> --}}
-            @if ($service != null)
+            @if (old('discounts') != null)
                 @foreach ($discounts as $key => $discount)
-                    <option value="{{ $discount->id }}" {{ in_array($discount->id, $service->discounts->pluck('id')->toArray()) ? 'selected' : '' }}>
+                    <option value="{{ $discount->id }}" {{ in_array($discount->id, old('discounts')) ? 'selected' : '' }}>
                         {{ "$discount->header ($discount->created_at)" }}
                     </option>
                 @endforeach
-            @elseif (old('discounts') != null)
+            @elseif ($service != null)
                 @foreach ($discounts as $key => $discount)
-                    <option value="{{ $discount->id }}" {{ in_array($discount->id, old('discounts')) ? 'selected' : '' }}>
+                    <option value="{{ $discount->id }}" {{ in_array($discount->id, $service->discounts->pluck('id')->toArray()) ? 'selected' : '' }}>
                         {{ "$discount->header ($discount->created_at)" }}
                     </option>
                 @endforeach

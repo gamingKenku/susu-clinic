@@ -35,6 +35,10 @@ Route::get('/', function () {
     return redirect('/home');
 });
 
+Route::get('/admin', function () {
+    return redirect(route('resources'));
+});
+
 Route::resources([
     'admin/resources/events' => EventController::class,
     'admin/resources/documents' => DocumentController::class,
@@ -79,7 +83,7 @@ Route::get('/home/license', [HomeController::class, 'licenseShow'])->name('licen
 Route::get('/home/documents', [HomeController::class, 'documentsIndex'])->name('documentsIndex');
 Route::get('/home/documents/{id}', [HomeController::class, 'documentsShow'])->name('documentsShow');
 
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('dashboard');
+// Route::get('/admin', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('/admin/resources', [AdminController::class, 'resources'])->name('resources');
 
 Route::get('/admin/moderation', [AdminController::class, 'moderationIndex'])->name('moderationIndex');
