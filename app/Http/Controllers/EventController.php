@@ -26,15 +26,23 @@ class EventController extends Controller
 
         $events = $events->orderBy('created_at', 'desc')->paginate(25);
 
-        return view('resources.events.index', [
-            'events' => $events
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'events' => $events,
+            ]);
+        } else 
+        {
+            return view('resources.events.index', [
+                'events' => $events
+            ]);
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('resources.events.create');
     }
@@ -63,17 +71,36 @@ class EventController extends Controller
 
         $event->save();
 
-        return redirect('/admin/resources/events');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'event' => $event
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/events');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $event = Event::query()->findOrFail($id);
 
-        return view('resources.events.show', ['event' => $event]);
+
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'event' => $event
+            ]);
+        }
+        else
+        {
+            return view('resources.events.show', ['event' => $event]);
+        }
     }
 
     /**
@@ -119,13 +146,23 @@ class EventController extends Controller
 
         $event->save();
 
-        return redirect('/admin/resources/events');
+
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'event' => $event
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/events');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $event = Event::query()->findOrFail($id);
 
@@ -135,6 +172,15 @@ class EventController extends Controller
         
         $event->delete();
 
-        return redirect('/admin/resources/events');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                
+            ], 204);
+        }
+        else
+        {
+            return redirect('/admin/resources/events');
+        }
     }
 }

@@ -46,9 +46,18 @@ class StaffController extends Controller
 
         $staff = $staff->orderBy('staff_type')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym')->paginate(25);
 
-        return view('resources.staff.index', [
-            'staffObjects' => $staff
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'staffObjects' => $staff  
+            ]);
+        }
+        else
+        {
+            return view('resources.staff.index', [
+                'staffObjects' => $staff
+            ]);        
+        }
     }
 
     /**
@@ -102,17 +111,35 @@ class StaffController extends Controller
 
         $staff->save();
 
-        return redirect('/admin/resources/staff');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'staff' => $staff  
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/staff');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        return view('resources.staff.show', [
-            'staff' => Staff::query()->findOrFail($id),
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'staff' => Staff::query()->findOrFail($id),
+            ]);
+        }
+        else
+        {
+            return view('resources.staff.show', [
+                'staff' => Staff::query()->findOrFail($id),
+            ]);        
+        }
     }
 
     /**
@@ -172,13 +199,22 @@ class StaffController extends Controller
 
         $staff->save();
 
-        return redirect('/admin/resources/staff');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'staff' => $staff,
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/staff');  
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $staff = Staff::query()->findOrFail($id);
 
@@ -188,6 +224,13 @@ class StaffController extends Controller
 
         $staff->delete();
         
-        return redirect('/admin/resources/staff');
+        if ($request->wantsJson())
+        {
+            return response()->json([], 2-4);
+        }
+        else
+        {
+            return redirect('/admin/resources/staff');
+        }
     }
 }

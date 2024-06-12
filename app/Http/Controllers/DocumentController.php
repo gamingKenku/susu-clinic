@@ -15,11 +15,20 @@ class DocumentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('resources.documents.index', [
-            'documents' => Document::orderBy('name')->paginate(15),
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'documents' => Document::orderBy('name')->get(),
+            ]);
+        }
+        else
+        {
+            return view('resources.documents.index', [
+                'documents' => Document::orderBy('name')->paginate(15),
+            ]);
+        } 
     }
 
     /**
@@ -52,17 +61,36 @@ class DocumentController extends Controller
 
         $document->save();
 
-        return redirect(route('documents.index'));
+
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'document' => $document,
+            ]);
+        }
+        else
+        {
+            return redirect(route('documents.index'));
+        } 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        return view('resources.documents.show', [
-            'document' => Document::findOrFail($id),
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'document' => Document::findOrFail($id),
+            ]);
+        }
+        else
+        {
+            return view('resources.documents.show', [
+                'document' => Document::findOrFail($id),
+            ]);        
+        } 
     }
 
     /**
@@ -109,16 +137,32 @@ class DocumentController extends Controller
 
         $document->save();
 
-        return redirect(route('documents.index'));
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'document' => $document,
+            ]);
+        }
+        else
+        {
+            return redirect(route('documents.index'));
+        } 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         Document::findOrFail($id)->delete();
 
-        return redirect(route('documents.index'));
+        if ($request->wantsJson())
+        {
+            return response()->json([], 204);
+        }
+        else
+        {
+            return redirect(route('documents.index'));
+        } 
     }
 }

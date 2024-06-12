@@ -30,9 +30,18 @@ class DiscountsController extends Controller
 
         $discounts = $discounts->orderBy('start_date')->paginate(25);
 
-        return view('resources.discounts.index', [
-            'discounts' => $discounts,
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'discounts' => $discounts,
+            ]);
+        }
+        else
+        {
+            return view('resources.discounts.index', [
+                'discounts' => $discounts,
+            ]);
+        }
     }
 
     /**
@@ -70,17 +79,34 @@ class DiscountsController extends Controller
 
         $discount->save();
 
-        return redirect('/admin/resources/discounts');
+
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'discount' => $discount,
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/discounts');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        return view('resources.discounts.show', [
-            'discount' => Discount::query()->findOrFail($id),
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'discount' => Discount::query()->findOrFail($id)
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/discounts');
+        }
     }
 
     /**
@@ -118,16 +144,32 @@ class DiscountsController extends Controller
 
         $discount->save();
 
-        return redirect('/admin/resources/discounts');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'discount' => $discount
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/discounts');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         Discount::query()->findOrFail($id)->delete();
 
-        return redirect('/admin/resources/discounts');
+        if ($request->wantsJson())
+        {
+            return response()->json([], 204);
+        }
+        else
+        {
+            return redirect('/admin/resources/discounts');
+        }
     }
 }

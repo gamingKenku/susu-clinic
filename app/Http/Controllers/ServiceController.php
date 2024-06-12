@@ -36,9 +36,18 @@ class ServiceController extends Controller
 
         $services = $services->orderBy('category_id')->orderBy('name')->paginate(25);
 
-        return view('resources.services.index', [
-            'services' => $services
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'services' => $services
+            ]);
+        }
+        else
+        {
+            return view('resources.services.index', [
+                'services' => $services
+            ]);        
+        }
     }
 
     /**
@@ -78,15 +87,34 @@ class ServiceController extends Controller
 
         $service->save();
 
-        return redirect('/admin/resources/services');
+
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'service' => $service
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/services');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        return view('resources.services.show', ['service' => Service::query()->findOrFail($id)]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'service' => Service::query()->findOrFail($id)
+            ]);
+        }
+        else
+        {
+            return view('resources.services.show', ['service' => Service::query()->findOrFail($id)]);
+        }
     }
 
     /**
@@ -126,16 +154,32 @@ class ServiceController extends Controller
         
         $service->save();
 
-        return redirect('/admin/resources/services');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'service' => $service
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/services');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         Service::query()->findOrFail($id)->delete();
 
-        return redirect('/admin/resources/services');
+        if ($request->wantsJson())
+        {
+            return response()->json([], 204);
+        }
+        else
+        {
+            return redirect('/admin/resources/services');
+        }
     }
 }

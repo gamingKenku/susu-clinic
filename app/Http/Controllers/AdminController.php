@@ -21,7 +21,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function resources()
+    public function resources(Request $request)
     {
         $tables = [
             // 'users',
@@ -36,9 +36,15 @@ class AdminController extends Controller
             'working_hours',
         ];
 
-        return view('admin.resources', [
-            'tables' => $tables,
-        ]);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'tables' => $tables,
+            ]);
+        } else {
+            return view('admin.resources', [
+                'tables' => $tables,
+            ]);
+        }
     }
 
     public function moderationIndex(Request $request)

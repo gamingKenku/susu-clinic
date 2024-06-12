@@ -26,7 +26,16 @@ class ClinicController extends Controller
 
         $clinicsObjects = $clinicsObjects->orderBy('name')->paginate(25);
 
-        return view('resources.clinics.index', ['clinicsObjects' => $clinicsObjects]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'clinicsObjects' => $clinicsObjects
+            ]);
+        }
+        else 
+        {
+            return view('resources.clinics.index', ['clinicsObjects' => $clinicsObjects]);
+        }
     }
 
     /**
@@ -47,24 +56,40 @@ class ClinicController extends Controller
             'address' => ['required'],
         ]);
 
-        // address validation?
-
-        Clinic::create([
+        $clinic = Clinic::create([
             'name' => $validated_data['name'],
             'address' => $validated_data['address'],
         ]);
 
-        return redirect('/admin/resources/clinics');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'clinicsObjects' => $clinic
+            ]);
+        }
+        else 
+        {
+            return redirect('/admin/resources/clinics');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $clinic = Clinic::query()->findOrFail($id);
 
-        return view('resources.clinics.show', ['clinic' => $clinic]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'clinic' => $clinic
+            ]);
+        }
+        else 
+        {
+            return view('resources.clinics.show', ['clinic' => $clinic]);
+        }
     }
 
     /**
@@ -94,16 +119,32 @@ class ClinicController extends Controller
 
         $clinic->save();
 
-        return redirect('/admin/resources/clinics');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'clinic' => $clinic
+            ]);
+        }
+        else 
+        {
+            return redirect('/admin/resources/clinics');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         Clinic::query()->findOrFail($id)->delete();
         
-        return redirect('/admin/resources/clinics');
+        if ($request->wantsJson())
+        {
+            return response()->json([], 204);
+        }
+        else 
+        {
+            return redirect('/admin/resources/clinics');
+        }
     }
 }

@@ -30,7 +30,17 @@ class CategoryController extends Controller
         
         $categories = $categories->orderBy('clinic_id')->orderBy('name')->paginate(25);
 
-        return view('resources.categories.index', ['categoriesObjects' => $categories]);
+
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'categoriesObjects' => $categories,
+            ]);
+        }
+        else
+        {
+            return view('resources.categories.index', ['categoriesObjects' => $categories]);
+        }
     }
 
     /**
@@ -51,20 +61,38 @@ class CategoryController extends Controller
             'clinic_id' => ['required', 'exists:clinics,id'],
         ]);
 
-        Category::create([
+        $category = Category::create([
             'name' => $validated_data['name'],
             'clinic_id' => $validated_data['clinic_id'],
         ]);
 
-        return redirect('/admin/resources/categories');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'category' => $category,
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/categories');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        return view('resources.categories.show', ['categories' => Category::query()->findOrFail($id)]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'categories' => Category::query()->findOrFail($id),
+            ]);
+        }
+        else
+        {
+            return view('resources.categories.show', ['categories' => Category::query()->findOrFail($id)]);
+        }
     }
 
     /**
@@ -95,16 +123,33 @@ class CategoryController extends Controller
         
         $category->save();
 
-        return redirect('/admin/resources/categories');
+
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'categories' => $category,
+            ]);
+        }
+        else
+        {
+            return redirect('/admin/resources/categories');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         Category::query()->findOrFail($id)->delete();
 
-        return redirect('/admin/resources/categories');
+        if ($request->wantsJson())
+        {
+            return response()->json([], 204);
+        }
+        else
+        {
+            return redirect('/admin/resources/categories');
+        }
     }
 }
