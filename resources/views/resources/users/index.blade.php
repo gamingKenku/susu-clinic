@@ -50,7 +50,7 @@
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td class="align-middle">{{ $user->username }}</td>
+                            <td class="align-middle">{{ $user->username }} @if (auth()->user() == $user) <span class="text-success text-bold">(Это вы)</span> @endif</td>
                             <td class="align-middle">{{ $user->email }}</td>
                             <td class="align-middle">{{ $user->first_name }}</td>
                             <td class="align-middle">{{ $user->last_name }}</td>
@@ -70,9 +70,11 @@
                                             <span class="fa-regular fa-pen-to-square" aria-hidden="true"></span>
                                         </a>
 
-                                        <button type="submit" class="btn btn-danger" title="Удалить" onclick="return confirm(&quot;Click Ok to delete User.&quot;)">
-                                            <span class="fa-regular fa-trash-can" aria-hidden="true"></span>
-                                        </button>
+                                        @if (auth()->user() != $user)    
+                                            <button type="submit" class="btn btn-danger" title="Удалить" onclick="return confirm(&quot;Click Ok to delete User.&quot;)">
+                                                <span class="fa-regular fa-trash-can" aria-hidden="true"></span>
+                                            </button>
+                                        @endif
                                     </div>
 
                                 </form>

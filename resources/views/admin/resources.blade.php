@@ -12,6 +12,23 @@
 
             <div class="row">
                 <div class="col">
+
+                    @if (Session::has('success_message'))
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            {!! session('success_message') !!}
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                        </div>
+                    @endif
+
+                    @if (Session::has('error_message'))
+                        <div class="alert alert-error alert-dismissible" role="alert">
+                            {!! session('error_message') !!}
+
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                        </div>
+                    @endif
+
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <tr>

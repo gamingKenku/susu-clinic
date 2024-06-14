@@ -24,7 +24,7 @@ class AdminController extends Controller
     public function resources(Request $request)
     {
         $tables = [
-            // 'users',
+            'users',
             'documents',
             'events',
             'clinics',

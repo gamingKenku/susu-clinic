@@ -11,7 +11,7 @@
                 <input name="_method" value="DELETE" type="hidden">
                 {{ csrf_field() }}
 
-                <a href="{{ route('working-hours.edit', $staff->id ) }}" class="btn btn-primary" title="Редактировать">
+                <a href="{{ route('working-hours.edit', $staff->id ) }}" class="btn btn-info" title="Редактировать">
                     <span class="fa-regular fa-pen-to-square" aria-hidden="true"></span>
                 </a>
 
@@ -19,7 +19,7 @@
                     <span class="fa-regular fa-trash-can" aria-hidden="true"></span>
                 </button> --}}
 
-                <a href="{{ route('working-hours.index') }}" class="btn btn-primary" title="Показать все">
+                <a href="{{ route('working-hours.index') }}" class="btn btn-info" title="Показать все">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
 

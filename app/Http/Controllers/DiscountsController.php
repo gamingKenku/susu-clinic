@@ -105,7 +105,9 @@ class DiscountsController extends Controller
         }
         else
         {
-            return redirect('/admin/resources/discounts');
+            return view('resources.discounts.show', [
+                'discount' => Discount::query()->findOrFail($id),
+            ]);
         }
     }
 

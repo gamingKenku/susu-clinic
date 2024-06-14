@@ -124,7 +124,16 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::query()->findOrFail($id)->delete();
+        $user = User::query()->findOrFail($id);
+
+        if (auth()->user() == $user) 
+        {
+            session()->flash('error_message', 'Вы не можете удалить свой аккаунт.');
+        }
+        else 
+        {
+            $user->delete();
+        }
 
         return redirect('/admin/resources/users');
     }

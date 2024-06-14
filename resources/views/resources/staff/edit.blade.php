@@ -7,7 +7,7 @@
          <div class="card-header d-flex justify-content-between align-items-center p-3">
             <h4 class="m-0">{{ !empty($title) ? $title : 'Сотрудник' }}</h4>
             <div>
-                <a href="{{ route('staff.index') }}" class="btn btn-primary" title="Показать все">
+                <a href="{{ route('staff.index') }}" class="btn btn-info" title="Показать все">
                     <span class="fa-solid fa-table-list" aria-hidden="true"></span>
                 </a>
 
