@@ -87,7 +87,6 @@ class ServiceController extends Controller
 
         $service->save();
 
-
         if ($request->wantsJson())
         {
             return response()->json([

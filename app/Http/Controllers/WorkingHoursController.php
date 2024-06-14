@@ -49,9 +49,18 @@ class WorkingHoursController extends Controller
 
         $staff = $staff->orderBy('staff_type')->orderBy('last_name')->orderBy('first_name')->orderBy('patronym')->paginate(25);
 
-        return view('resources.working_hours.index', [
-            'staff' => $staff
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'staff' => $staff
+            ]);
+        } 
+        else 
+        {
+            return view('resources.working_hours.index', [
+                'staff' => $staff
+            ]);
+        }
     }
 
     /**
@@ -92,11 +101,20 @@ class WorkingHoursController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        return view('resources.working_hours.show', [
-            'staff' => Staff::query()->findOrFail($id),
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'staff' => Staff::query()->findOrFail($id)->workingHours()->get(),
+            ]);
+        } 
+        else 
+        {
+            return view('resources.working_hours.show', [
+                'staff' => Staff::query()->findOrFail($id),
+            ]);
+        }
     }
 
     /**
@@ -153,7 +171,16 @@ class WorkingHoursController extends Controller
             }
         }
 
-        return redirect(route('working-hours.index'));
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'staff' => Staff::findOrFail($id)->workingHours()->orderBy('weekday')->get(),
+            ]);
+        } 
+        else 
+        {
+            return redirect(route('working-hours.index'));
+        }
     }
 
     /**

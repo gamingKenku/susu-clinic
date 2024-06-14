@@ -146,7 +146,6 @@ class EventController extends Controller
 
         $event->save();
 
-
         if ($request->wantsJson())
         {
             return response()->json([
@@ -174,9 +173,7 @@ class EventController extends Controller
 
         if ($request->wantsJson())
         {
-            return response()->json([
-                
-            ], 204);
+            return response()->json([], 204);
         }
         else
         {

@@ -33,9 +33,17 @@ class PositionController extends Controller
 
         $positions = $positions->orderBy('name')->paginate(25);
 
-        return view('resources.positions.index', [
-            'positions' => $positions,
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'positions' => $positions,
+            ]);
+        } else 
+        {
+            return view('resources.positions.index', [
+                'positions' => $positions,
+            ]);
+        }
     }
 
     /**
@@ -76,25 +84,46 @@ class PositionController extends Controller
             'conditions' =>  $validated_data['conditions'],
         ]);
 
-        if (in_array('has_vacancy', $validated_data)) {
-            $position->has_vacansy = $validated_data['has_vacansy'];
+        if (array_key_exists('has_vacancy', $validated_data)) {
+            $position->has_vacancy = $validated_data['has_vacancy'];
+        }
+        else {
+            $position->has_vacancy = false;
         }
 
         $position->staff()->attach($validated_data['staff'] ?? []);
 
         $position->save();
 
-        return redirect('/admin/resources/positions');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'position' => $position,
+            ]);
+        } 
+        else 
+        {
+            return redirect('/admin/resources/positions');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        return view('resources.positions.show', [
-            'position' => Position::query()->findOrFail($id),
-        ]);
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'position' => Position::query()->findOrFail($id),
+            ]);
+        } 
+        else 
+        {
+            return view('resources.positions.show', [
+                'position' => Position::query()->findOrFail($id),
+            ]);        
+        }
     }
 
     /**
@@ -146,16 +175,32 @@ class PositionController extends Controller
         
         $position->save();
 
-        return redirect('/admin/resources/positions');
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'position' => $position,
+            ]);
+        } 
+        else 
+        {
+            return redirect('/admin/resources/positions');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         Position::query()->findOrFail($id)->delete();
 
-        return redirect('/admin/resources/positions');
+        if ($request->wantsJson())
+        {
+            return response()->json([], 204);
+        } 
+        else 
+        {
+            return redirect('/admin/resources/positions');
+        }
     }
 }

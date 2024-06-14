@@ -226,7 +226,7 @@ class StaffController extends Controller
         
         if ($request->wantsJson())
         {
-            return response()->json([], 2-4);
+            return response()->json([], 204);
         }
         else
         {
