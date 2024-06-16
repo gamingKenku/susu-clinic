@@ -95,6 +95,7 @@ class ServiceController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/services');
         }
     }
@@ -161,6 +162,7 @@ class ServiceController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/services');
         }
     }
@@ -178,6 +180,7 @@ class ServiceController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/services');
         }
     }

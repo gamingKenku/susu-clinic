@@ -79,6 +79,7 @@ class EventController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/events');
         }
     }
@@ -154,6 +155,7 @@ class EventController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/events');
         }
     }
@@ -177,6 +179,7 @@ class EventController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/events');
         }
     }

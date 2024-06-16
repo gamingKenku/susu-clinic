@@ -74,6 +74,7 @@ class CategoryController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/categories');
         }
     }
@@ -132,6 +133,7 @@ class CategoryController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/categories');
         }
     }
@@ -149,6 +151,7 @@ class CategoryController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/categories');
         }
     }

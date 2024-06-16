@@ -103,6 +103,7 @@ class PositionController extends Controller
         } 
         else 
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/positions');
         }
     }
@@ -183,6 +184,7 @@ class PositionController extends Controller
         } 
         else 
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/positions');
         }
     }
@@ -200,6 +202,7 @@ class PositionController extends Controller
         } 
         else 
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/positions');
         }
     }

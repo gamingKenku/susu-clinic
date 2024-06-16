@@ -179,6 +179,7 @@ class WorkingHoursController extends Controller
         } 
         else 
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect(route('working-hours.index'));
         }
     }

@@ -119,6 +119,7 @@ class StaffController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/staff');
         }
     }
@@ -207,6 +208,7 @@ class StaffController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/staff');  
         }
     }
@@ -230,6 +232,7 @@ class StaffController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect('/admin/resources/staff');
         }
     }

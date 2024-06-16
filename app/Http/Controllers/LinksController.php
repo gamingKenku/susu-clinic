@@ -40,6 +40,8 @@ class LinksController extends Controller
             'link' => $validated_response['link'],
         ]);
 
+        session()->flash('success_message', 'Операция прошла успешно!');
+
         return redirect(route('links.index'));
     }
 
@@ -80,6 +82,7 @@ class LinksController extends Controller
 
         $link->save();
 
+        session()->flash('success_message', 'Операция прошла успешно!');
         return redirect(route('links.index'));
     }
 
@@ -89,7 +92,8 @@ class LinksController extends Controller
     public function destroy(string $id)
     {
         Link::findOrFail($id)->delete();
-
+        
+        session()->flash('success_message', 'Операция прошла успешно!');
         return redirect(route('links.index'));
     }
 }

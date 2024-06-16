@@ -62,7 +62,8 @@ class UserController extends Controller
             'email' => $validated_data['email'],
             'password' => Hash::make($validated_data['password']),
         ]);
-
+        
+        session()->flash('success_message', 'Операция прошла успешно!');
         return redirect('/admin/resources/users');
     }
 
@@ -116,6 +117,7 @@ class UserController extends Controller
 
         $user->save();
 
+        session()->flash('success_message', 'Операция прошла успешно!');
         return redirect('/admin/resources/users');
     }
 
@@ -135,6 +137,7 @@ class UserController extends Controller
             $user->delete();
         }
 
+        session()->flash('success_message', 'Операция прошла успешно!');
         return redirect('/admin/resources/users');
     }
 }

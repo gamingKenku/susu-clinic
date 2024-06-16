@@ -70,6 +70,7 @@ class DocumentController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect(route('documents.index'));
         } 
     }
@@ -145,6 +146,7 @@ class DocumentController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect(route('documents.index'));
         } 
     }
@@ -162,6 +164,7 @@ class DocumentController extends Controller
         }
         else
         {
+            session()->flash('success_message', 'Операция прошла успешно!');
             return redirect(route('documents.index'));
         } 
     }
