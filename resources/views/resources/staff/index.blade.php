@@ -38,8 +38,8 @@
                 <table class="table table-striped ">
                     <thead>
                         <tr>
-                            <th>Имя</th>
                             <th>Фамилия</th>
+                            <th>Имя</th>
                             <th>Отчество</th>
                             <th>Тип сотрудника</th>
 
@@ -49,8 +49,8 @@
                     <tbody>
                     @foreach($staffObjects as $staff)
                         <tr>
-                            <td class="align-middle">{{ $staff->first_name }}</td>
                             <td class="align-middle">{{ $staff->last_name }}</td>
+                            <td class="align-middle">{{ $staff->first_name }}</td>
                             <td class="align-middle">{{ $staff->patronym }}</td>
                             <td class="align-middle">{{ __(ucfirst($staff->staff_type)) }}</td>
 

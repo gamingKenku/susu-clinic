@@ -32,10 +32,10 @@
         @foreach ($staff_chunks as $staff_chunk)
             <div class="row justify-content-center">
                 @foreach ($staff_chunk as $staff_member)
-                    <div class="col-md-3 d-flex mb-3">
+                    <div class="col-lg-3 d-flex mb-3">
                         <div class="card flex-fill d-flex flex-column">
                             <img src="{{ $staff_member->photo_path ? asset('storage/' . $staff_member->photo_path) : asset('storage/staff_photos/staff_default.jpg') }}"
-                                class="card-img-top">
+                                class="card-img-top img-fluid">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $staff_member->last_name }} {{ $staff_member->first_name }}
                                     {{ $staff_member->patronym }}</h5>
