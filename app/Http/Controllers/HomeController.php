@@ -207,7 +207,7 @@ class HomeController extends Controller
     public function managementIndex()
     {
         return view('home.management', [
-            'management' => Staff::query()->where('staff_type', '=', 'administrator'),
+            'management' => Staff::query()->where('staff_type', '=', 'administrator')->paginate(15),
         ]);
     }
 

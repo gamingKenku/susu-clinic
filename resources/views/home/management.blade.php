@@ -14,7 +14,43 @@
         <div class="row justify-content-center align-items-start">
             <div class="col">
                 <h3 class="mb-3">Руководство</h3>
-                <div class="card">
+
+                @foreach ($management as $management_staff)
+                    <div class="row mb-3 justify-content-center">
+                        <div class="col-md">
+                            <div class="card">
+                                <h5 class="card-header">{{ $management_staff->last_name }} {{ $management_staff->first_name }}
+                                    {{ $management_staff->patronym }}</h5>
+                                <div class="card-body">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3 mb-md-0">
+                                                <img class="w-100 mb-1"
+                                                    src="{{ $management_staff->photo_path ? asset('storage/' . $management_staff->photo_path) : asset('storage/staff_photos/staff_default.jpg') }}">
+                                                <h5 class="text-center">{{ $management_staff->last_name }} {{ $management_staff->first_name }}
+                                                    {{ $management_staff->patronym }}, {{ __($management_staff->staff_type) }}</h5>
+                                            </div>
+                                            <div class="col-md">
+                                                <h4>Стаж работы с {{ $management_staff->experience }} года.</h4>
+                                                <h4>Специализации</h4>
+                                                <p>{!! $management_staff->specialities !!}</p>
+                                                <h4>Должности</h4>
+                                                <ul>
+                                                    @foreach ($management_staff->positions as $position)
+                                                        <li>{{ $position->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {!! $management->links() !!}
+                        </div>
+                    </div>
+                @endforeach
+                {{-- <div class="card">
                     <div class="card-body">
                         <div class="container-fluid">
                             <div class="row justify-content-center align-items-start">
@@ -39,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
