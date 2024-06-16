@@ -4,6 +4,11 @@
     Руководство
 @endsection
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Руководство</li>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center align-items-start">

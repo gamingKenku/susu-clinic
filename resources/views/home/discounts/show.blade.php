@@ -4,6 +4,11 @@
     {{ $discount->header }}
 @endsection
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $discount->header }}</li>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">

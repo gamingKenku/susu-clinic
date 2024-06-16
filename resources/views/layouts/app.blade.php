@@ -85,6 +85,13 @@
                         </div>
                     </div>
                 </nav>
+                <nav aria-label="breadcrumb" class="navbar navbar-expand-md navbar-light bg-white border-bottom border-primary">
+                    <div class="container">
+                        <ol class="m-1 breadcrumb">
+                            @yield('breadcrumb')
+                        </ol>
+                    </div>
+                </nav>
             </div>
 
             <main class="py-4 overflow-auto">

@@ -5,6 +5,10 @@
     $categories_chunks = $categories->chunk(6);
 @endphp
 
+@section('breadcrumb')
+    <li class="breadcrumb-item active" aria-current="page">Главная</li>
+@endsection
+
 @section('content')
     <div class="container">
         @if ($events->isNotEmpty())

@@ -4,6 +4,11 @@
     Расписание сотрудников
 @endsection
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Расписание</li>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center mb-0 mb-md-3">

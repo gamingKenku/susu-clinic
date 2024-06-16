@@ -9,6 +9,12 @@
     Сотрудники медицинского центра
 @endsection
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('staffIndex') }}">Специалисты</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $staff->last_name }} {{ $staff->first_name }} {{ $staff->patronym }}</li>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row mb-3 justify-content-center">

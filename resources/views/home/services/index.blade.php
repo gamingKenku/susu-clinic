@@ -4,6 +4,11 @@
     Услуги
 @endsection
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Услуги</li>
+@endsection
+
 @section('content')
     <div class="container">
         <h3 class="mb-3">Предоставляемые услуги</h3>

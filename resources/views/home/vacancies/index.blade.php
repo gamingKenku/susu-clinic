@@ -4,6 +4,11 @@
     Вакансии
 @endsection
 
+@section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Вакансии</li>
+@endsection
+
 @php
     $vacancies_chunks = $vacancies->chunk(2);
 @endphp
