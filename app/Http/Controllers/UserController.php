@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\PasswordForUser;
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -54,7 +55,7 @@ class UserController extends Controller
             'password' => ['required', 'max:255', 'confirmed'],
         ]);
 
-        User::create([
+        $user = User::create([
             'first_name' => $validated_data['first_name'],
             'last_name' => $validated_data['last_name'],
             'patronym' => $validated_data['patronym'],
@@ -63,6 +64,8 @@ class UserController extends Controller
             'password' => Hash::make($validated_data['password']),
         ]);
         
+        event(new Registered($user));
+
         session()->flash('success_message', 'Операция прошла успешно!');
         return redirect('/admin/resources/users');
     }

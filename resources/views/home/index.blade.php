@@ -41,48 +41,55 @@
                 </div>
             </div>
         @endif
-        <div class="row justify-content-center mb-5">
-            @foreach ($discounts as $discount)
-                <div class="col-md d-flex mb-3 mb-md-0">
-                    <div class="card flex-fill">
-                        <h5 class="card-header">Акция</h5>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ $discount->header }}</h5>
-                            <p class="card-text flex-grow-1">{{ $discount->content }}</p>
-                            @if ($discount->end_date)
-                                @php
-                                    $end_date_string = Carbon::createFromFormat('Y-m-d', $discount->end_date)->format('d.m.Y');
-                                @endphp
-                                <p class="card-text"><small class="text-muted">Акция действует до
-                                        {{ $end_date_string }}</small></p>
-                            @endif
-                            <a href="{{ route('discountsShow', $discount->id) }}"
-                                class="btn btn-primary mt-auto">Просмотреть</a>
+        @if ($discounts->isNotEmpty())
+            <div class="row justify-content-center mb-5">
+                @foreach ($discounts as $discount)
+                    <div class="col-md d-flex mb-3 mb-md-0">
+                        <div class="card flex-fill">
+                            <h5 class="card-header">Акция</h5>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ $discount->header }}</h5>
+                                <p class="card-text flex-grow-1">{{ $discount->content }}</p>
+                                @if ($discount->end_date)
+                                    @php
+                                        $end_date_string = Carbon::createFromFormat(
+                                            'Y-m-d',
+                                            $discount->end_date,
+                                        )->format('d.m.Y');
+                                    @endphp
+                                    <p class="card-text"><small class="text-muted">Акция действует до
+                                            {{ $end_date_string }}</small></p>
+                                @endif
+                                <a href="{{ route('discountsShow', $discount->id) }}"
+                                    class="btn btn-primary mt-auto">Просмотреть</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
-        <div class="row justify-content-center">
-            @foreach ($categories_chunks as $categories_chunk)
-                <div class="col-lg d-flex mb-3 mb-lg-0">
-                    <div class="card flex-fill d-flex flex-column">
-                        <h5 class="card-header">Категории услуг</h5>
-                        <div class="card-body">
-                            @foreach ($categories_chunk as $category)
-                                <a href="{{ route('servicesIndex', ['category' => $category->id, 'filter' => $category->clinic->name]) }}"
-                                    class="card-text fs-5 link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ $category->name }}</a> <br>
-                            @endforeach
-                        </div>
-                        <div class="mt-auto"></div>
-                    </div>
-                </div>
-            @endforeach
-            <div class="col-lg-1"></div>
-            <div class="col-lg-2 d-flex">
-                <a class="btn btn-primary align-self-center" href="{{ route('servicesIndex') }}">Открыть все услуги</a>
+                @endforeach
             </div>
-        </div>
-
+        @endif
+        @if ($categories_chunks->isNotEmpty())
+            <div class="row justify-content-center">
+                @foreach ($categories_chunks as $categories_chunk)
+                    <div class="col-lg d-flex mb-3 mb-lg-0">
+                        <div class="card flex-fill d-flex flex-column">
+                            <h5 class="card-header">Категории услуг</h5>
+                            <div class="card-body">
+                                @foreach ($categories_chunk as $category)
+                                    <a href="{{ route('servicesIndex', ['category' => $category->id, 'filter' => $category->clinic->name]) }}"
+                                        class="card-text fs-5 link-underline link-underline-opacity-0 link-underline-opacity-100-hover">{{ $category->name }}</a>
+                                    <br>
+                                @endforeach
+                            </div>
+                            <div class="mt-auto"></div>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2 d-flex">
+                    <a class="btn btn-primary align-self-center" href="{{ route('servicesIndex') }}">Открыть все услуги</a>
+                </div>
+            </div>
+        @endif
     </div>
 @endsection

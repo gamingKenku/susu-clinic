@@ -90,4 +90,9 @@ class AdminController extends Controller
 
         return redirect(route('moderationIndex', ['unchecked' => true]));
     }
+
+    public function emailVerifyNotice() 
+    {
+        return view('auth.verify');
+    }
 }
